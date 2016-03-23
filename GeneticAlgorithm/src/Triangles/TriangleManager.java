@@ -1,5 +1,6 @@
 package Triangles;
 
-public class TriangleManager {
+public class TriangleManager 
+{
 
 }
