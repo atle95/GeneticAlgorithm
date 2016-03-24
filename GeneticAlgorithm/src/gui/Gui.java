@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Gui extends Application
@@ -18,12 +19,18 @@ public class Gui extends Application
     
     GuiControls controller = new GuiControls();
     Scene scene = new Scene(controller);
-//    BorderPane page = (BorderPane) FXMLLoader.load(Gui.class.getResource("gui.fxml"));
-//    gfx = canvas.getGraphicsContext2D();
-//    gfx = (GraphicsContext) ( ((VBox) page.getRight()).getChildren().get(1)).getGraphicsContext2D();
-//    Scene scene = new Scene(page);
     primaryStage.setScene(scene);
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
+    gfx = controller.getCanvas().getGraphicsContext2D();
+   
+    gfx.setFill(Color.rgb(0, 0, 255, 1.0));
+    gfx.fillPolygon(new double[]{0, 200, 200}, new double[]{0, 200, 0}, 3);
+    
+    gfx.setFill(Color.rgb(255, 255, 0, 0.3));
+    gfx.fillPolygon(new double[]{0, 0, 200}, new double[]{0, 200, 0}, 3);
+    
+    
+    
     primaryStage.show();
     
   }
