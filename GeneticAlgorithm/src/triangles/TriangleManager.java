@@ -1,4 +1,4 @@
-package Triangles;
+package triangles;
 
 public class TriangleManager 
 {

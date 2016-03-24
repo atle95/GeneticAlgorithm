@@ -1,4 +1,4 @@
-package Gui;
+package gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,9 @@ public class Gui extends Application
   @Override
   public void start(Stage primaryStage) throws Exception 
   {
-    Parent page = (Parent) FXMLLoader.load(Gui.class.getResource("Gui.fxml"));
+//    GuiControls controller = new GuiControls();
+//    Scene scene = new Scene(controller);
+    Parent page = (Parent) FXMLLoader.load(Gui.class.getResource("gui.fxml"));
     Scene scene = new Scene(page);
     primaryStage.setScene(scene);
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
