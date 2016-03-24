@@ -21,9 +21,10 @@ public class GuiControls extends BorderPane
   
   public GuiControls() 
   {
-    FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getClass().getResource("gui.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gui.fxml"));
     fxmlLoader.setRoot(this);
     fxmlLoader.setController(this);
+//    fxmlLoader.setLocation(Gui.class.getClass().getResource("gui.fxml"));
     
     try
     {
