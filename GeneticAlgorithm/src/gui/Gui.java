@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 public class Gui extends Application
 {
+  int pictureWidth;
+  int pictureHeight;
   GraphicsContext gfx;
   @FXML Canvas canvas;
 
@@ -21,13 +23,20 @@ public class Gui extends Application
     Scene scene = new Scene(controller);
     primaryStage.setScene(scene);
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
+    pictureWidth = (int) controller.getCanvas().getWidth();
+    pictureHeight = (int) controller.getCanvas().getHeight();
     gfx = controller.getCanvas().getGraphicsContext2D();
+    
+    gfx.setFill(Color.BLACK);
+    gfx.fillRect(0,0,pictureWidth,pictureHeight);
+    gfx.setFill(Color.WHITE);
+    gfx.fillRect(1, 1, pictureWidth-2, pictureHeight-2);
    
     gfx.setFill(Color.rgb(0, 0, 255, 1.0));
-    gfx.fillPolygon(new double[]{0, 200, 200}, new double[]{0, 200, 0}, 3);
+    gfx.fillPolygon(new double[]{0, pictureWidth, pictureWidth}, new double[]{0, pictureHeight, 0}, 3);
     
     gfx.setFill(Color.rgb(255, 255, 0, 0.3));
-    gfx.fillPolygon(new double[]{0, 0, 200}, new double[]{0, 200, 0}, 3);
+    gfx.fillPolygon(new double[]{0, 0, pictureWidth}, new double[]{0, pictureHeight, 0}, 3);
     
     
     
