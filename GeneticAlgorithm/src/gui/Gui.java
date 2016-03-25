@@ -13,17 +13,18 @@ import triangles.TriangleObject;
 
 public class Gui extends Application
 {
-  GraphicsContext gfx;
+  GraphicsContext gfxR;
+  static GraphicsContext gfxL;
   @FXML Canvas canvasLeft;
   @FXML Canvas canvasRight;
   double pictureWidth = 512;
   double pictureHeight = 512;
   TriangleManager triangleManager;
-  Image monaLisa = new Image("File:Resources/Images/monalisa.png");
-//  Image poppyfields = new Image("Resources/Images/poppyfields.png");
-//  Image greatwave = new Image("Resources/Images/greatwave.png");
-//  Image vangogh = new Image("Resources/Images/vangogh.png");
-//  Image mcescher = new Image("Resources/Images/mcescher.png");
+  Image monalisa = new Image("File:Resources/Images/monalisa.png");
+  Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
+  Image greatwave = new Image("File:Resources/Images/greatwave.png");
+  Image vangogh = new Image("File:Resources/Images/vangogh.png");
+  Image mcescher = new Image("File:Resources/Images/mcescher.png");
   
   @Override
   public void start(Stage primaryStage) throws Exception 
@@ -34,23 +35,10 @@ public class Gui extends Application
     Scene scene = new Scene(controller);
     primaryStage.setScene(scene);
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
-//    canvasLeft.setWidth(pictureWidth);
-//    canvasLeft.setHeight(pictureHeight);
-//    canvasRight.setWidth(pictureWidth);
-//    canvasRight.setHeight(pictureHeight);
-    gfx = controller.getCanvas().getGraphicsContext2D();
+    gfxR = controller.getCanvasRight().getGraphicsContext2D();
+    gfxL= controller.getCanvasLeft().getGraphicsContext2D();
     
-    gfx.setFill(Color.BLACK);
-    gfx.fillRect(0,0,pictureWidth,pictureHeight);
-    gfx.setFill(Color.WHITE);
-    gfx.fillRect(1, 1, pictureWidth-2, pictureHeight-2);
-   
-    gfx.setFill(Color.rgb(0, 0, 255, 0.5));
-    gfx.fillPolygon(new double[]{0, pictureWidth, pictureWidth}, new double[]{0, pictureHeight, 0}, 3);
-    
-    gfx.setFill(Color.rgb(0, 255, 255, 0.5));
-    gfx.fillPolygon(new double[]{0, 0, pictureWidth}, new double[]{0, pictureHeight, 0}, 3);
-    
+    drawCurImage(monalisa);
     triangleManager.initializeTriangles();
     drawTriangles();
     
@@ -63,9 +51,14 @@ public class Gui extends Application
     
     for(TriangleObject triangleObject : triangleManager.triangleList)
     {
-      gfx.setFill(Color.rgb(triangleObject.r, triangleObject.g, triangleObject.b, triangleObject.a));
-      gfx.fillPolygon(triangleObject.x, triangleObject.y,3);
+      gfxR.setFill(Color.rgb(triangleObject.r, triangleObject.g, triangleObject.b, triangleObject.a));
+      gfxR.fillPolygon(triangleObject.x, triangleObject.y,3);
     }
+  }
+  
+  public static void drawCurImage(Image img)
+  {
+    gfxL.drawImage(img, 0, 0);
   }
   
   public static void main(String[] args)

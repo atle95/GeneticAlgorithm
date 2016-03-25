@@ -102,8 +102,13 @@ public class GuiControls extends BorderPane
     
   }
   
-  public Canvas getCanvas()
+  public Canvas getCanvasRight()
   {
     return this.canvasRight;
+  }
+
+  public Canvas getCanvasLeft() 
+  {
+    return this.canvasLeft;
   }
 }
