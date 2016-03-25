@@ -46,55 +46,24 @@
                   <Button fx:id="button8" mnemonicParsing="false" onAction="#button" text="8" />
                </children>
             </HBox>
-            <Canvas fx:id="canvas" height="558" width="450" />
+            <Canvas fx:id="canvasRight" height="512.0" width="512.0" />
          </children>
       </VBox>
    </right>
    <left>
-      <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Mona Lisa">
-               <content>
-                  <ImageView preserveRatio="true">
-                     <image>
-                        <Image url="@../../Resources/Images/mona-lisa-cropted-512x413.png" />
-                     </image>
-                  </ImageView>
-               </content></Tab>
-          <Tab text="Poppy Fields">
-               <content>
-                  <ImageView preserveRatio="true">
-                     <image>
-                        <Image url="@../../Resources/Images/poppyfields-512x384.png" />
-                     </image>
-                  </ImageView>
-               </content></Tab>
-            <Tab text="Great Wave">
-               <content>
-                  <ImageView preserveRatio="true">
-                     <image>
-                        <Image url="@../../Resources/Images/the_great_wave_off_kanagawa-512x352.png" />
-                     </image>
-                  </ImageView>
-               </content></Tab>
-            <Tab text="Van Gogh">
-               <content>
-                  <ImageView fx:id="vangogh" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Resources/Images/VanGogh.png" />
-                     </image>
-                  </ImageView>
-               </content>
-            </Tab>
-            <Tab text="Mc Escher">
-               <content>
-                  <ImageView preserveRatio="true">
-                     <image>
-                        <Image url="@../../Resources/Images/mcescher1898-1972-1353453862_org.png" />
-                     </image>
-                  </ImageView>
-               </content></Tab>
-        </tabs>
-      </TabPane>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="buttonL1" mnemonicParsing="false" onAction="#imageButton" text="Mona Lisa" />
+                  <Button fx:id="buttonL2" mnemonicParsing="false" onAction="#imageButton" text="Poppy Fields" />
+                  <Button fx:id="buttonL3" mnemonicParsing="false" onAction="#imageButton" text="Great Wave" />
+                  <Button fx:id="buttonL4" mnemonicParsing="false" onAction="#imageButton" text="Van Gogh" />
+                  <Button fx:id="buttonL5" mnemonicParsing="false" onAction="#imageButton" text="Eshcer" />
+               </children>
+            </HBox>
+            <Canvas fx:id="canvasLeft" height="512.0" width="512.0" />
+         </children>
+      </VBox>
    </left>
 </fx:root>

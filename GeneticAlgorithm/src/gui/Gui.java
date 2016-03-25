@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import triangles.TriangleManager;
@@ -12,11 +13,17 @@ import triangles.TriangleObject;
 
 public class Gui extends Application
 {
-  int pictureWidth;
-  int pictureHeight;
   GraphicsContext gfx;
-  @FXML Canvas canvas;
+  @FXML Canvas canvasLeft;
+  @FXML Canvas canvasRight;
+  double pictureWidth = 512;
+  double pictureHeight = 512;
   TriangleManager triangleManager;
+  Image monaLisa = new Image("File:Resources/Images/monalisa.png");
+//  Image poppyfields = new Image("Resources/Images/poppyfields.png");
+//  Image greatwave = new Image("Resources/Images/greatwave.png");
+//  Image vangogh = new Image("Resources/Images/vangogh.png");
+//  Image mcescher = new Image("Resources/Images/mcescher.png");
   
   @Override
   public void start(Stage primaryStage) throws Exception 
@@ -27,8 +34,10 @@ public class Gui extends Application
     Scene scene = new Scene(controller);
     primaryStage.setScene(scene);
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
-    pictureWidth = (int) controller.getCanvas().getWidth();
-    pictureHeight = (int) controller.getCanvas().getHeight();
+//    canvasLeft.setWidth(pictureWidth);
+//    canvasLeft.setHeight(pictureHeight);
+//    canvasRight.setWidth(pictureWidth);
+//    canvasRight.setHeight(pictureHeight);
     gfx = controller.getCanvas().getGraphicsContext2D();
     
     gfx.setFill(Color.BLACK);

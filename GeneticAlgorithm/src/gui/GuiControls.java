@@ -12,15 +12,10 @@ import javafx.scene.layout.BorderPane;
 
 public class GuiControls extends BorderPane
 {
-  @FXML private Button button1;
-  @FXML private Button button2;
-  @FXML private Button button3;
-  @FXML private Button button4;
-  @FXML private Button button5;
-  @FXML private Button button6;
-  @FXML private Button button7;
-  @FXML private Button button8;
-  @FXML private Canvas canvas;
+  @FXML private Button button1, button2, button3, button4, button5, button6, button7, button8;
+  @FXML private Button buttonL1, buttonL2, buttonL3, buttonL4, buttonL5;
+  @FXML private Canvas canvasLeft;
+  @FXML private Canvas canvasRight;
   @FXML private ImageView vangogh;
   
   public GuiControls() 
@@ -74,7 +69,34 @@ public class GuiControls extends BorderPane
       System.out.println("Button 8");
     }
   }
+  
+  @FXML
+  protected void imageButton(ActionEvent event)
+  {
+    if(event.getSource() == buttonL1)
+    {
+      System.out.println("Left Button 1");
+    }
+    else if(event.getSource() == buttonL2)
+    {
+      System.out.println("Left Button 2");
+    }
+    else if(event.getSource() == buttonL3)
+    {
+      System.out.println("Left Button 3");
+    }
+    else if(event.getSource() == buttonL4)
+    {
+      System.out.println("Left Button 4");
+    }
+    else if(event.getSource() == buttonL5)
+    {
+      System.out.println("Left Button 5");
+    }
+    
+  }
  
+  @FXML
   protected void slider(ActionEvent event)
   {
     
@@ -82,6 +104,6 @@ public class GuiControls extends BorderPane
   
   public Canvas getCanvas()
   {
-    return this.canvas;
+    return this.canvasRight;
   }
 }
