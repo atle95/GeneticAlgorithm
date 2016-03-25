@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root type="javafx.scene.layout.BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"> 
+<fx:root type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> 
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -31,17 +31,10 @@
          </children>
       </GridPane>
    </bottom>
-   <left>
-      <ImageView fx:id="vangogh" fitHeight="558" fitWidth="450" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_CENTER">
-         <image>
-            <Image url="@../../Resources/Images/VanGogh.png" />
-         </image>
-      </ImageView>
-   </left>
    <right>
       <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <HBox alignment="BOTTOM_CENTER">
+            <HBox alignment="CENTER">
                <children>
                   <Button fx:id="button1" mnemonicParsing="false" onAction="#button" text="1" />
                   <Button fx:id="button2" mnemonicParsing="false" onAction="#button" text="2" />
@@ -57,4 +50,51 @@
          </children>
       </VBox>
    </right>
+   <left>
+      <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Mona Lisa">
+               <content>
+                  <ImageView preserveRatio="true">
+                     <image>
+                        <Image url="@../../Resources/Images/mona-lisa-cropted-512x413.png" />
+                     </image>
+                  </ImageView>
+               </content></Tab>
+          <Tab text="Poppy Fields">
+               <content>
+                  <ImageView preserveRatio="true">
+                     <image>
+                        <Image url="@../../Resources/Images/poppyfields-512x384.png" />
+                     </image>
+                  </ImageView>
+               </content></Tab>
+            <Tab text="Great Wave">
+               <content>
+                  <ImageView preserveRatio="true">
+                     <image>
+                        <Image url="@../../Resources/Images/the_great_wave_off_kanagawa-512x352.png" />
+                     </image>
+                  </ImageView>
+               </content></Tab>
+            <Tab text="Van Gogh">
+               <content>
+                  <ImageView fx:id="vangogh" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Resources/Images/VanGogh.png" />
+                     </image>
+                  </ImageView>
+               </content>
+            </Tab>
+            <Tab text="Mc Escher">
+               <content>
+                  <ImageView preserveRatio="true">
+                     <image>
+                        <Image url="@../../Resources/Images/mcescher1898-1972-1353453862_org.png" />
+                     </image>
+                  </ImageView>
+               </content></Tab>
+        </tabs>
+      </TabPane>
+   </left>
 </fx:root>
