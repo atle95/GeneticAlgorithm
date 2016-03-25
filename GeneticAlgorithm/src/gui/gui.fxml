@@ -8,7 +8,8 @@
 <?import javafx.scene.canvas.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<fx:root type="javafx.scene.layout.BorderPane" xmlns:fx="http://javafx.com/fxml"> 
+
+<fx:root type="javafx.scene.layout.BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8"> 
    <bottom>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -31,31 +32,28 @@
       </GridPane>
    </bottom>
    <left>
-      <ImageView fx:id="vangogh" fitHeight="216.0" fitWidth="266.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fx:id="vangogh" fitHeight="558" fitWidth="450" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_CENTER">
          <image>
             <Image url="@../../Resources/Images/VanGogh.png" />
          </image>
       </ImageView>
    </left>
-   <padding>
-      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
-   </padding>
    <right>
-      <VBox alignment="CENTER"  BorderPane.alignment="CENTER">
+      <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <HBox alignment="CENTER" >
+            <HBox alignment="BOTTOM_CENTER">
                <children>
-                  <Button fx:id="button1" mnemonicParsing="false" text="1" onAction="#button"/>
-                  <Button fx:id="button2" mnemonicParsing="false" text="2" onAction="#button"/>
-                  <Button fx:id="button3" mnemonicParsing="false" text="3" onAction="#button"/>
-                  <Button fx:id="button4" mnemonicParsing="false" text="4" onAction="#button"/>
-                  <Button fx:id="button5" mnemonicParsing="false" text="5" onAction="#button"/>
-                  <Button fx:id="button6" mnemonicParsing="false" text="6" onAction="#button"/>
-                  <Button fx:id="button7" mnemonicParsing="false" text="7" onAction="#button"/>
-                  <Button fx:id="button8" mnemonicParsing="false" text="8" onAction="#button"/>
+                  <Button fx:id="button1" mnemonicParsing="false" onAction="#button" text="1" />
+                  <Button fx:id="button2" mnemonicParsing="false" onAction="#button" text="2" />
+                  <Button fx:id="button3" mnemonicParsing="false" onAction="#button" text="3" />
+                  <Button fx:id="button4" mnemonicParsing="false" onAction="#button" text="4" />
+                  <Button fx:id="button5" mnemonicParsing="false" onAction="#button" text="5" />
+                  <Button fx:id="button6" mnemonicParsing="false" onAction="#button" text="6" />
+                  <Button fx:id="button7" mnemonicParsing="false" onAction="#button" text="7" />
+                  <Button fx:id="button8" mnemonicParsing="false" onAction="#button" text="8" />
                </children>
             </HBox>
-            <Canvas fx:id="canvas" height="216.0" width="266.0" />
+            <Canvas fx:id="canvas" height="558" width="450" />
          </children>
       </VBox>
    </right>

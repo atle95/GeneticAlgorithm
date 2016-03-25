@@ -36,7 +36,6 @@ public class GuiControls extends BorderPane
     {
       throw new RuntimeException(exception);
     }
-    
   }
   
   @FXML
@@ -76,6 +75,11 @@ public class GuiControls extends BorderPane
     }
   }
  
+  protected void slider(ActionEvent event)
+  {
+    
+  }
+  
   public Canvas getCanvas()
   {
     return this.canvas;

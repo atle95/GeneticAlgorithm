@@ -2,12 +2,13 @@ package triangles;
 
 public class TriangleObject 
 {
-  int[] x, y;
-  int r, g, b, a;
+  public double[] x = new double[3];
+  public double[] y = new double[3];
+  public int r, g, b;
+  public double a;
   
-  TriangleObject(int x1, int y1, int x2, int y2, int x3, int y3, int r, int g, int b, int a)
+  TriangleObject(int x1, int x2, int x3, int y1, int y2, int y3, int r, int g, int b, double a)
   {
-    
     this.x[0] = x1;
     this.x[1] = x2;
     this.x[2] = x3;
