@@ -1,5 +1,6 @@
 package gui;
 
+import core.FitnessCalculator;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -20,7 +21,7 @@ public class Gui extends Application
   double pictureWidth = 512;
   double pictureHeight = 512;
   TriangleManager triangleManager;
-  Image monalisa = new Image("File:Resources/Images/monalisa.png");
+  Image monalisa = new Image("File:GeneticAlgorithm/Resources/Images/monalisa.png");
   Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
   Image greatwave = new Image("File:Resources/Images/greatwave.png");
   Image vangogh = new Image("File:Resources/Images/vangogh.png");
@@ -43,6 +44,9 @@ public class Gui extends Application
     drawTriangles();
     
     primaryStage.show();
+    
+    //TODO ADDED THIS TO TEST STUFF
+   FitnessCalculator.getPixels();
     
   }
   

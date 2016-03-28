@@ -13,37 +13,38 @@ import javax.imageio.ImageIO;
  */
 public class FitnessCalculator
 {
+  
+   static BufferedImage img = null;
 
   //TODO get the fitness of the image
   public void getOriginalImageFitness(){}
   
   //TODO Get the pixels
-  public void getPixels() throws IOException
+  public static void getPixels() throws IOException
   {
-    File file= new File("your_file.jpg");
-    BufferedImage image = ImageIO.read(file);
+    img = ImageIO.read(new File("GeneticAlgorithm/Resources/Images/monalisa.png"));
     // Getting pixel color by position x and y
     
-    int w = image.getWidth();
-    int h = image.getHeight();
+    int w = img.getWidth();
+    int h = img.getHeight();
     System.out.println("width, height: " + w + ", " + h);
  
-    for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        System.out.println("x,y: " + j + ", " + i);
-        int pixel = image.getRGB(j, i);
-       // printPixelARGB(pixel);
+    for (int i = 0; i < h; i++)
+    {
+      for (int j = 0; j < w; j++)
+      {
+        int pixel = img.getRGB(j, i);
+        
         System.out.println("");
-
-    
-    
-    int clr=  image.getRGB(i,j); 
-    int  red   = (clr & 0x00ff0000) >> 16;
-    int  green = (clr & 0x0000ff00) >> 8;
-    int  blue  =  clr & 0x000000ff;
-//    System.out.println("Red Color value = "+ red);
-//    System.out.println("Green Color value = "+ green);
-//    System.out.println("Blue Color value = "+ blue);
+        
+        //Skip every fourth pixel
+        if (i % 4 == 0)
+        {
+          int red = (pixel & 0x00ff0000) >> 16;
+          int green = (pixel & 0x0000ff00) >> 8;
+          int blue = pixel & 0x000000ff;
+          System.out.println(red + " " + green + " " + blue);
+        }
       }
     }
   }
