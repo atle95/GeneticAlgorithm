@@ -72,11 +72,11 @@
                      <children>
                         <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button onAction="#imageButton" fx:id="monaLisaButton" mnemonicParsing="false" text="Mona Lisa" />
-                              <Button onAction="#imageButton" fx:id="poppyFieldsButton" mnemonicParsing="false" text="Poppy Fields" />
-                              <Button onAction="#imageButton" fx:id="greatWaveButton" mnemonicParsing="false" text="Great Wave" />
-                              <Button onAction="#imageButton" fx:id="vanGoghButton" mnemonicParsing="false" text="Van Gogh" />
-                              <Button onAction="#imageButton" fx:id="mcEscherButton" mnemonicParsing="false" text="Eshcer" />
+                              <Button fx:id="monaLisaButton" mnemonicParsing="false" onAction="#imageButton" text="Mona Lisa" />
+                              <Button fx:id="poppyFieldsButton" mnemonicParsing="false" onAction="#imageButton" text="Poppy Fields" />
+                              <Button fx:id="greatWaveButton" mnemonicParsing="false" onAction="#imageButton" text="Great Wave" />
+                              <Button fx:id="vanGoghButton" mnemonicParsing="false" onAction="#imageButton" text="Van Gogh" />
+                              <Button fx:id="mcEscherButton" mnemonicParsing="false" onAction="#imageButton" text="Eshcer" />
                            </children>
                            <padding>
                               <Insets bottom="4.0" left="4.0" />
@@ -102,13 +102,57 @@
                         <Label fx:id="genPerSec" text="Current Generations per second:  ####" />
                         <Label fx:id="avgGenSec" text="Average Generations per second:  ####" />
                         <Label fx:id="totalRun" text="Total Runtime: hh:mm:ss" />
-                        <Button mnemonicParsing="false" text="Genes" />
-                        <ComboBox fx:id="blendmodecombobox" prefWidth="150.0" promptText="Blend Mode: " />
                      </children>
                      <padding>
                         <Insets left="4.0" top="4.0" />
                      </padding>
                   </VBox>
+               </content>
+            </Tab>
+            <Tab text="Genes">
+               <content>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <TreeTableView prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                            <TreeTableColumn prefWidth="75.0" text="C1" />
+                            <TreeTableColumn prefWidth="75.0" text="C2" />
+                              <TreeTableColumn maxWidth="-1.0" minWidth="-Infinity" prefWidth="-1.0" text="C3" />
+                          </columns>
+                        </TreeTableView>
+                     </content>
+                  </ScrollPane>
+               </content>
+            </Tab>
+            <Tab text="Settings">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="BlendMode:" />
+                              <Separator prefWidth="200.0" />
+                              <Button fx:id="srcOver" mnemonicParsing="false" onAction="#blendModeButton" text="SRC_OVER" />
+                              <Button fx:id="srcAtop" mnemonicParsing="false" onAction="#blendModeButton" text="SRC_ATOP" />
+                              <Button fx:id="add"  mnemonicParsing="false" onAction="#blendModeButton" text="SRC_ADD" />
+                              <Button fx:id="multiply"  mnemonicParsing="false" onAction="#blendModeButton" text="MULTIPLY" />
+                              <Button fx:id="screen"  mnemonicParsing="false" onAction="#blendModeButton" text="SCREEN" />
+                              <Button fx:id="overlay"  mnemonicParsing="false" onAction="#blendModeButton" text="OVERLAY" />
+                              <Button fx:id="darken"  mnemonicParsing="false" onAction="#blendModeButton" text="DARKEN" />
+                              <Button fx:id="lighten"  mnemonicParsing="false" onAction="#blendModeButton" text="LIGHTEN" />
+                              <Button fx:id="colorDodge"  mnemonicParsing="false" onAction="#blendModeButton" text="COLOR_DODGE" />
+                              <Button fx:id="colorBurn"  mnemonicParsing="false" onAction="#blendModeButton" text="COLOR_BURN" />
+                              <Button fx:id="hardLight"  mnemonicParsing="false" onAction="#blendModeButton" text="HARD_LIGHT" />
+                              <Button fx:id="softLight"  mnemonicParsing="false" onAction="#blendModeButton" text="SOFT_LIGHT" />
+                              <Button fx:id="difference"  mnemonicParsing="false" onAction="#blendModeButton" text="DIFFERENCE" />
+                              <Button fx:id="exclusion"  mnemonicParsing="false" onAction="#blendModeButton" text="EXCLUSION" />
+                              <Button fx:id="redBlend"  mnemonicParsing="false" onAction="#blendModeButton" text="RED" />
+                              <Button fx:id="blueBlend"  mnemonicParsing="false" onAction="#blendModeButton" text="GREEN" />
+                              <Button fx:id="greenBlend"  mnemonicParsing="false" onAction="#blendModeButton" text="BLUE" />
+                          </children>
+                        </VBox>
+                     </children>
+                  </HBox>
                </content>
             </Tab>
         </tabs>

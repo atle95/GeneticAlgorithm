@@ -19,18 +19,7 @@ public class TriangleManager
   {
     for(int i = 0; i < Attributes.numTriangles; i++)
     {
-      TriangleObject a = new TriangleObject(
-          r.nextInt(Attributes.imageWidth),
-          r.nextInt(Attributes.imageWidth),
-          r.nextInt(Attributes.imageWidth),
-          r.nextInt(Attributes.imageHeight),
-          r.nextInt(Attributes.imageHeight),
-          r.nextInt(Attributes.imageHeight),
-          r.nextInt(255),
-          r.nextInt(255),
-          r.nextInt(255),
-          r.nextDouble()
-          );
+      TriangleObject a = new TriangleObject();
       triangleList.add(a);
     }
   }
