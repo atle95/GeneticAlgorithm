@@ -1,6 +1,5 @@
 package gui;
 
-import core.FitnessCalculator;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -27,11 +26,16 @@ public class Gui extends Application
   Image vangogh = new Image("File:Resources/Images/vangogh.png");
   Image mcescher = new Image("File:Resources/Images/mcescher.png");
   
+  public Gui()
+  {
+    
+  }
+  
   @Override
   public void start(Stage primaryStage) throws Exception 
   {
     
-    GuiControls controller = new GuiControls();
+    GuiControls controller = new GuiControls(this);
     triangleManager = new TriangleManager();
     Scene scene = new Scene(controller);
     primaryStage.setScene(scene);
@@ -45,8 +49,7 @@ public class Gui extends Application
     
     primaryStage.show();
     
-    //TODO ADDED THIS TO TEST STUFF
-   FitnessCalculator.getPixels();
+//   FitnessCalculator.getPixels();
     
   }
   
@@ -60,7 +63,7 @@ public class Gui extends Application
     }
   }
   
-  public static void drawCurImage(Image img)
+  public void drawCurImage(Image img)
   {
     gfxL.drawImage(img, 0, 0);
   }

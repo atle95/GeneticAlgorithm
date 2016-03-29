@@ -6,20 +6,31 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 public class GuiControls extends BorderPane
 {
   @FXML private Button button1, button2, button3, button4, button5, button6, button7, button8;
   @FXML private Button buttonL1, buttonL2, buttonL3, buttonL4, buttonL5;
+  @FXML private Button monaLisaButton, poppyFieldsButton, greatWaveButton, vanGoghButton, mcEscherButton;
   @FXML private Canvas canvasLeft;
   @FXML private Canvas canvasRight;
-  @FXML private ImageView vangogh;
+  Image monalisa    = new Image("File:Resources/Images/monalisa.png");
+  Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
+  Image greatwave   = new Image("File:Resources/Images/greatwave.png");
+  Image vangogh     = new Image("File:Resources/Images/vangogh.png");
+  Image mcescher    = new Image("File:Resources/Images/mcescher.png");
+  GraphicsContext gfxL;
+  double pictureWidth = 512;
+  double pictureHeight = 512;
+  Gui gui;
   
-  public GuiControls() 
+  public GuiControls(Gui gui) 
   {
+    this.gui = gui;
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gui.fxml"));
     fxmlLoader.setRoot(this);
     fxmlLoader.setController(this);
@@ -73,29 +84,27 @@ public class GuiControls extends BorderPane
   @FXML
   protected void imageButton(ActionEvent event)
   {
-    if(event.getSource() == buttonL1)
+    if(event.getSource() == monaLisaButton)
     {
-      System.out.println("Left Button 1");
+      gui.drawCurImage(monalisa);
     }
-    else if(event.getSource() == buttonL2)
+    else if(event.getSource() == poppyFieldsButton)
     {
-      System.out.println("Left Button 2");
+      gui.drawCurImage(poppyfields);
     }
-    else if(event.getSource() == buttonL3)
+    else if(event.getSource() == greatWaveButton)
     {
-      System.out.println("Left Button 3");
+      gui.drawCurImage(greatwave);
     }
-    else if(event.getSource() == buttonL4)
+    else if(event.getSource() == vanGoghButton)
     {
-      System.out.println("Left Button 4");
+      gui.drawCurImage(vangogh);
     }
-    else if(event.getSource() == buttonL5)
+    else if(event.getSource() == mcEscherButton)
     {
-      System.out.println("Left Button 5");
+      gui.drawCurImage(mcescher);
     }
-    
   }
- 
   @FXML
   protected void slider(ActionEvent event)
   {
