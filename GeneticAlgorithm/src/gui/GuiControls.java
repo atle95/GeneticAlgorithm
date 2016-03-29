@@ -18,7 +18,7 @@ public class GuiControls extends BorderPane
   @FXML private Button monaLisaButton, poppyFieldsButton, greatWaveButton, vanGoghButton, mcEscherButton;
   @FXML private Canvas canvasLeft, canvasRight, fitnessCanvas;
   @FXML private Label currFit, fitPerSec, totalPop, totalHill, genPerSec, avgGenSec, totalRun;
-  @FXML Button srcOver, srcAtop, add, multiply, screen, overlay, darken, lighten, colorDodge, colorBurn, hardLight, softLight, difference, exclusion, redBlend, blueBlend, greenBlend;
+  @FXML Button srcOver, srcAtop, add, multiply, screen, overlay, darken, lighten, colorDodge, colorBurn, hardLight, softLight, difference, exclusion, redBlend, blueBlend, greenBlend, clear;
   private Image monalisa    = new Image("File:Resources/Images/monalisa.png");
   private Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
   private Image greatwave   = new Image("File:Resources/Images/greatwave.png");
@@ -104,17 +104,6 @@ public class GuiControls extends BorderPane
       gui.drawCurImage(mcescher);
     }
   }
-  public enum blendModeEvents 
-  {
-    srcOver, srcAtop, add, multiply, 
-    screen, overlay, 
-    darken, lighten, 
-    colorDodge, colorBurn, 
-    hardLight, softLight, 
-    difference, exclusion, 
-    redBlend, blueBlend, greenBlend 
-  }
-  
   @FXML
   protected void blendModeButton(ActionEvent event)
   {
@@ -159,6 +148,12 @@ public class GuiControls extends BorderPane
     break;
     }
     gui.drawTriangles();
+  }
+  
+  @FXML
+  protected void clearButton()
+  {
+    gui.clearTriangles();
   }
   
   @FXML

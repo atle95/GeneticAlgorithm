@@ -41,7 +41,6 @@ public class Gui extends Application
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
     gfxR = controller.getCanvasRight().getGraphicsContext2D();
     gfxL = controller.getCanvasLeft().getGraphicsContext2D();
-    gfxR.setGlobalBlendMode(BlendMode.GREEN);
     
     drawCurImage(monalisa);
     triangleManager.initializeTriangles();
@@ -53,8 +52,9 @@ public class Gui extends Application
   
   public void drawTriangles()
   {
-    gfxR.setFill(Color.WHITE);
-    gfxR.fillRect(0, 0, controller.getCanvasRight().getWidth(), controller.getCanvasRight().getHeight());
+    BlendMode temp = gfxR.getGlobalBlendMode();
+    clearTriangles();
+    setBlendMode(temp);
     for(TriangleObject triangleObject : triangleManager.triangleList)
     {
       gfxR.setFill(Color.rgb(triangleObject.r, triangleObject.g, triangleObject.b, triangleObject.a));
@@ -75,6 +75,12 @@ public class Gui extends Application
   WritableImage getSnapShot()
   {
     return controller.getCanvasRight().snapshot(null, null);
+  }
+  
+  public void clearTriangles()
+  {
+    gfxR.setGlobalBlendMode(BlendMode.SRC_OVER);
+    gfxR.clearRect(0, 0, controller.getCanvasRight().getWidth(), controller.getCanvasRight().getHeight());
   }
   
   public static void main(String[] args)
