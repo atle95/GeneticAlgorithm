@@ -23,7 +23,7 @@ public class Gui extends Application
 {
   private GraphicsContext gfxR;
   private static GraphicsContext gfxL;
-//  private GraphicsContext gfxF;
+  private GraphicsContext gfxF;
   
   TriangleManager triangleManager;
   GuiControls controller;
@@ -50,7 +50,7 @@ public class Gui extends Application
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
     gfxR = controller.getCanvasRight().getGraphicsContext2D();
     gfxL = controller.getCanvasLeft().getGraphicsContext2D();
-//    gfxF = controller.getFitnessCanvas().getGraphicsContext2D();
+    gfxF = controller.getFitnessCanvas().getGraphicsContext2D();
 
     drawCurImage(monalisa);
     triangleManager.initializeTriangles();
@@ -65,7 +65,6 @@ public class Gui extends Application
     BlendMode temp = gfxR.getGlobalBlendMode();
     clearTriangles();
     setBlendMode(temp);
-//    for(TriangleObject triangleObject : triangleManager.triangleList)
     for(int i = 0; i<Attributes.numTriangles;i++)
     {
       gfxR.setFill(Color.rgb(
@@ -100,15 +99,24 @@ public class Gui extends Application
     gfxR.setGlobalBlendMode(mode);
   }
   
-  WritableImage getSnapShot(Canvas canvas, double x, double y, int w, int h)
+  WritableImage getSnapShot(Canvas canvas, int x, int y, int w, int h)
   {
     SnapshotParameters parameters = new SnapshotParameters();
-    parameters.setViewport(new Rectangle2D(x, y, x+w, y+h));
+    parameters.setViewport(new Rectangle2D(x, y, w+x, h+y));
     WritableImage wi = new WritableImage(w, h);
     WritableImage snapshot = canvas.snapshot(parameters, wi);
     return snapshot;
   }
   
+  WritableImage getSnapShot(Canvas canvas, int[] input)
+  {
+    SnapshotParameters parameters = new SnapshotParameters();
+    parameters.setViewport(new Rectangle2D(input[0], input[1], input[2], input[3]));
+    WritableImage wi = new WritableImage(input[2], input[3]);
+    WritableImage snapshot = canvas.snapshot(parameters, wi);
+    return snapshot;
+  }
+   
   public void clearTriangles()
   {
     gfxR.setGlobalBlendMode(BlendMode.SRC_OVER);
