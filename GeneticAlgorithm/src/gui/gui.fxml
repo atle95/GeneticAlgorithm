@@ -27,16 +27,19 @@
             <Label text="Triangles" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Slider fx:id="numTrianglesSlider" max="200.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.rowIndex="1" />
-            <Slider fx:id="slider2" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Slider fx:id="numTrianglesSlider" blockIncrement="1.0" max="200.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="200.0" GridPane.rowIndex="1" />
+            <Slider fx:id="currentTriangleSlider" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Slider fx:id="slider3" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
+         <opaqueInsets>
+            <Insets bottom="4.0" left="2.0" right="2.0" />
+         </opaqueInsets>
       </GridPane>
    </bottom>
    <right>
       <TabPane>
          <tabs>
-            <Tab>
+            <Tab closable="false" text="Triangle Canvas">
                <content>
                   <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="BOTTOM_CENTER">
                      <children>
@@ -56,6 +59,15 @@
                            </padding>
                         </HBox>
                         <Canvas fx:id="canvasRight" blendMode="SRC_ATOP" height="512.0" width="512.0" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Flood Fill Test">
+               <content>
+                  <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Canvas fx:id="canvasRight1" blendMode="SRC_ATOP" height="512.0" width="512.0" />
                      </children>
                   </VBox>
                </content>

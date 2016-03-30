@@ -8,7 +8,6 @@ public class TriangleManager
 {
   public ArrayList<TriangleObject> triangleList = new ArrayList<TriangleObject>();
   Random random = new Random(Attributes.seed);
-  private int lastMutation;
   
   public TriangleManager()
   {

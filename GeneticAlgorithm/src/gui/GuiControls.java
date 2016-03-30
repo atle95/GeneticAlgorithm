@@ -24,7 +24,7 @@ public class GuiControls extends BorderPane
   @FXML private Canvas canvasLeft, canvasRight, fitnessCanvas;
   @FXML private Label currFit, fitPerSec, totalPop, totalHill, genPerSec, avgGenSec, totalRun;
   @FXML Button srcOver, srcAtop, add, multiply, screen, overlay, darken, lighten, colorDodge, colorBurn, hardLight, softLight, difference, exclusion, redBlend, blueBlend, greenBlend, clear, mutate;
-  @FXML Slider numTrianglesSlider, slider2, slider3;
+  @FXML Slider numTrianglesSlider, currentTriangleSlider, slider3;
   private Image monalisa    = new Image("File:Resources/Images/monalisa.png");
   private Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
   private Image greatwave   = new Image("File:Resources/Images/greatwave.png");
@@ -55,16 +55,38 @@ public class GuiControls extends BorderPane
         gui.drawTriangles();
       }
     });
-    numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
-      @Override
-      public void changed(ObservableValue<? extends Boolean> obs, Boolean wasChanging, Boolean isNowChanging) {
-          if (! isNowChanging) 
-          {
-            System.out.println("done");
-              gui.drawTriangles();
-          }
+    numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
+    {
+      public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) 
+      {
+        if (!new_val) 
+        {
+          System.out.println("done");
+          gui.drawTriangles();
+        }
       }
-  });
+    });
+    currentTriangleSlider.valueProperty().addListener(new ChangeListener<Number>()
+    {
+      public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) 
+      {
+        System.out.printf("Num Triangles: %d\n", new_val.intValue());
+        Attributes.currentTriangle = new_val.intValue();
+//        gui.drawTriangles();
+      }
+    });
+    currentTriangleSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
+    {
+      public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) 
+      {
+        if (!new_val) 
+        {
+          System.out.println("done");
+          gui.drawTriangles();
+        }
+      }
+    });
+  
   }
   
   @FXML
@@ -184,8 +206,11 @@ public class GuiControls extends BorderPane
   @FXML
   protected void mutateButton()
   {
+    //for(;;)
+    {
     gui.triangleManager.mutateTriangle();
     gui.drawTriangles();
+    }
   }
   
   @FXML
