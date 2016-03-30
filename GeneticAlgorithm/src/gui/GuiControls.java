@@ -2,14 +2,19 @@ package gui;
 
 import java.io.IOException;
 
+import engine.Attributes;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
+import javafx.scene.input.DragEvent;
 import javafx.scene.layout.BorderPane;
 
 public class GuiControls extends BorderPane
@@ -18,7 +23,8 @@ public class GuiControls extends BorderPane
   @FXML private Button monaLisaButton, poppyFieldsButton, greatWaveButton, vanGoghButton, mcEscherButton;
   @FXML private Canvas canvasLeft, canvasRight, fitnessCanvas;
   @FXML private Label currFit, fitPerSec, totalPop, totalHill, genPerSec, avgGenSec, totalRun;
-  @FXML Button srcOver, srcAtop, add, multiply, screen, overlay, darken, lighten, colorDodge, colorBurn, hardLight, softLight, difference, exclusion, redBlend, blueBlend, greenBlend, clear;
+  @FXML Button srcOver, srcAtop, add, multiply, screen, overlay, darken, lighten, colorDodge, colorBurn, hardLight, softLight, difference, exclusion, redBlend, blueBlend, greenBlend, clear, mutate;
+  @FXML Slider numTrianglesSlider, slider2, slider3;
   private Image monalisa    = new Image("File:Resources/Images/monalisa.png");
   private Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
   private Image greatwave   = new Image("File:Resources/Images/greatwave.png");
@@ -32,7 +38,6 @@ public class GuiControls extends BorderPane
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gui.fxml"));
     fxmlLoader.setRoot(this);
     fxmlLoader.setController(this);
-    
     try
     {
       fxmlLoader.load();            
@@ -41,6 +46,25 @@ public class GuiControls extends BorderPane
     {
       throw new RuntimeException(exception);
     }
+    numTrianglesSlider.valueProperty().addListener(new ChangeListener<Number>()
+    {
+      public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) 
+      {
+        System.out.printf("Num Triangles: %d\n", new_val.intValue());
+        Attributes.numTriangles = new_val.intValue();
+        gui.drawTriangles();
+      }
+    });
+    numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
+      @Override
+      public void changed(ObservableValue<? extends Boolean> obs, Boolean wasChanging, Boolean isNowChanging) {
+          if (! isNowChanging) 
+          {
+            System.out.println("done");
+              gui.drawTriangles();
+          }
+      }
+  });
   }
   
   @FXML
@@ -158,10 +182,23 @@ public class GuiControls extends BorderPane
   }
   
   @FXML
-  protected void slider(ActionEvent event)
+  protected void mutateButton()
   {
-    
+    gui.triangleManager.mutateTriangle();
+    gui.drawTriangles();
   }
+  
+  @FXML
+  protected void slider(DragEvent event)
+  {
+    if(event.equals(DragEvent.DRAG_OVER))
+    {
+      System.out.println("Mouse Released");
+//      gui.drawTriangles();
+    }
+  }
+  
+ 
   
   public Canvas getCanvasRight()
   {

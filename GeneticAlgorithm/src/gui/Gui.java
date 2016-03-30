@@ -1,6 +1,7 @@
 package gui;
 
 import core.FitnessCalculator;
+import engine.Attributes;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -14,13 +15,12 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import triangles.TriangleManager;
-import triangles.TriangleObject;
 
 public class Gui extends Application
 {
   private GraphicsContext gfxR;
   private static GraphicsContext gfxL;
-  private GraphicsContext gfxF;
+//  private GraphicsContext gfxF;
   
   TriangleManager triangleManager;
   GuiControls controller;
@@ -47,7 +47,7 @@ public class Gui extends Application
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
     gfxR = controller.getCanvasRight().getGraphicsContext2D();
     gfxL = controller.getCanvasLeft().getGraphicsContext2D();
-    gfxF = controller.getFitnessCanvas().getGraphicsContext2D();
+//    gfxF = controller.getFitnessCanvas().getGraphicsContext2D();
 
     drawCurImage(monalisa);
     triangleManager.initializeTriangles();
@@ -62,10 +62,17 @@ public class Gui extends Application
     BlendMode temp = gfxR.getGlobalBlendMode();
     clearTriangles();
     setBlendMode(temp);
-    for(TriangleObject triangleObject : triangleManager.triangleList)
+//    for(TriangleObject triangleObject : triangleManager.triangleList)
+    for(int i = 0; i<Attributes.numTriangles;i++)
     {
-      gfxR.setFill(Color.rgb(triangleObject.r, triangleObject.g, triangleObject.b, triangleObject.a));
-      gfxR.fillPolygon(triangleObject.x, triangleObject.y,3);
+      gfxR.setFill(Color.rgb(
+          triangleManager.triangleList.get(i).r, 
+          triangleManager.triangleList.get(i).g,
+          triangleManager.triangleList.get(i).b,
+          triangleManager.triangleList.get(i).a
+          )
+          );
+      gfxR.fillPolygon(triangleManager.triangleList.get(i).x, triangleManager.triangleList.get(i).y,3);
     }
   }
   

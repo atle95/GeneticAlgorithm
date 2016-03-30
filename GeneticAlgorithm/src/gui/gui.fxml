@@ -27,7 +27,7 @@
             <Label text="Triangles" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Slider fx:id="slider1" showTickLabels="true" showTickMarks="true" GridPane.rowIndex="1" />
+            <Slider fx:id="numTrianglesSlider" max="200.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.rowIndex="1" />
             <Slider fx:id="slider2" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Slider fx:id="slider3" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
@@ -150,23 +150,23 @@
                                        <children>
                                          <Label text="BlendMode:" />
                                           <Separator prefWidth="200.0" />
-                                          <Button fx:id="srcOver"    maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="SRC_OVER" />
-                                          <Button fx:id="srcAtop"    maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="SRC_ATOP" />
-                                          <Button fx:id="add"        maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="SRC_ADD" />
-                                          <Button fx:id="multiply"   maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="MULTIPLY" />
-                                          <Button fx:id="screen"     maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="SCREEN" />
-                                          <Button fx:id="overlay"    maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="OVERLAY" />
-                                          <Button fx:id="darken"     maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="DARKEN" />
-                                          <Button fx:id="lighten"    maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="LIGHTEN" />
+                                          <Button fx:id="srcOver" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="SRC_OVER" />
+                                          <Button fx:id="srcAtop" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="SRC_ATOP" />
+                                          <Button fx:id="add" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="SRC_ADD" />
+                                          <Button fx:id="multiply" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="MULTIPLY" />
+                                          <Button fx:id="screen" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="SCREEN" />
+                                          <Button fx:id="overlay" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="OVERLAY" />
+                                          <Button fx:id="darken" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="DARKEN" />
+                                          <Button fx:id="lighten" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="LIGHTEN" />
                                           <Button fx:id="colorDodge" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="COLOR_DODGE" />
-                                          <Button fx:id="colorBurn"  maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="COLOR_BURN" />
-                                          <Button fx:id="hardLight"  maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="HARD_LIGHT" />
-                                          <Button fx:id="softLight"  maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="SOFT_LIGHT" />
+                                          <Button fx:id="colorBurn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="COLOR_BURN" />
+                                          <Button fx:id="hardLight" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="HARD_LIGHT" />
+                                          <Button fx:id="softLight" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="SOFT_LIGHT" />
                                           <Button fx:id="difference" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="DIFFERENCE" />
-                                          <Button fx:id="exclusion"  maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="EXCLUSION" />
-                                          <Button fx:id="redBlend"   maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="RED" />
+                                          <Button fx:id="exclusion" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="EXCLUSION" />
+                                          <Button fx:id="redBlend" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="RED" />
                                           <Button fx:id="greenBlend" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="GREEN" />
-                                          <Button fx:id="blueBlend"  maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="BLUE" />
+                                          <Button fx:id="blueBlend" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#blendModeButton" text="BLUE" />
                                       </children>
                                        <opaqueInsets>
                                           <Insets left="4.0" right="4.0" top="4.0" />
@@ -180,6 +180,7 @@
                           </content>
                         </ScrollPane>
                        <Button fx:id="clear" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearButton" text="CLEAR" />
+                       <Button fx:id="mutate" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mutateButton" text="MUTATE" />
                      </children>
                      <opaqueInsets>
                         <Insets left="4.0" top="4.0" />

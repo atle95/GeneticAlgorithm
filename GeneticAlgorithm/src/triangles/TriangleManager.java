@@ -2,13 +2,13 @@ package triangles;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import engine.Attributes;
 
 public class TriangleManager 
 {
   public ArrayList<TriangleObject> triangleList = new ArrayList<TriangleObject>();
-  Random r = new Random();
+  Random random = new Random(Attributes.seed);
+  private int lastMutation;
   
   public TriangleManager()
   {
@@ -17,12 +17,22 @@ public class TriangleManager
   
   public void initializeTriangles()
   {
-    for(int i = 0; i < Attributes.numTriangles; i++)
+    for(int i = 0; i < Attributes.maxTriangles; i++)
     {
-      TriangleObject a = new TriangleObject();
-      triangleList.add(a);
+      TriangleObject member = new TriangleObject(random);
+      triangleList.add(member);
     }
   }
+  
+  public void mutateTriangle()
+  {
+    for(int i = 0; i < Attributes.numTriangles; i++)
+    {
+      triangleList.get(i).mutate(random.nextInt(19));
+    }
+    
+  }
+  
   
   
 }
