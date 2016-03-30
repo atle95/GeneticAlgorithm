@@ -2,10 +2,14 @@ package gui;
 
 import core.FitnessCalculator;
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -14,9 +18,10 @@ import triangles.TriangleObject;
 
 public class Gui extends Application
 {
-  GraphicsContext gfxR;
-  static GraphicsContext gfxL;
-  GraphicsContext gfxF;
+  private GraphicsContext gfxR;
+  private static GraphicsContext gfxL;
+  private GraphicsContext gfxF;
+  
   TriangleManager triangleManager;
   GuiControls controller;
   Image monalisa = new Image("File:GeneticAlgorithm/Resources/Images/monalisa.png");
@@ -25,6 +30,7 @@ public class Gui extends Application
   Image vangogh = new Image("File:Resources/Images/vangogh.png");
   Image mcescher = new Image("File:Resources/Images/mcescher.png");
   Scene scene;
+  PixelReader reader;
   
   public Gui()
   {
@@ -41,11 +47,12 @@ public class Gui extends Application
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
     gfxR = controller.getCanvasRight().getGraphicsContext2D();
     gfxL = controller.getCanvasLeft().getGraphicsContext2D();
-    
+    gfxF = controller.getFitnessCanvas().getGraphicsContext2D();
+
     drawCurImage(monalisa);
     triangleManager.initializeTriangles();
     drawTriangles();
-    
+    drawCurImage(getSnapShot(controller.getCanvasRight(), 0, 10, 100, 100));
     primaryStage.show();
     FitnessCalculator.getPixels();
   }
@@ -72,9 +79,13 @@ public class Gui extends Application
     gfxR.setGlobalBlendMode(mode);
   }
   
-  WritableImage getSnapShot()
+  WritableImage getSnapShot(Canvas canvas, double x, double y, int w, int h)
   {
-    return controller.getCanvasRight().snapshot(null, null);
+    SnapshotParameters parameters = new SnapshotParameters();
+    parameters.setViewport(new Rectangle2D(x, y, x+w, y+h));
+    WritableImage wi = new WritableImage(w, h);
+    WritableImage snapshot = canvas.snapshot(parameters, wi);
+    return snapshot;
   }
   
   public void clearTriangles()

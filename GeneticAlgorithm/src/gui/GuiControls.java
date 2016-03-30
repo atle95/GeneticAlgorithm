@@ -32,6 +32,7 @@ public class GuiControls extends BorderPane
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gui.fxml"));
     fxmlLoader.setRoot(this);
     fxmlLoader.setController(this);
+    
     try
     {
       fxmlLoader.load();            
@@ -171,5 +172,11 @@ public class GuiControls extends BorderPane
   public Canvas getCanvasLeft() 
   {
     return this.canvasLeft;
+  }
+  
+
+  public Canvas getFitnessCanvas()
+  {
+    return this.fitnessCanvas;
   }
 }
