@@ -40,9 +40,9 @@ public class FitnessCalculator
         //Skip every fourth pixel
         if (i % 4 == 0)
         {
-          int red = (pixel & 0x00ff0000) >> 16;
+          int red   = (pixel & 0x00ff0000) >> 16;
           int green = (pixel & 0x0000ff00) >> 8;
-          int blue = pixel & 0x000000ff;
+          int blue  = pixel & 0x000000ff;
           System.out.println(red + " " + green + " " + blue);
         }
       }
