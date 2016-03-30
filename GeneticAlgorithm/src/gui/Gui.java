@@ -1,6 +1,9 @@
 package gui;
 
+import java.nio.Buffer;
+
 import core.FitnessCalculator;
+import core.TriangleCanvas;
 import engine.Attributes;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -54,7 +57,7 @@ public class Gui extends Application
     drawTriangles();
     drawCurImage(getSnapShot(controller.getCanvasRight(), 0, 10, 100, 100));
     primaryStage.show();
-    FitnessCalculator.getPixels();
+    FitnessCalculator.getPixelsFromOriginalImage();
   }
   
   public void drawTriangles()
@@ -72,8 +75,19 @@ public class Gui extends Application
           triangleManager.triangleList.get(i).a
           )
           );
+      
+//      System.err.println( "red   " + triangleManager.triangleList.get(i).r 
+//                        + " green " + triangleManager.triangleList.get(i).g 
+//                        + " blue  " + triangleManager.triangleList.get(i).b);
+      
       gfxR.fillPolygon(triangleManager.triangleList.get(i).x, triangleManager.triangleList.get(i).y,3);
     }
+
+    
+    //TODO Creates an object containing the right-side canvas
+    new TriangleCanvas(gfxR);
+    FitnessCalculator.getPixelsFromRightCanvas();
+    
   }
   
   public void drawCurImage(Image img)
