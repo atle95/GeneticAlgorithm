@@ -2,31 +2,35 @@ package gui;
 
 import java.io.IOException;
 
+import engine.Attributes;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
+import javafx.scene.input.DragEvent;
 import javafx.scene.layout.BorderPane;
 
 public class GuiControls extends BorderPane
 {
   @FXML private Button button1, button2, button3, button4, button5, button6, button7, button8;
-  @FXML private Button buttonL1, buttonL2, buttonL3, buttonL4, buttonL5;
   @FXML private Button monaLisaButton, poppyFieldsButton, greatWaveButton, vanGoghButton, mcEscherButton;
-  @FXML private Canvas canvasLeft;
-  @FXML private Canvas canvasRight;
-  Image monalisa    = new Image("File:Resources/Images/monalisa.png");
-  Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
-  Image greatwave   = new Image("File:Resources/Images/greatwave.png");
-  Image vangogh     = new Image("File:Resources/Images/vangogh.png");
-  Image mcescher    = new Image("File:Resources/Images/mcescher.png");
-  GraphicsContext gfxL;
-  double pictureWidth = 512;
-  double pictureHeight = 512;
-  Gui gui;
+  @FXML private Canvas canvasLeft, canvasRight, fitnessCanvas;
+  @FXML private Label currFit, fitPerSec, totalPop, totalHill, genPerSec, avgGenSec, totalRun;
+  @FXML Button srcOver, srcAtop, add, multiply, screen, overlay, darken, lighten, colorDodge, colorBurn, hardLight, softLight, difference, exclusion, redBlend, blueBlend, greenBlend, clear, mutate;
+  @FXML Slider numTrianglesSlider, slider2, slider3;
+  private Image monalisa    = new Image("File:Resources/Images/monalisa.png");
+  private Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
+  private Image greatwave   = new Image("File:Resources/Images/greatwave.png");
+  private Image vangogh     = new Image("File:Resources/Images/vangogh.png");
+  private Image mcescher    = new Image("File:Resources/Images/mcescher.png");
+  private Gui gui;
   
   public GuiControls(Gui gui) 
   {
@@ -42,6 +46,25 @@ public class GuiControls extends BorderPane
     {
       throw new RuntimeException(exception);
     }
+    numTrianglesSlider.valueProperty().addListener(new ChangeListener<Number>()
+    {
+      public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) 
+      {
+        System.out.printf("Num Triangles: %d\n", new_val.intValue());
+        Attributes.numTriangles = new_val.intValue();
+        gui.drawTriangles();
+      }
+    });
+    numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
+      @Override
+      public void changed(ObservableValue<? extends Boolean> obs, Boolean wasChanging, Boolean isNowChanging) {
+          if (! isNowChanging) 
+          {
+            System.out.println("done");
+              gui.drawTriangles();
+          }
+      }
+  });
   }
   
   @FXML
@@ -81,6 +104,7 @@ public class GuiControls extends BorderPane
     }
   }
   
+  
   @FXML
   protected void imageButton(ActionEvent event)
   {
@@ -106,18 +130,90 @@ public class GuiControls extends BorderPane
     }
   }
   @FXML
-  protected void slider(ActionEvent event)
+  protected void blendModeButton(ActionEvent event)
   {
-    
+    Button btn = (Button) event.getSource();
+    String id = btn.getId();
+    //System.out.println(id);
+    switch(id)
+    {
+    case "srcOver": gui.setBlendMode(BlendMode.SRC_OVER);
+    break;
+    case "srcAtop": gui.setBlendMode(BlendMode.SRC_ATOP);
+    break;
+    case "srcAdd": gui.setBlendMode(BlendMode.ADD);
+    break;
+    case "multiply": gui.setBlendMode(BlendMode.MULTIPLY);
+    break;
+    case "screen": gui.setBlendMode(BlendMode.SCREEN);
+    break;
+    case "overlay": gui.setBlendMode(BlendMode.OVERLAY);
+    break;
+    case "darken": gui.setBlendMode(BlendMode.DARKEN);
+    break;
+    case "lighten": gui.setBlendMode(BlendMode.LIGHTEN);
+    break;
+    case "colorDodge": gui.setBlendMode(BlendMode.COLOR_DODGE);
+    break;
+    case "colorBurn": gui.setBlendMode(BlendMode.COLOR_BURN);
+    break;
+    case "hardLight": gui.setBlendMode(BlendMode.HARD_LIGHT);
+    break;
+    case "softLight": gui.setBlendMode(BlendMode.SOFT_LIGHT);
+    break;
+    case "difference": gui.setBlendMode(BlendMode.EXCLUSION);
+    break;
+    case "exclusion": gui.setBlendMode(BlendMode.EXCLUSION);
+    break;
+    case "redBlend": gui.setBlendMode(BlendMode.RED);
+    break;
+    case "blueBlend": gui.setBlendMode(BlendMode.BLUE);
+    break;
+    case "greenBlend": gui.setBlendMode(BlendMode.GREEN);
+    break;
+    }
+    gui.drawTriangles();
   }
+  
+  @FXML
+  protected void clearButton()
+  {
+    gui.clearTriangles();
+  }
+  
+  @FXML
+  protected void mutateButton()
+  {
+    gui.triangleManager.mutateTriangle();
+    gui.drawTriangles();
+  }
+  
+  @FXML
+  protected void slider(DragEvent event)
+  {
+    if(event.equals(DragEvent.DRAG_OVER))
+    {
+      System.out.println("Mouse Released");
+//      gui.drawTriangles();
+    }
+  }
+  
+ 
   
   public Canvas getCanvasRight()
   {
     return this.canvasRight;
   }
 
+ 
   public Canvas getCanvasLeft() 
   {
     return this.canvasLeft;
+  }
+  
+
+  public Canvas getFitnessCanvas()
+  {
+    return this.fitnessCanvas;
   }
 }

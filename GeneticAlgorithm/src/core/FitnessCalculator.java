@@ -22,7 +22,7 @@ public class FitnessCalculator
   //TODO Get the pixels
   public static void getPixels() throws IOException
   {
-    img = ImageIO.read(new File("GeneticAlgorithm/Resources/Images/monalisa.png"));
+    img = ImageIO.read(new File("Resources/Images/monalisa.png"));
     // Getting pixel color by position x and y
     
     int w = img.getWidth();
