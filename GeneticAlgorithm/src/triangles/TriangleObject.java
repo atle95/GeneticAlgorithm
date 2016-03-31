@@ -5,6 +5,11 @@ import java.util.Random;
 
 import engine.Attributes;
 
+/**
+ * 
+ * @author Atle Olson
+ *
+ */
 public class TriangleObject 
 {
   public double[] x = new double[3];
@@ -13,6 +18,7 @@ public class TriangleObject
   public double a;
   public int lastMutation;
   public int magnitude = 1;
+  private double opacityMagnitude = 0.001;
   
   TriangleObject(int x1, int x2, int x3, int y1, int y2, int y3, int r, int g, int b, double a)
   {
@@ -100,17 +106,17 @@ public class TriangleObject
       case 17: if(this.b-magnitude>=0) this.b-=magnitude;
              else this.b+=magnitude;
       break;
-      case 18: if(this.a-0.01>=0.0) this.a-=0.01;
-             else this.a+=0.01;
+      case 18: if(this.a-opacityMagnitude>=0.0) this.a-=opacityMagnitude;
+             else this.a+=opacityMagnitude;
       break;
-      case 19: if(this.a+0.01<=1.0) this.a+=0.01;
-             else this.a-=0.01;
+      case 19: if(this.a+opacityMagnitude<=1.0) this.a+=opacityMagnitude;
+             else this.a-=opacityMagnitude;
       break;
     }
-//    if(this.r>=255 || this.r<0 ||this.g>=255 || this.g<0 ||this.b>=255 || this.b<0)
-//    {
-//      System.out.printf("x[0]%03.0f x[1]%03.0f x[2]%03.0f y[0]%03.0f y[1]%03.0f y[2]%03.0f r%03d g%03d b%03d a%f\n", this.x[0], this.x[1], this.x[2], this.y[0], this.y[1], this.y[2], this.r, this.g, this.b, this.a);
-//    }
+    if(this.r>255 || this.r<0 ||this.g>255 || this.g<0 ||this.b>255 || this.b<0)
+    {
+      System.out.printf("x[0]%03.0f x[1]%03.0f x[2]%03.0f y[0]%03.0f y[1]%03.0f y[2]%03.0f r%03d g%03d b%03d a%f\n", this.x[0], this.x[1], this.x[2], this.y[0], this.y[1], this.y[2], this.r, this.g, this.b, this.a);
+    }
 //    if(this.r > 255)
 //    {
 //      this.r = 255;

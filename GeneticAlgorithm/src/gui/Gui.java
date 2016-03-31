@@ -18,6 +18,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import triangles.TriangleManager;
 
+/**
+ * 
+ * @author Atle Olson
+ *
+ */
 public class Gui extends Application
 {
   public AnimationTimer gameLoop;
