@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 import engine.Attributes;
 
+/**
+ * 
+ * @author Atle Olson
+ *
+ */
 public class TriangleManager 
 {
   public ArrayList<TriangleObject> triangleList = new ArrayList<TriangleObject>();

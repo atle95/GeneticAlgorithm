@@ -17,6 +17,11 @@ import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * 
+ * @author Atle Olson
+ *
+ */
 public class GuiControls extends BorderPane
 {
   @FXML private Button button1, button2, button3, button4, button5, button6, button7, button8;
@@ -206,11 +211,7 @@ public class GuiControls extends BorderPane
   @FXML
   protected void mutateButton()
   {
-    //for(;;)
-    {
-    gui.triangleManager.mutateTriangle();
-    gui.drawTriangles();
-    }
+    gui.paused = !gui.paused;
   }
   
   @FXML
