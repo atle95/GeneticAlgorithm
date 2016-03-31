@@ -26,7 +26,7 @@ public class Gui extends Application
   private GraphicsContext gfxF;
   
   TriangleManager triangleManager;
-  GuiControls controller;
+ public GuiControls controller;
   Image monalisa = new Image("File:GeneticAlgorithm/Resources/Images/monalisa.png");
   Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
   Image greatwave = new Image("File:Resources/Images/greatwave.png");
@@ -85,7 +85,8 @@ public class Gui extends Application
     
     //TODO Creates an object containing the right-side canvas
     new TriangleCanvas(gfxR);
-    FitnessCalculator.getPixelsFromRightCanvas();
+  //  FitnessCalculator.getPixelsFromRightCanvas();
+    FitnessCalculator  fc = new FitnessCalculator(this);
     
   }
   
@@ -99,7 +100,7 @@ public class Gui extends Application
     gfxR.setGlobalBlendMode(mode);
   }
   
-  WritableImage getSnapShot(Canvas canvas, int x, int y, int w, int h)
+  public WritableImage getSnapShot(Canvas canvas, int x, int y, int w, int h)
   {
     SnapshotParameters parameters = new SnapshotParameters();
     parameters.setViewport(new Rectangle2D(x, y, w+x, h+y));
