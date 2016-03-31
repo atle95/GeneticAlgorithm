@@ -1,10 +1,9 @@
 package gui;
 
-import java.nio.Buffer;
-
 import core.FitnessCalculator;
 import core.TriangleCanvas;
 import engine.Attributes;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -21,6 +20,8 @@ import triangles.TriangleManager;
 
 public class Gui extends Application
 {
+  public AnimationTimer gameLoop;
+  
   private GraphicsContext gfxR;
   private static GraphicsContext gfxL;
   private GraphicsContext gfxF;
@@ -34,6 +35,8 @@ public class Gui extends Application
   Image mcescher = new Image("File:Resources/Images/mcescher.png");
   Scene scene;
   PixelReader reader;
+
+  public boolean paused = true;
   
   public Gui()
   {
@@ -58,6 +61,9 @@ public class Gui extends Application
     drawCurImage(getSnapShot(controller.getCanvasRight(), 0, 10, 100, 100));
     primaryStage.show();
     FitnessCalculator.getPixelsFromOriginalImage();
+    
+    gameLoop = new MainGameLoop();
+    gameLoop.start();
   }
   
   public void drawTriangles()
@@ -121,6 +127,24 @@ public class Gui extends Application
   {
     gfxR.setGlobalBlendMode(BlendMode.SRC_OVER);
     gfxR.clearRect(0, 0, controller.getCanvasRight().getWidth(), controller.getCanvasRight().getHeight());
+  }
+  
+  private class MainGameLoop extends AnimationTimer
+  {
+
+    /**
+     * Call the appropriate method to update the attributes of the
+     * entities in the game.
+     */
+    public void handle(long now)
+    {
+      if(!paused )
+      {
+        triangleManager.mutateTriangle();
+        drawTriangles();
+      }
+      
+    }
   }
   
   public static void main(String[] args)

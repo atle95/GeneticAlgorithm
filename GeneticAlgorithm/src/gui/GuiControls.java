@@ -206,11 +206,7 @@ public class GuiControls extends BorderPane
   @FXML
   protected void mutateButton()
   {
-    //for(;;)
-    {
-    gui.triangleManager.mutateTriangle();
-    gui.drawTriangles();
-    }
+    gui.paused = !gui.paused;
   }
   
   @FXML
