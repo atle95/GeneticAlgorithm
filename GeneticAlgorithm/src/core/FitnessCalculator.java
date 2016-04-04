@@ -38,7 +38,7 @@ public class FitnessCalculator
 
   
    
-   //TODO get the fitness of the image
+  //TODO get the fitness of the image
   public void getOriginalImageFitness(){}
   
   
@@ -77,7 +77,7 @@ public class FitnessCalculator
   //TODO Get pixels of image from right side (triangles)
   public  void getPixelsFromRightCanvas()
   {
-    int  width = Attributes.imageWidth;
+    int width = Attributes.imageWidth;
     int height = Attributes.imageHeight;
     
     Gui g = new Gui();

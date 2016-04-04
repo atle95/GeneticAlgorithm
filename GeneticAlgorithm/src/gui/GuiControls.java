@@ -137,23 +137,23 @@ public class GuiControls extends BorderPane
   {
     if(event.getSource() == monaLisaButton)
     {
-      gui.drawCurImage(monalisa);
+      gui.drawCurImage(gui.gfxL, monalisa);
     }
     else if(event.getSource() == poppyFieldsButton)
     {
-      gui.drawCurImage(poppyfields);
+      gui.drawCurImage(gui.gfxL, poppyfields);
     }
     else if(event.getSource() == greatWaveButton)
     {
-      gui.drawCurImage(greatwave);
+      gui.drawCurImage(gui.gfxL, greatwave);
     }
     else if(event.getSource() == vanGoghButton)
     {
-      gui.drawCurImage(vangogh);
+      gui.drawCurImage(gui.gfxL, vangogh);
     }
     else if(event.getSource() == mcEscherButton)
     {
-      gui.drawCurImage(mcescher);
+      gui.drawCurImage(gui.gfxL, mcescher);
     }
   }
   @FXML
