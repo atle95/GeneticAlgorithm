@@ -1,10 +1,16 @@
 package gui;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+
 import core.FitnessCalculator;
 import core.TriangleCanvas;
 import engine.Attributes;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -14,7 +20,7 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
-import javafx.scene.paint.Color;
+//import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import triangles.TriangleManager;
 
@@ -27,12 +33,12 @@ public class Gui extends Application
 {
   public AnimationTimer gameLoop;
   
-  private GraphicsContext gfxR;
-  private static GraphicsContext gfxL;
-  private GraphicsContext gfxF;
+  public GraphicsContext gfxR;
+  public static GraphicsContext gfxL;
+  public GraphicsContext gfxF;
   
   TriangleManager triangleManager;
- public GuiControls controller;
+  public GuiControls controller;
   Image monalisa = new Image("File:GeneticAlgorithm/Resources/Images/monalisa.png");
   Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
   Image greatwave = new Image("File:Resources/Images/greatwave.png");
@@ -60,10 +66,11 @@ public class Gui extends Application
     gfxL = controller.getCanvasLeft().getGraphicsContext2D();
     gfxF = controller.getFitnessCanvas().getGraphicsContext2D();
 
-    drawCurImage(monalisa);
+    drawCurImage(gfxL, monalisa);
     triangleManager.initializeTriangles();
-    drawTriangles();
-    drawCurImage(getSnapShot(controller.getCanvasRight(), 0, 10, 100, 100));
+    //drawTriangles();
+    drawCurImage(gfxF, getBufferedImage(triangleManager));
+    drawCurImage(gfxL, getSnapShot(controller.getCanvasRight(), 0, 10, 100, 100));
     primaryStage.show();
     FitnessCalculator.getPixelsFromOriginalImage();
     
@@ -78,37 +85,64 @@ public class Gui extends Application
     setBlendMode(temp);
     for(int i = 0; i<Attributes.numTriangles;i++)
     {
-      gfxR.setFill(Color.rgb(
-          triangleManager.triangleList.get(i).r, 
-          triangleManager.triangleList.get(i).g,
-          triangleManager.triangleList.get(i).b,
-          triangleManager.triangleList.get(i).a
-          )
-          );
+//      gfxR.setFill(Color.rgb(
+//          triangleManager.triangleList.get(i).r, 
+//          triangleManager.triangleList.get(i).g,
+//          triangleManager.triangleList.get(i).b,
+//          triangleManager.triangleList.get(i).a
+//          )
+//          );
       
 //      System.err.println( "red   " + triangleManager.triangleList.get(i).r 
 //                        + " green " + triangleManager.triangleList.get(i).g 
 //                        + " blue  " + triangleManager.triangleList.get(i).b);
       
-      gfxR.fillPolygon(triangleManager.triangleList.get(i).x, triangleManager.triangleList.get(i).y,3);
+      gfxR.fillPolygon(triangleManager.triangleList.get(i).x,triangleManager.triangleList.get(i).y,3);
     }
 
     
     //TODO Creates an object containing the right-side canvas
     new TriangleCanvas(gfxR);
-  //  FitnessCalculator.getPixelsFromRightCanvas();
+    //FitnessCalculator.getPixelsFromRightCanvas();
     FitnessCalculator  fc = new FitnessCalculator(this);
     
   }
   
-  public void drawCurImage(Image img)
+  public void drawCurImage(GraphicsContext fx, Image img)
   {
-    gfxL.drawImage(img, 0, 0);
+    fx.drawImage(img, 0, 0);
   }
   
   public void setBlendMode(BlendMode mode)
   {
     gfxR.setGlobalBlendMode(mode);
+  }
+  
+  public Image getBufferedImage(TriangleManager triManag)
+  {
+    BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
+    Graphics2D bigfx = bimg.createGraphics();
+    bigfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    for(int i = 0; i<Attributes.numTriangles;i++)
+    {
+      bigfx.setPaint(new Color(
+          triManag.triangleList.get(i).r,
+          triManag.triangleList.get(i).g,
+          triManag.triangleList.get(i).b,
+          (int) (triManag.triangleList.get(i).a*255.0)
+          
+          ));
+      int[] tempX = new int[3];
+      int[] tempY = new int[3];
+      for(int j = 0; j<triManag.triangleList.get(i).x.length; j++)
+      {
+        tempX[j] = (int) triManag.triangleList.get(i).x[j];
+        tempY[j] = (int) triManag.triangleList.get(i).y[j];
+      }
+      bigfx.fillPolygon(tempX, tempY, 3);
+    }
+    Image img = SwingFXUtils.toFXImage(bimg, null);
+    return img;
   }
   
   public WritableImage getSnapShot(Canvas canvas, int x, int y, int w, int h)
