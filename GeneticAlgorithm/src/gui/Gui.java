@@ -6,7 +6,6 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 import core.FitnessCalculator;
-import core.TriangleCanvas;
 import engine.Attributes;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -77,36 +76,6 @@ public class Gui extends Application
     gameLoop = new MainGameLoop();
     gameLoop.start();
   }
-  
-//  public void drawTriangles()
-//  {
-//    BlendMode temp = gfxR.getGlobalBlendMode();
-//    clearTriangles();
-//    setBlendMode(temp);
-//    for(int i = 0; i<Attributes.numTriangles;i++)
-//    {
-////      gfxR.setFill(Color.rgb(
-////          triangleManager.triangleList.get(i).r, 
-////          triangleManager.triangleList.get(i).g,
-////          triangleManager.triangleList.get(i).b,
-////          triangleManager.triangleList.get(i).a
-////          )
-////          );
-//      
-////      System.err.println( "red   " + triangleManager.triangleList.get(i).r 
-////                        + " green " + triangleManager.triangleList.get(i).g 
-////                        + " blue  " + triangleManager.triangleList.get(i).b);
-//      
-//      gfxR.fillPolygon(triangleManager.triangleList.get(i).x,triangleManager.triangleList.get(i).y,3);
-//    }
-//
-//    
-//    //TODO Creates an object containing the right-side canvas
-//    new TriangleCanvas(gfxR);
-//    //FitnessCalculator.getPixelsFromRightCanvas();
-//    FitnessCalculator  fc = new FitnessCalculator(this);
-//    
-//  }
   
   public void drawCurImage(GraphicsContext fx, Image img)
   {

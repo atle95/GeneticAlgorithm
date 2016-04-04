@@ -27,7 +27,7 @@
             <Label text="Triangles" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Slider fx:id="numTrianglesSlider" blockIncrement="1.0" max="200.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="200.0" GridPane.rowIndex="1" />
+            <Slider fx:id="numTrianglesSlider" blockIncrement="1.0" majorTickUnit="250.0" max="2000.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" value="200.0" GridPane.rowIndex="1" />
             <Slider fx:id="currentTriangleSlider" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Slider fx:id="slider3" showTickLabels="true" showTickMarks="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
