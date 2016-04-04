@@ -57,7 +57,7 @@ public class GuiControls extends BorderPane
       {
         System.out.printf("Num Triangles: %d\n", new_val.intValue());
         Attributes.numTriangles = new_val.intValue();
-        gui.drawTriangles();
+        gui.drawCurImage(gui.gfxR, gui.drawTriangles(gui.triangleManager));
       }
     });
     numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
@@ -67,7 +67,7 @@ public class GuiControls extends BorderPane
         if (!new_val) 
         {
           System.out.println("done");
-          gui.drawTriangles();
+          gui.drawTriangles(gui.triangleManager);
         }
       }
     });
@@ -87,7 +87,7 @@ public class GuiControls extends BorderPane
         if (!new_val) 
         {
           System.out.println("done");
-          gui.drawTriangles();
+          gui.drawCurImage(gui.gfxR, gui.drawTriangles(gui.triangleManager));
         }
       }
     });
@@ -199,7 +199,7 @@ public class GuiControls extends BorderPane
     case "greenBlend": gui.setBlendMode(BlendMode.GREEN);
     break;
     }
-    gui.drawTriangles();
+    gui.drawTriangles(gui.triangleManager);
   }
   
   @FXML
