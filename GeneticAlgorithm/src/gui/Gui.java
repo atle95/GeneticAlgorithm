@@ -5,8 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
-
 import core.FitnessCalculator;
 import engine.Attributes;
 import javafx.animation.AnimationTimer;
@@ -45,6 +43,7 @@ public class Gui extends Application
   Image greatwave = new Image("File:Resources/Images/greatwave.png");
   Image vangogh = new Image("File:Resources/Images/vangogh.png");
   Image mcescher = new Image("File:Resources/Images/mcescher.png");
+  Image curImage = monalisa;
   Scene scene;
   PixelReader reader;
 
@@ -69,18 +68,9 @@ public class Gui extends Application
 
     drawCurImage(gfxL, monalisa);
     triangleManager.initializeTriangles();
-//    drawTriangles();
-    drawCurImage(gfxR, drawTriangles(triangleManager));
+    drawCurImage(gfxR, SwingFXUtils.toFXImage(getBufferedTriangle(triangleManager), null));
     drawCurImage(gfxL, getSnapShot(controller.getCanvasRight(), 200, 200, 10, 10));
     primaryStage.show();
-    
-    /*****************************************/
-   // drawTriangles(triangleManager);
-    FitnessCalculator fc = new FitnessCalculator();
-    fc.getPixelsFromOriginalImage();
-    fc.getPixelsFromRightCanvas(drawTriangles(triangleManager));
-    fc.calculateFitnessOfMutation();
-    /****************************************/
     
     gameLoop = new MainGameLoop();
     gameLoop.start();
@@ -90,17 +80,32 @@ public class Gui extends Application
   {
     fx.drawImage(img, 0, 0);
   }
+
+  public void setCurImage(Image img)
+  {
+    this.curImage = img;
+    Attributes.imageHeight = (int) curImage.getHeight();
+    Attributes.imageWidth  = (int) curImage.getHeight();
+    drawCurImage(gfxL, curImage);
+    //reinitialize fitness calculator stuff;
+  }
+
+  public Image getCurImage()
+  {
+    return this.curImage;
+  }
   
   public void setBlendMode(BlendMode mode)
   {
     gfxR.setGlobalBlendMode(mode);
   }
   
-  public Image drawTriangles(TriangleManager triManag)
+  public BufferedImage getBufferedTriangle(TriangleManager triManag)
   {
     BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
     Graphics2D bigfx = bimg.createGraphics();
     bigfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    clearTriangles();
     for(int i = 0; i<Attributes.numTriangles;i++)
     {
       bigfx.setPaint(new Color(
@@ -119,8 +124,8 @@ public class Gui extends Application
       }
       bigfx.fillPolygon(tempX, tempY, 3);
     }
-    Image img = SwingFXUtils.toFXImage(bimg, null);
-    return img;
+//    Image img = SwingFXUtils.toFXImage(bimg, null);
+    return bimg;
   }
   
   public WritableImage getSnapShot(Canvas canvas, int x, int y, int w, int h)
@@ -159,7 +164,7 @@ public class Gui extends Application
       if(!paused )
       {
         triangleManager.mutateTriangle();
-        drawCurImage(gfxR, drawTriangles(triangleManager));
+        drawCurImage(gfxR, SwingFXUtils.toFXImage(getBufferedTriangle(triangleManager), null));
       }
       
     }

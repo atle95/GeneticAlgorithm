@@ -5,6 +5,7 @@ import java.io.IOException;
 import engine.Attributes;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,7 +58,7 @@ public class GuiControls extends BorderPane
       {
         System.out.printf("Num Triangles: %d\n", new_val.intValue());
         Attributes.numTriangles = new_val.intValue();
-        //gui.drawCurImage(gui.gfxR, gui.drawTriangles(gui.triangleManager));
+        gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager), null));
       }
     });
     numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
@@ -67,7 +68,7 @@ public class GuiControls extends BorderPane
         if (!new_val) 
         {
           System.out.println("done");
-          gui.drawCurImage(gui.gfxR, gui.drawTriangles(gui.triangleManager));
+          gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager), null));
         }
       }
     });
@@ -87,7 +88,7 @@ public class GuiControls extends BorderPane
         if (!new_val) 
         {
           System.out.println("done");
-          gui.drawCurImage(gui.gfxR, gui.drawTriangles(gui.triangleManager));
+          gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager), null));
         }
       }
     });
@@ -137,23 +138,23 @@ public class GuiControls extends BorderPane
   {
     if(event.getSource() == monaLisaButton)
     {
-      gui.drawCurImage(gui.gfxL, monalisa);
+      gui.setCurImage(monalisa);
     }
     else if(event.getSource() == poppyFieldsButton)
     {
-      gui.drawCurImage(gui.gfxL, poppyfields);
+      gui.setCurImage(poppyfields);
     }
     else if(event.getSource() == greatWaveButton)
     {
-      gui.drawCurImage(gui.gfxL, greatwave);
+      gui.setCurImage(greatwave);
     }
     else if(event.getSource() == vanGoghButton)
     {
-      gui.drawCurImage(gui.gfxL, vangogh);
+      gui.setCurImage(vangogh);
     }
     else if(event.getSource() == mcEscherButton)
     {
-      gui.drawCurImage(gui.gfxL, mcescher);
+      gui.setCurImage(mcescher);
     }
   }
 
@@ -200,7 +201,7 @@ public class GuiControls extends BorderPane
     case "greenBlend": gui.setBlendMode(BlendMode.GREEN);
     break;
     }
-    gui.drawTriangles(gui.triangleManager);
+    gui.getBufferedTriangle(gui.triangleManager);
   }
   
   @FXML
@@ -221,7 +222,6 @@ public class GuiControls extends BorderPane
     if(event.equals(DragEvent.DRAG_OVER))
     {
       System.out.println("Mouse Released");
-//      gui.drawTriangles();
     }
   }
   
