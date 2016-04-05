@@ -6,7 +6,6 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 import core.FitnessCalculator;
-import core.TriangleCanvas;
 import engine.Attributes;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -34,12 +33,12 @@ public class Gui extends Application
   public AnimationTimer gameLoop;
   
   public GraphicsContext gfxR;
-  public static GraphicsContext gfxL;
+  public GraphicsContext gfxL;
   public GraphicsContext gfxF;
   
   TriangleManager triangleManager;
   public GuiControls controller;
-  Image monalisa = new Image("File:GeneticAlgorithm/Resources/Images/monalisa.png");
+  Image monalisa = new Image("File:Resources/Images/monalisa.png");
   Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
   Image greatwave = new Image("File:Resources/Images/greatwave.png");
   Image vangogh = new Image("File:Resources/Images/vangogh.png");
@@ -68,44 +67,14 @@ public class Gui extends Application
 
     drawCurImage(gfxL, monalisa);
     triangleManager.initializeTriangles();
-    //drawTriangles();
-    drawCurImage(gfxF, getBufferedImage(triangleManager));
-    drawCurImage(gfxL, getSnapShot(controller.getCanvasRight(), 0, 10, 100, 100));
+//    drawTriangles();
+    drawCurImage(gfxR, drawTriangles(triangleManager));
+    drawCurImage(gfxL, getSnapShot(controller.getCanvasRight(), 200, 200, 10, 10));
     primaryStage.show();
     FitnessCalculator.getPixelsFromOriginalImage();
     
     gameLoop = new MainGameLoop();
     gameLoop.start();
-  }
-  
-  public void drawTriangles()
-  {
-    BlendMode temp = gfxR.getGlobalBlendMode();
-    clearTriangles();
-    setBlendMode(temp);
-    for(int i = 0; i<Attributes.numTriangles;i++)
-    {
-//      gfxR.setFill(Color.rgb(
-//          triangleManager.triangleList.get(i).r, 
-//          triangleManager.triangleList.get(i).g,
-//          triangleManager.triangleList.get(i).b,
-//          triangleManager.triangleList.get(i).a
-//          )
-//          );
-      
-//      System.err.println( "red   " + triangleManager.triangleList.get(i).r 
-//                        + " green " + triangleManager.triangleList.get(i).g 
-//                        + " blue  " + triangleManager.triangleList.get(i).b);
-      
-      gfxR.fillPolygon(triangleManager.triangleList.get(i).x,triangleManager.triangleList.get(i).y,3);
-    }
-
-    
-    //TODO Creates an object containing the right-side canvas
-    new TriangleCanvas(gfxR);
-    //FitnessCalculator.getPixelsFromRightCanvas();
-    FitnessCalculator  fc = new FitnessCalculator(this);
-    
   }
   
   public void drawCurImage(GraphicsContext fx, Image img)
@@ -118,7 +87,7 @@ public class Gui extends Application
     gfxR.setGlobalBlendMode(mode);
   }
   
-  public Image getBufferedImage(TriangleManager triManag)
+  public Image drawTriangles(TriangleManager triManag)
   {
     BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
     Graphics2D bigfx = bimg.createGraphics();
@@ -181,7 +150,7 @@ public class Gui extends Application
       if(!paused )
       {
         triangleManager.mutateTriangle();
-        drawTriangles();
+        drawCurImage(gfxR, drawTriangles(triangleManager));
       }
       
     }

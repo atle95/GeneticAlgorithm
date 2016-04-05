@@ -32,7 +32,7 @@ public class TriangleManager
   {
     for(int i = 0; i < Attributes.numTriangles; i++)
     {
-      triangleList.get(i).mutate(random.nextInt(19));
+      triangleList.get(i).mutate(random.nextInt(20));
     }
     
   }
