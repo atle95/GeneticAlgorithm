@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+
 import core.FitnessCalculator;
 import engine.Attributes;
 import javafx.animation.AnimationTimer;
@@ -71,7 +73,14 @@ public class Gui extends Application
     drawCurImage(gfxR, drawTriangles(triangleManager));
     drawCurImage(gfxL, getSnapShot(controller.getCanvasRight(), 200, 200, 10, 10));
     primaryStage.show();
-    FitnessCalculator.getPixelsFromOriginalImage();
+    
+    /*****************************************/
+   // drawTriangles(triangleManager);
+    FitnessCalculator fc = new FitnessCalculator();
+    fc.getPixelsFromOriginalImage();
+    fc.getPixelsFromRightCanvas(drawTriangles(triangleManager));
+    fc.calculateFitnessOfMutation();
+    /****************************************/
     
     gameLoop = new MainGameLoop();
     gameLoop.start();
