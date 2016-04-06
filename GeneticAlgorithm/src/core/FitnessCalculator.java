@@ -3,6 +3,7 @@ package core;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import engine.Attributes;
+import engine.Genome;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
@@ -19,7 +20,7 @@ import gui.Main;
  */
 public class FitnessCalculator
 {
-  private Main gui;
+  private Main main;
   
   int width = Attributes.imageWidth;
   int height = Attributes.imageHeight;
@@ -40,17 +41,17 @@ public class FitnessCalculator
 
   public FitnessCalculator(Main gui)
   {
-    this.gui = gui;
+    this.main = gui;
   }
 
 
   // TODO get the fitness of the image
-  public void getOriginalImageFitness()
+  public void getOriginalImageFitness(Genome genome)
   {
     try
     {
       getPixelsFromOriginalImage();
-      getPixelsFromRightCanvas(gui.genome.getBufferedTriangle(gui.genome));
+      getPixelsFromRightCanvas(genome.getBufferedTriangle(genome));
     } 
     catch (IOException e) 
     {
@@ -58,11 +59,11 @@ public class FitnessCalculator
   }
 
   // TODO Get the pixels of original image
-  public  void getPixelsFromOriginalImage() throws IOException
+  public void getPixelsFromOriginalImage() throws IOException
   {
     img = ImageIO.read(new File("Resources/Images/monalisa.png"));
 
-    gui.drawCurImage(gui.gfxL, SwingFXUtils.toFXImage(img, null));
+    main.drawCurImage(main.gfxL, SwingFXUtils.toFXImage(img, null));
     int w = img.getWidth();
     int h = img.getHeight();
 
@@ -121,18 +122,18 @@ public class FitnessCalculator
  * 
  * @return - fitness
  */
-  public double calculateFitnessOfMutation()
+  public double calculateFitnessOfMutation(Genome genome)
   {
     double error = 0;
     try 
     {
       getPixelsFromOriginalImage();
-      getPixelsFromRightCanvas(gui.genome.getBufferedTriangle(gui.genome));
+      getPixelsFromRightCanvas(genome.getBufferedTriangle(genome));
     } catch (IOException e) 
     {
       e.printStackTrace();
     }
-    this.pixWriter = this.gui.gfxF.getPixelWriter();
+    this.pixWriter = this.main.gfxF.getPixelWriter();
     
     for (int x = 0; x < width; x++)
     {

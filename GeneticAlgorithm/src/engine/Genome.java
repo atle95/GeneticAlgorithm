@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import gui.Main;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
@@ -17,18 +18,20 @@ import javafx.scene.image.WritableImage;
  * @author Atle Olson
  *
  */
-public class Genome 
+public class Genome
 {
   public ArrayList<TriangleObject> triangleList = new ArrayList<TriangleObject>();
   Main main;
   public BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
   Graphics2D bigfx = bimg.createGraphics();
+  public double fitness;
   
   public Genome(Main main)
   {
     this.main = main;
     bigfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     initializeTriangles();
+    main.setCurGenome(SwingFXUtils.toFXImage(this.bimg, null));
   }
   
   public void initializeTriangles()
@@ -44,11 +47,11 @@ public class Genome
   {
     int i = main.random.nextInt(triangleList.size());
     int mutation = main.random.nextInt(20);
-    double oldFitness = main.fitCalc.calculateFitnessOfMutation();
+    double oldFitness = main.fitCalc.calculateFitnessOfMutation(this);
     //main.setCurrFit("current Fitness: "+ oldFitness);
     //if (Attributes.debug) System.out.printf("mutation: %3d: ", mutation);
     triangleList.get(i).mutate(mutation);
-    double newFitness = main.fitCalc.calculateFitnessOfMutation();
+    double newFitness = main.fitCalc.calculateFitnessOfMutation(this);
     int counter = 0;
     //if (Attributes.debug) System.out.printf("old fitness: %f new fitness: %f\n", oldFitness, newFitness);
     while (newFitness < oldFitness)
@@ -62,13 +65,19 @@ public class Genome
       triangleList.get(i).mutate(triangleList.get(i).lastMutation);
       if (Attributes.debug) System.out.printf("delta Fitness %f \n", oldFitness-newFitness);
       oldFitness = newFitness;
-      newFitness = main.fitCalc.calculateFitnessOfMutation();
+      newFitness = main.fitCalc.calculateFitnessOfMutation(this);
     }
     if(counter > 0)
     {
       if (Attributes.debug) System.out.printf("Number of iterations: %d \n", counter);
     }
     counter = 0;
+//    if(this.fitness > main.greatestFitness)
+//    {
+//      main.greatestFitness = this.fitness;
+//      
+//    }
+    main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(this.bimg, null));
   }
   
   public BufferedImage getBufferedTriangle(Genome genome)

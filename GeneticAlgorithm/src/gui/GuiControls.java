@@ -1,14 +1,10 @@
 package gui;
 
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import engine.Attributes;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +57,7 @@ public class GuiControls extends BorderPane
       {
         System.out.printf("Num Triangles: %d\n", new_val.intValue());
         Attributes.numTriangles = new_val.intValue();
-        main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.genome.bimg, null));
+        //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.tribe.genome.bimg, null));
       }
     });
     numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
@@ -71,7 +67,7 @@ public class GuiControls extends BorderPane
         if (!new_val) 
         {
           System.out.println("done");
-          main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.genome.bimg, null));
+          //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.genome.bimg, null));
         }
       }
     });
@@ -91,7 +87,7 @@ public class GuiControls extends BorderPane
         if (!new_val) 
         {
           System.out.println("done");
-          main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.genome.bimg, null));
+          //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.genome.bimg, null));
         }
       }
     });
@@ -221,14 +217,15 @@ public class GuiControls extends BorderPane
   @FXML
   protected void saveButton()
   {
-    File file = new File("oldtriangles.png");
-    try 
-    {
-      ImageIO.write(SwingFXUtils.fromFXImage(main.genome.getSnapShot(getCanvasRight(), 0,0,Attributes.imageWidth,Attributes.imageHeight), null), "png", file);
-    } catch (IOException e) 
-    {
-      e.printStackTrace();
-    }
+//    File file = new File("oldtriangles.png");
+//    
+//    try {
+//      ImageIO.write(SwingFXUtils.fromFXImage(main.threadList.get(0).triangleList.get(0).getSnapShot(getCanvasRight(), 0,0,Attributes.imageWidth,Attributes.imageHeight), null), "png", file);
+//    } catch (IOException e) 
+//    {
+//      e.printStackTrace();
+//    }
+    
   }
   
   @FXML

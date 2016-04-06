@@ -1,15 +1,14 @@
 package gui;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.CyclicBarrier;
 
 import core.FitnessCalculator;
 import engine.Attributes;
-import engine.Genome;
 import engine.Tribe;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlendMode;
@@ -33,9 +32,12 @@ public class Main extends Application
   public GraphicsContext gfxL;
   public GraphicsContext gfxF;
   
-  public Genome genome;
+//  public Genome genome;
   public GuiControls controller;
   public FitnessCalculator fitCalc;
+  ArrayList<Thread> threadList = new ArrayList<Thread>();
+  
+  public double greatestFitness = 0;
   
   Image monalisa    = new Image("File:Resources/Images/monalisa.png");
   Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
@@ -43,6 +45,7 @@ public class Main extends Application
   Image vangogh     = new Image("File:Resources/Images/vangogh.png");
   Image mcescher    = new Image("File:Resources/Images/mcescher.png");
   Image curImage = monalisa;
+  private Image curGenome;
   Scene scene;
   PixelReader reader;
   public Random random = new Random();
@@ -59,7 +62,7 @@ public class Main extends Application
   public void start(Stage primaryStage) throws Exception 
   {
     controller = new GuiControls(this);
-    genome = new Genome(this);
+//    genome = new Genome(this);
     fitCalc = new FitnessCalculator(this);
     scene = new Scene(controller);
     primaryStage.setScene(scene);
@@ -69,11 +72,13 @@ public class Main extends Application
     gfxF = controller.getFitnessCanvas().getGraphicsContext2D();
 
     drawCurImage(gfxL, monalisa);
-    genome.initializeTriangles();
-    drawCurImage(gfxR, SwingFXUtils.toFXImage(genome.bimg, null));
-    fitCalc.getOriginalImageFitness();
-    fitCalc.calculateFitnessOfMutation();
-    
+//    genome.initializeTriangles();
+//    drawCurImage(gfxR, SwingFXUtils.toFXImage(genome.bimg, null));
+//    fitCalc.getOriginalImageFitness();
+//    fitCalc.calculateFitnessOfMutation();
+    initializeTribes();
+    AnimationTimer gameLoop = new MainGameLoop();
+    gameLoop.start();
     
     primaryStage.show();
     
@@ -82,6 +87,7 @@ public class Main extends Application
   
   public void drawCurImage(GraphicsContext fx, Image img)
   {
+    fx.clearRect(0, 0, img.getWidth(), img.getHeight());
     fx.drawImage(img, 0, 0);
   }
   
@@ -130,4 +136,19 @@ public class Main extends Application
     controller.currFit.setText(string);
   }
 
+  public Image getCurGenome() {
+    return curGenome;
+  }
+
+  public void setCurGenome(Image curGenome) {
+    this.curGenome = curGenome;
+  }
+
+  class MainGameLoop extends AnimationTimer
+  {
+    public void handle(long now)
+    {
+      drawCurImage(gfxR, curGenome);
+    }
+  }
 }
