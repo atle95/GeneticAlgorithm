@@ -32,7 +32,7 @@ public class FitnessCalculator
   static BufferedImage img = null;
   static Image image = null;
   private double fitness;
-  private double error;
+//  private double error;
 
   public FitnessCalculator()
   {
@@ -50,7 +50,7 @@ public class FitnessCalculator
     try
     {
       getPixelsFromOriginalImage();
-      getPixelsFromRightCanvas(SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager),null));
+      getPixelsFromRightCanvas(gui.getBufferedTriangle(gui.triangleManager));
     } 
     catch (IOException e) 
     {
@@ -66,7 +66,7 @@ public class FitnessCalculator
     int w = img.getWidth();
     int h = img.getHeight();
 
-    System.out.println("width, height: " + w + ", " + h);
+    //System.out.println("width, height: " + w + ", " + h);
 
     for (int i = 0; i < w; i++)
     {
@@ -93,7 +93,7 @@ public class FitnessCalculator
    * 
    * @param triangleImage
    */
-  public void getPixelsFromRightCanvas(Image triangleImage)
+  public void getPixelsFromRightCanvas(BufferedImage triangleImage)
   {
 
     int red,green,blue, pixel;
@@ -102,7 +102,7 @@ public class FitnessCalculator
     {
       for (int j = 0; j < height; j++)
       {
-       pixel = triangleImage.getPixelReader().getArgb(i, j);
+       pixel = triangleImage.getRGB(i, j);
        
        red   = (pixel & 0x00ff0000) >> 16;
        green = (pixel & 0x0000ff00) >> 8;
@@ -123,7 +123,17 @@ public class FitnessCalculator
  */
   public double calculateFitnessOfMutation()
   {
+    double error = 0;
+    try 
+    {
+      getPixelsFromOriginalImage();
+      getPixelsFromRightCanvas(gui.getBufferedTriangle(gui.triangleManager));
+    } catch (IOException e) 
+    {
+      e.printStackTrace();
+    }
     this.pixWriter = this.gui.gfxF.getPixelWriter();
+    
     for (int x = 0; x < width; x++)
     {
       for (int y = 0; y < height; y++)
@@ -149,7 +159,7 @@ public class FitnessCalculator
       }
      // fitness = 1 - error / (width * height);
     }
-    System.out.println(error);
+    //System.out.println(error);
     return error;  
   }
   
