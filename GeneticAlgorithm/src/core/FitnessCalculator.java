@@ -50,7 +50,7 @@ public class FitnessCalculator
     try
     {
       getPixelsFromOriginalImage();
-      getPixelsFromRightCanvas(gui.getBufferedTriangle(gui.triangleManager));
+      getPixelsFromRightCanvas(gui.genome.getBufferedTriangle(gui.genome));
     } 
     catch (IOException e) 
     {
@@ -127,7 +127,7 @@ public class FitnessCalculator
     try 
     {
       getPixelsFromOriginalImage();
-      getPixelsFromRightCanvas(gui.getBufferedTriangle(gui.triangleManager));
+      getPixelsFromRightCanvas(gui.genome.getBufferedTriangle(gui.genome));
     } catch (IOException e) 
     {
       e.printStackTrace();

@@ -9,4 +9,5 @@ public class Attributes
   public static int imageHeight = 413;
   public static long seed = 30000;
   public static int currentTriangle=200;
+  public static boolean debug = true;
 }
