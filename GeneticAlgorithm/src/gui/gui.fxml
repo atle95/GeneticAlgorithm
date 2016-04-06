@@ -101,7 +101,7 @@
             </Tab>
           <Tab text="Fitness Map">
                <content>
-                  <Canvas fx:id="fitnessCanvas" height="512.0" width="512.0" />
+                  <Canvas fx:id="fitnessCanvas" height="960" width="720" />
                </content></Tab>
           <Tab text="Variables">
                <content>
@@ -193,6 +193,7 @@
                         </ScrollPane>
                        <Button fx:id="clear" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearButton" text="CLEAR" />
                        <Button fx:id="mutate" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mutateButton" text="MUTATE" />
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButton" text="Save image" />
                      </children>
                      <opaqueInsets>
                         <Insets left="4.0" top="4.0" />

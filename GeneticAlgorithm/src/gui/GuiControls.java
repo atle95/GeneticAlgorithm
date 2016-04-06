@@ -1,6 +1,9 @@
 package gui;
 
+import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import engine.Attributes;
 import javafx.beans.value.ChangeListener;
@@ -215,6 +218,19 @@ public class GuiControls extends BorderPane
     //gui.paused = !gui.paused;
     gui.triangleManager.mutateTriangle();
     gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager), null));
+  }
+
+  @FXML
+  protected void saveButton()
+  {
+    File file = new File("atle.png");
+    try 
+    {
+      ImageIO.write(SwingFXUtils.fromFXImage(gui.getSnapShot(getFitnessCanvas(), 0,0,Attributes.imageWidth,Attributes.imageHeight), null), "png", file);
+    } catch (IOException e) 
+    {
+      e.printStackTrace();
+    }
   }
   
   @FXML

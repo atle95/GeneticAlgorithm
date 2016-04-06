@@ -60,8 +60,9 @@ public class FitnessCalculator
   // TODO Get the pixels of original image
   public  void getPixelsFromOriginalImage() throws IOException
   {
-    img = ImageIO.read(new File("Resources/Images/atle.png"));
+    img = ImageIO.read(new File("Resources/Images/monalisa.png"));
 
+    gui.drawCurImage(gui.gfxL, SwingFXUtils.toFXImage(img, null));
     int w = img.getWidth();
     int h = img.getHeight();
 
