@@ -1,8 +1,8 @@
-package triangles;
+package engine;
 
 import java.util.ArrayList;
 import java.util.Random;
-import engine.Attributes;
+
 import gui.Gui;
 import javafx.embed.swing.SwingFXUtils;
 
@@ -40,23 +40,24 @@ public class TriangleManager
     triangleList.get(i).mutate(mutation);
     double newFitness = gui.fitCalc.calculateFitnessOfMutation();
     int counter = 0;
-    System.out.printf("old fitness: %f new fitness: %f\n", oldFitness, newFitness);
+    //System.out.printf("old fitness: %f new fitness: %f\n", oldFitness, newFitness);
     while (newFitness < oldFitness)
     {
-      if (counter == 0)
-      {
-        System.out.printf("Mutating Triangle %d, current fitness: %f \n", i, newFitness);
-      }
-      System.out.printf("iteration: %d \r\n",counter);
+//      if (counter == 0)
+//      {
+//        System.out.printf("Mutating Triangle %d, current fitness: %f \n", i, newFitness);
+//      }
+      //System.out.printf("iteration: %d \r",counter);
       counter++;
       triangleList.get(i).mutate(triangleList.get(i).lastMutation);
-      gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager), null));
+      System.out.printf("delta Fitness %f \n", oldFitness-newFitness);
       oldFitness = newFitness;
       newFitness = gui.fitCalc.calculateFitnessOfMutation();
     }
     if(counter > 0)
     {
-      System.out.printf("Number of iterations: %d \n", counter);
+            
+      //System.out.printf("Number of iterations: %d \n", counter);
     }
     counter = 0;
   }

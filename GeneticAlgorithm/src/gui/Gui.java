@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import core.FitnessCalculator;
 import engine.Attributes;
+import engine.TriangleManager;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
@@ -21,7 +22,6 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 //import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import triangles.TriangleManager;
 
 /**
  * 
@@ -48,7 +48,10 @@ public class Gui extends Application
   Image curImage = monalisa;
   Scene scene;
   PixelReader reader;
-
+  public BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
+  Graphics2D bigfx = bimg.createGraphics();
+  
+  
   public boolean paused = true;
   
   public Gui()
@@ -69,16 +72,16 @@ public class Gui extends Application
     gfxL = controller.getCanvasLeft().getGraphicsContext2D();
     gfxF = controller.getFitnessCanvas().getGraphicsContext2D();
 
+    bigfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     drawCurImage(gfxL, monalisa);
     triangleManager.initializeTriangles();
-    drawCurImage(gfxR, SwingFXUtils.toFXImage(getBufferedTriangle(triangleManager), null));
+    drawCurImage(gfxR, SwingFXUtils.toFXImage(bimg, null));
     drawCurImage(gfxL, getSnapShot(controller.getCanvasRight(), 200, 200, 100, 100));
     fitCalc.getOriginalImageFitness();
     fitCalc.calculateFitnessOfMutation();
     primaryStage.show();
     
-    gameLoop = new MainGameLoop();
-    gameLoop.start();
+    
   }
   
   public void drawCurImage(GraphicsContext fx, Image img)
@@ -106,10 +109,8 @@ public class Gui extends Application
   }
   
   public BufferedImage getBufferedTriangle(TriangleManager triManag)
-  {
-    BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
-    Graphics2D bigfx = bimg.createGraphics();
-    bigfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+  { 
+    
     clearTriangles();
     for(int i = 0; i<Attributes.numTriangles;i++)
     {
@@ -153,20 +154,8 @@ public class Gui extends Application
    
   public void clearTriangles()
   {
-    gfxR.setGlobalBlendMode(BlendMode.SRC_OVER);
+    //gfxR.setGlobalBlendMode(BlendMode.SRC_OVER);
     gfxR.clearRect(0, 0, controller.getCanvasRight().getWidth(), controller.getCanvasRight().getHeight());
-  }
-  
-  private class MainGameLoop extends AnimationTimer
-  {
-    public void handle(long now)
-    {
-      if(!paused )
-      {
-        triangleManager.mutateTriangle();
-        drawCurImage(gfxR, SwingFXUtils.toFXImage(getBufferedTriangle(triangleManager), null));
-      }
-    }
   }
   
   public static void main(String[] args)
