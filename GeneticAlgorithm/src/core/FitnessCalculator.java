@@ -60,7 +60,7 @@ public class FitnessCalculator
   // TODO Get the pixels of original image
   public  void getPixelsFromOriginalImage() throws IOException
   {
-    img = ImageIO.read(new File("Resources/Images/monalisa.png"));
+    img = ImageIO.read(new File("Resources/Images/atle.png"));
 
     int w = img.getWidth();
     int h = img.getHeight();
@@ -135,6 +135,7 @@ public class FitnessCalculator
 
         error += pixelError;
         int drawError = (int) Math.sqrt(pixelError);
+//        int drawError = (int) ((255/195075) * (pixelError));
         if(drawError < 255)
         {
           pixWriter.setColor(x,y,Color.rgb(drawError,drawError,drawError));
@@ -142,12 +143,12 @@ public class FitnessCalculator
         else
         {
           pixWriter.setColor(x,y,Color.rgb(255,0,0));
-//          System.out.printf("",);
+          //System.out.printf("%d\n",drawError);
         }
       }
      // fitness = 1 - error / (width * height);
     }
-    System.out.print(error);
+    System.out.println(error);
     return error;  
   }
   
@@ -162,6 +163,14 @@ public class FitnessCalculator
       double b = c1.getBlue()  - c2.getBlue();
 
       return r*r + g*g + b*b;
+  }
+
+  public double getFitness() {
+    return fitness;
+  }
+
+  public void setFitness(double fitness) {
+    this.fitness = fitness;
   }
 
 }

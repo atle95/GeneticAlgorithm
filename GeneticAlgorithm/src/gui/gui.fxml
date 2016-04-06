@@ -11,7 +11,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root prefHeight="491.0" prefWidth="1020.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> 
+<fx:root type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> 
    <bottom>
       <GridPane BorderPane.alignment="TOP_CENTER">
         <columnConstraints>
@@ -43,6 +43,7 @@
                <content>
                   <VBox alignment="BOTTOM_CENTER" BorderPane.alignment="BOTTOM_CENTER">
                      <children>
+                        <Canvas fx:id="canvasRight" blendMode="SRC_ATOP" height="512.0" width="512.0" />
                         <HBox alignment="BOTTOM_LEFT">
                            <children>
                               <Button fx:id="button1" mnemonicParsing="false" onAction="#button" text="1" />
@@ -58,7 +59,6 @@
                               <Insets bottom="4.0" left="4.0" />
                            </padding>
                         </HBox>
-                        <Canvas fx:id="canvasRight" blendMode="SRC_ATOP" height="512.0" width="512.0" />
                      </children>
                   </VBox>
                </content>
@@ -80,8 +80,9 @@
         <tabs>
           <Tab text="Current Image">
                <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
+                        <Canvas fx:id="canvasLeft" height="512.0" width="512.0" />
                         <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Button fx:id="monaLisaButton" mnemonicParsing="false" onAction="#imageButton" text="Mona Lisa" />
@@ -94,7 +95,6 @@
                               <Insets bottom="4.0" left="4.0" />
                            </padding>
                         </HBox>
-                        <Canvas fx:id="canvasLeft" height="512.0" width="512.0" />
                      </children>
                   </VBox>
                </content>

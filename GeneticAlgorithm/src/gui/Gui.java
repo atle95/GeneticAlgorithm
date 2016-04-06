@@ -38,13 +38,13 @@ public class Gui extends Application
   
   public TriangleManager triangleManager;
   public GuiControls controller;
-  FitnessCalculator fitCalc;
+  public FitnessCalculator fitCalc;
   
-  Image monalisa = new Image("File:Resources/Images/monalisa.png");
+  Image monalisa    = new Image("File:Resources/Images/monalisa.png");
   Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
-  Image greatwave = new Image("File:Resources/Images/greatwave.png");
-  Image vangogh = new Image("File:Resources/Images/vangogh.png");
-  Image mcescher = new Image("File:Resources/Images/mcescher.png");
+  Image greatwave   = new Image("File:Resources/Images/greatwave.png");
+  Image vangogh     = new Image("File:Resources/Images/vangogh.png");
+  Image mcescher    = new Image("File:Resources/Images/mcescher.png");
   Image curImage = monalisa;
   Scene scene;
   PixelReader reader;
@@ -60,7 +60,7 @@ public class Gui extends Application
   public void start(Stage primaryStage) throws Exception 
   {
     controller = new GuiControls(this);
-    triangleManager = new TriangleManager();
+    triangleManager = new TriangleManager(this);
     fitCalc = new FitnessCalculator(this);
     scene = new Scene(controller);
     primaryStage.setScene(scene);
@@ -72,7 +72,7 @@ public class Gui extends Application
     drawCurImage(gfxL, monalisa);
     triangleManager.initializeTriangles();
     drawCurImage(gfxR, SwingFXUtils.toFXImage(getBufferedTriangle(triangleManager), null));
-    drawCurImage(gfxL, getSnapShot(controller.getCanvasRight(), 200, 200, 10, 10));
+    drawCurImage(gfxL, getSnapShot(controller.getCanvasRight(), 200, 200, 100, 100));
     fitCalc.getOriginalImageFitness();
     fitCalc.calculateFitnessOfMutation();
     primaryStage.show();

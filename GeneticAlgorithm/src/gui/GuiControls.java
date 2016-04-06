@@ -212,7 +212,9 @@ public class GuiControls extends BorderPane
   @FXML
   protected void mutateButton()
   {
-    gui.paused = !gui.paused;
+    //gui.paused = !gui.paused;
+    gui.triangleManager.mutateTriangle();
+    gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager), null));
   }
   
   @FXML
