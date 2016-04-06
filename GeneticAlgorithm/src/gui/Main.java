@@ -110,15 +110,14 @@ public class Main extends Application
   
   public BufferedImage getBufferedTriangle(Genome triManag)
   { 
-    
     clearTriangles();
-    for(int i = 0; i<Attributes.numTriangles;i++)
+    for(int i = 0; i<Attributes.numTriangles; i++)
     {
       bigfx.setPaint(new Color(
-          triManag.triangleList.get(i).r,
-          triManag.triangleList.get(i).g,
-          triManag.triangleList.get(i).b,
-          (int) (triManag.triangleList.get(i).a*255.0)
+          triManag.triangleList.get(i).c[0] & 0xFF,
+          triManag.triangleList.get(i).c[1] & 0xFF,
+          triManag.triangleList.get(i).c[2] & 0xFF,
+          triManag.triangleList.get(i).c[3] & 0xFF
           
           ));
       int[] tempX = new int[3];
@@ -130,7 +129,6 @@ public class Main extends Application
       }
       bigfx.fillPolygon(tempX, tempY, 3);
     }
-//    Image img = SwingFXUtils.toFXImage(bimg, null);
     return bimg;
   }
   

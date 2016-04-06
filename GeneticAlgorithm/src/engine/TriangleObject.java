@@ -12,13 +12,12 @@ public class TriangleObject
 {
   public double[] x = new double[3];
   public double[] y = new double[3];
-  public int r, g, b;
-  public double a;
+  public byte[] c = new byte[4];
   public int lastMutation;
   public int magnitude = 1;
   private double opacityMagnitude = 0.001;
   
-  TriangleObject(int x1, int x2, int x3, int y1, int y2, int y3, int r, int g, int b, double a)
+  TriangleObject(int x1, int x2, int x3, int y1, int y2, int y3, byte r, byte g, byte b, byte a)
   {
     this.x[0] = x1;
     this.x[1] = x2;
@@ -26,10 +25,10 @@ public class TriangleObject
     this.y[0] = y1;
     this.y[1] = y2;
     this.y[2] = y3;
-    this.r = r;
-    this.g = g;
-    this.b = b;
-    this.a = a;
+    this.c[0] = r;
+    this.c[1] = g;
+    this.c[2] = b;
+    this.c[3] = a;
   }
 
   TriangleObject(Random rand)
@@ -40,10 +39,7 @@ public class TriangleObject
     this.y[0] = rand.nextInt(Attributes.imageHeight);
     this.y[1] = rand.nextInt(Attributes.imageHeight);
     this.y[2] = rand.nextInt(Attributes.imageHeight);
-    this.r = rand.nextInt(255);
-    this.g = rand.nextInt(255);
-    this.b = rand.nextInt(255);
-    this.a = rand.nextDouble();
+    rand.nextBytes(c);
   }
   
   public void mutate(int mutation)
@@ -86,38 +82,34 @@ public class TriangleObject
       case 11: if(this.y[2]-magnitude>=0) this.y[2]-=magnitude;
              else this.y[2]+=magnitude;
       break;
-      case 12: if(this.r+magnitude<=255) this.r+=magnitude;
-             else this.r-=magnitude;
+      case 12: if(this.c[0]+magnitude<=255) this.c[0]+=magnitude;
+             else this.c[0]-=magnitude;
       break;
-      case 13: if(this.g+magnitude<=255) this.g+=magnitude;
-             else this.r+=magnitude;
+      case 13: if(this.c[1]+magnitude<=255) this.c[1]+=magnitude;
+             else this.c[1]+=magnitude;
       break;
-      case 14: if(this.b+magnitude<=255) this.b+=magnitude;
-             else this.b-=magnitude;
+      case 14: if(this.c[2]+magnitude<=255) this.c[2]+=magnitude;
+             else this.c[2]-=magnitude;
       break;
-      case 15: if(this.r-magnitude>=0) this.r-=magnitude;
-             else this.r+=magnitude;
+      case 15: if(this.c[0]-magnitude>=0) this.c[0]-=magnitude;
+             else this.c[0]+=magnitude;
       break;
-      case 16: if(this.g-magnitude>=0) this.g-=magnitude;
-             else this.g+=magnitude;
+      case 16: if(this.c[1]-magnitude>=0) this.c[1]-=magnitude;
+             else this.c[1]+=magnitude;
       break;
-      case 17: if(this.b-magnitude>=0) this.b-=magnitude;
-             else this.b+=magnitude;
+      case 17: if(this.c[2]-magnitude>=0) this.c[2]-=magnitude;
+             else this.c[2]+=magnitude;
       break;
-      case 18: if(this.a-opacityMagnitude>=0.0) this.a-=opacityMagnitude;
-             else this.a+=opacityMagnitude;
+      case 18: if(this.c[3]-opacityMagnitude>=0.0) this.c[3]-=opacityMagnitude;
+             else this.c[3]+=opacityMagnitude;
       break;
-      case 19: if(this.a+opacityMagnitude<=1.0) this.a+=opacityMagnitude;
-             else this.a-=opacityMagnitude;
+      case 19: if(this.c[3]+opacityMagnitude<=1.0) this.c[3]+=opacityMagnitude;
+             else this.c[3]-=opacityMagnitude;
       break;
     }
-    if(this.r>255 || this.r<0 ||this.g>255 || this.g<0 ||this.b>255 || this.b<0)
-    {
-      System.out.printf("x[0]%03.0f x[1]%03.0f x[2]%03.0f y[0]%03.0f y[1]%03.0f y[2]%03.0f r%03d g%03d b%03d a%f\n", this.x[0], this.x[1], this.x[2], this.y[0], this.y[1], this.y[2], this.r, this.g, this.b, this.a);
-    }
-//    if(this.r > 255)
+//    if(this.c[0]>255 || this.c[0]<0 ||this.c[1]>255 || this.c[1]<0 ||this.c[2]>255 || this.c[2]<0)
 //    {
-//      this.r = 255;
+//      System.out.printf("x[0]%03.0f x[1]%03.0f x[2]%03.0f y[0]%03.0f y[1]%03.0f y[2]%03.0f r%03d g%03d b%03d a%f\n", this.x[0], this.x[1], this.x[2], this.y[0], this.y[1], this.y[2], this.c[0], this.c[1], this.c[2], this.c[3]);
 //    }
     lastMutation = mutation;
   }
