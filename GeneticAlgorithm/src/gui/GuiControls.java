@@ -131,8 +131,7 @@ public class GuiControls extends BorderPane
       System.out.println("Button 8");
     }
   }
-  
-  
+    
   @FXML
   protected void imageButton(ActionEvent event)
   {

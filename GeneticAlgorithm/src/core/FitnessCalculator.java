@@ -3,7 +3,11 @@ package core;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import engine.Attributes;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.paint.Color;
+
 import java.io.IOException;
 import java.io.File;
 import gui.Gui;
@@ -23,7 +27,7 @@ public class FitnessCalculator
   private Colors[][] triangleCanvas = new Colors[width][height];
   private Colors[][] sourcePixels = new Colors[width][height];
 
-  
+  public PixelWriter pixWriter;
   static BufferedImage imageRight = null;
   static BufferedImage img = null;
   static Image image = null;
@@ -43,12 +47,20 @@ public class FitnessCalculator
   // TODO get the fitness of the image
   public void getOriginalImageFitness()
   {
+    try
+    {
+      getPixelsFromOriginalImage();
+      getPixelsFromRightCanvas(SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager),null));
+    } 
+    catch (IOException e) 
+    {
+    }
   }
 
   // TODO Get the pixels of original image
   public  void getPixelsFromOriginalImage() throws IOException
   {
-    img = ImageIO.read(new File("GeneticAlgorithm/Resources/Images/monalisa.png"));
+    img = ImageIO.read(new File("Resources/Images/monalisa.png"));
 
     int w = img.getWidth();
     int h = img.getHeight();
@@ -110,6 +122,7 @@ public class FitnessCalculator
  */
   public double calculateFitnessOfMutation()
   {
+    this.pixWriter = this.gui.gfxF.getPixelWriter();
     for (int x = 0; x < width; x++)
     {
       for (int y = 0; y < height; y++)
@@ -121,6 +134,16 @@ public class FitnessCalculator
         double pixelError = GetColorFitness(c1, c2);
 
         error += pixelError;
+        int drawError = (int) Math.sqrt(pixelError);
+        if(drawError < 255)
+        {
+          pixWriter.setColor(x,y,Color.rgb(drawError,drawError,drawError));
+        }
+        else
+        {
+          pixWriter.setColor(x,y,Color.rgb(255,0,0));
+//          System.out.printf("",);
+        }
       }
      // fitness = 1 - error / (width * height);
     }

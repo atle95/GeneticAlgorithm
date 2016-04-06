@@ -36,8 +36,10 @@ public class Gui extends Application
   public GraphicsContext gfxL;
   public GraphicsContext gfxF;
   
-  TriangleManager triangleManager;
+  public TriangleManager triangleManager;
   public GuiControls controller;
+  FitnessCalculator fitCalc;
+  
   Image monalisa = new Image("File:Resources/Images/monalisa.png");
   Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
   Image greatwave = new Image("File:Resources/Images/greatwave.png");
@@ -59,6 +61,7 @@ public class Gui extends Application
   {
     controller = new GuiControls(this);
     triangleManager = new TriangleManager();
+    fitCalc = new FitnessCalculator(this);
     scene = new Scene(controller);
     primaryStage.setScene(scene);
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
@@ -70,6 +73,8 @@ public class Gui extends Application
     triangleManager.initializeTriangles();
     drawCurImage(gfxR, SwingFXUtils.toFXImage(getBufferedTriangle(triangleManager), null));
     drawCurImage(gfxL, getSnapShot(controller.getCanvasRight(), 200, 200, 10, 10));
+    fitCalc.getOriginalImageFitness();
+    fitCalc.calculateFitnessOfMutation();
     primaryStage.show();
     
     gameLoop = new MainGameLoop();

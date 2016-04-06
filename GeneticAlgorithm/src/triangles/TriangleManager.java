@@ -12,7 +12,7 @@ import engine.Attributes;
 public class TriangleManager 
 {
   public ArrayList<TriangleObject> triangleList = new ArrayList<TriangleObject>();
-  Random random = new Random(Attributes.seed);
+  Random random = new Random();
   
   public TriangleManager()
   {
