@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import engine.Attributes;
+import engine.Tribe;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
@@ -61,7 +62,7 @@ public class GuiControls extends BorderPane
       {
         System.out.printf("Num Triangles: %d\n", new_val.intValue());
         Attributes.numTriangles = new_val.intValue();
-        gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager), null));
+        gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.bimg, null));
       }
     });
     numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
@@ -71,7 +72,7 @@ public class GuiControls extends BorderPane
         if (!new_val) 
         {
           System.out.println("done");
-          gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager), null));
+          gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.bimg, null));
         }
       }
     });
@@ -91,7 +92,7 @@ public class GuiControls extends BorderPane
         if (!new_val) 
         {
           System.out.println("done");
-          gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager), null));
+          gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.bimg, null));
         }
       }
     });
@@ -215,21 +216,30 @@ public class GuiControls extends BorderPane
   @FXML
   protected void mutateButton()
   {
-//    gui.paused = !gui.paused;
-    for(;;)
+    if(gui.paused)
     {
-      gui.triangleManager.mutateTriangle();
-      gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.getBufferedTriangle(gui.triangleManager), null));
+      gui.paused=!gui.paused;
+      new Thread(new Tribe(this.gui)).start();
     }
+    else
+    {
+      gui.paused = !gui.paused;
+    }
+//    gui.paused = !gui.paused;
+//    for(;;)
+//    {
+//      gui.triangleManager.mutateTriangle();
+//      gui.drawCurImage(gui.gfxR, SwingFXUtils.toFXImage(gui.bimg, null));
+//    }
   }
 
   @FXML
   protected void saveButton()
   {
-    File file = new File("atle.png");
+    File file = new File("oldtriangles.png");
     try 
     {
-      ImageIO.write(SwingFXUtils.fromFXImage(gui.getSnapShot(getFitnessCanvas(), 0,0,Attributes.imageWidth,Attributes.imageHeight), null), "png", file);
+      ImageIO.write(SwingFXUtils.fromFXImage(gui.getSnapShot(getCanvasRight(), 0,0,Attributes.imageWidth,Attributes.imageHeight), null), "png", file);
     } catch (IOException e) 
     {
       e.printStackTrace();
