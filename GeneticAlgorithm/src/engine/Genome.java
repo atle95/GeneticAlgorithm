@@ -3,7 +3,7 @@ package engine;
 import java.util.ArrayList;
 import java.util.Random;
 
-import gui.Gui;
+import gui.Main;
 import javafx.embed.swing.SwingFXUtils;
 
 /**
@@ -11,13 +11,13 @@ import javafx.embed.swing.SwingFXUtils;
  * @author Atle Olson
  *
  */
-public class TriangleManager 
+public class Genome 
 {
   public ArrayList<TriangleObject> triangleList = new ArrayList<TriangleObject>();
   Random random = new Random();
-  Gui gui;
+  Main gui;
   
-  public TriangleManager(Gui gui)
+  public Genome(Main gui)
   {
     this.gui = gui;
   }

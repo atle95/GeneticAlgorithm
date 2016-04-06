@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.io.File;
-import gui.Gui;
+import gui.Main;
 
 /**
  * 
@@ -19,7 +19,7 @@ import gui.Gui;
  */
 public class FitnessCalculator
 {
-  private Gui gui;
+  private Main gui;
   
   int width = Attributes.imageWidth;
   int height = Attributes.imageHeight;
@@ -38,7 +38,7 @@ public class FitnessCalculator
   {
   }
 
-  public FitnessCalculator(Gui gui)
+  public FitnessCalculator(Main gui)
   {
     this.gui = gui;
   }

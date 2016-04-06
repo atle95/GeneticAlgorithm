@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 import core.FitnessCalculator;
 import engine.Attributes;
-import engine.TriangleManager;
+import engine.Genome;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
@@ -28,7 +28,7 @@ import javafx.stage.Stage;
  * @author Atle Olson
  *
  */
-public class Gui extends Application
+public class Main extends Application
 {
   public AnimationTimer gameLoop;
   
@@ -36,7 +36,7 @@ public class Gui extends Application
   public GraphicsContext gfxL;
   public GraphicsContext gfxF;
   
-  public TriangleManager triangleManager;
+  public Genome triangleManager;
   public GuiControls controller;
   public FitnessCalculator fitCalc;
   
@@ -54,7 +54,7 @@ public class Gui extends Application
   
   public boolean paused = true;
   
-  public Gui()
+  public Main()
   {
     
   }
@@ -63,7 +63,7 @@ public class Gui extends Application
   public void start(Stage primaryStage) throws Exception 
   {
     controller = new GuiControls(this);
-    triangleManager = new TriangleManager(this);
+    triangleManager = new Genome(this);
     fitCalc = new FitnessCalculator(this);
     scene = new Scene(controller);
     primaryStage.setScene(scene);
@@ -108,7 +108,7 @@ public class Gui extends Application
     gfxR.setGlobalBlendMode(mode);
   }
   
-  public BufferedImage getBufferedTriangle(TriangleManager triManag)
+  public BufferedImage getBufferedTriangle(Genome triManag)
   { 
     
     clearTriangles();

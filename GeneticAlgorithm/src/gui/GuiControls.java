@@ -40,9 +40,9 @@ public class GuiControls extends BorderPane
   private Image greatwave   = new Image("File:Resources/Images/greatwave.png");
   private Image vangogh     = new Image("File:Resources/Images/vangogh.png");
   private Image mcescher    = new Image("File:Resources/Images/mcescher.png");
-  private Gui gui;
+  private Main gui;
   
-  public GuiControls(Gui gui) 
+  public GuiControls(Main gui) 
   {
     this.gui = gui;
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gui.fxml"));

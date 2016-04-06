@@ -4,16 +4,16 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
-import gui.Gui;
+import gui.Main;
 import javafx.embed.swing.SwingFXUtils;
 
 public class Tribe implements Runnable 
 {
   BufferedImage triangleImage = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
   Graphics2D bigfx = triangleImage.createGraphics();
-  private Gui gui;
+  private Main gui;
   
-  public Tribe(Gui gui)
+  public Tribe(Main gui)
   {
     this.gui = gui;
     bigfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
