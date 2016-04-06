@@ -159,11 +159,6 @@ public class Gui extends Application
   
   private class MainGameLoop extends AnimationTimer
   {
-
-    /**
-     * Call the appropriate method to update the attributes of the
-     * entities in the game.
-     */
     public void handle(long now)
     {
       if(!paused )
@@ -171,7 +166,6 @@ public class Gui extends Application
         triangleManager.mutateTriangle();
         drawCurImage(gfxR, SwingFXUtils.toFXImage(getBufferedTriangle(triangleManager), null));
       }
-      
     }
   }
   
