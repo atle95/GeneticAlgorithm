@@ -1,5 +1,10 @@
 package core;
 
+/**
+ * 
+ * @author Chris Sanchez
+ *
+ */
 public class Colors
 {
 
