@@ -77,18 +77,23 @@ public class Genome
 //      main.greatestFitness = this.fitness;
 //      
 //    }
-    main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(this.bimg, null));
+    setMainImage();
   }
-  
+  public synchronized void setMainImage()
+  {
+    main.settingImage = true;
+    main.setCurGenome(SwingFXUtils.toFXImage(this.bimg, null));
+    main.settingImage = false;
+  }
   public BufferedImage getBufferedTriangle(Genome genome)
   { 
     for(int i = 0; i<Attributes.numTriangles; i++)
     {
       bigfx.setPaint(new Color(
-          genome.triangleList.get(i).c[0] & 0xFF,
-          genome.triangleList.get(i).c[1] & 0xFF,
-          genome.triangleList.get(i).c[2] & 0xFF,
-          genome.triangleList.get(i).c[3] & 0xFF
+          (int) genome.triangleList.get(i).c[0] & 0xFF,
+          (int) genome.triangleList.get(i).c[1] & 0xFF,
+          (int) genome.triangleList.get(i).c[2] & 0xFF,
+          (int) genome.triangleList.get(i).c[3] & 0xFF
           
           ));
       int[] tempX = new int[3];

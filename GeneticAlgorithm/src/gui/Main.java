@@ -32,10 +32,11 @@ public class Main extends Application
   public GraphicsContext gfxL;
   public GraphicsContext gfxF;
   
-//  public Genome genome;
   public GuiControls controller;
   public FitnessCalculator fitCalc;
   ArrayList<Thread> threadList = new ArrayList<Thread>();
+  
+  public Boolean settingImage = false;
   
   public double greatestFitness = 0;
   
@@ -62,7 +63,6 @@ public class Main extends Application
   public void start(Stage primaryStage) throws Exception 
   {
     controller = new GuiControls(this);
-//    genome = new Genome(this);
     fitCalc = new FitnessCalculator(this);
     scene = new Scene(controller);
     primaryStage.setScene(scene);
@@ -140,7 +140,8 @@ public class Main extends Application
     return curGenome;
   }
 
-  public void setCurGenome(Image curGenome) {
+  public void setCurGenome(Image curGenome)
+  {
     this.curGenome = curGenome;
   }
 
@@ -148,7 +149,10 @@ public class Main extends Application
   {
     public void handle(long now)
     {
-      drawCurImage(gfxR, curGenome);
+      if(!settingImage)
+      {
+        drawCurImage(gfxR, curGenome);
+      }
     }
   }
 }
