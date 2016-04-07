@@ -100,9 +100,11 @@ public class Main extends Application
         //crossover goes here
       }
     });
+    
+    //  each tribe is initialized by a different job on the threads
     for(int i = 0; i < numThreads; i++)
     {
-      new Thread(new Tribe(barrier, this)).start();
+      new Thread(new Tribe(barrier, this, i)).start();
     }
   }
   

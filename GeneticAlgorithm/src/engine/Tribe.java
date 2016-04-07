@@ -18,12 +18,23 @@ public class Tribe implements Runnable
   public ArrayList<Genome> genomeList = new ArrayList<Genome>();
   CyclicBarrier barrier;
   
+  /*
+   =====================
+   Added tribe id to asssociate
+   a specific job with a tribe
+   =====================
+   */
+  private int tribe_id;
   
-  public Tribe(CyclicBarrier barrier, Main main)
+  public Tribe(CyclicBarrier barrier, Main main, int tribe_id)
   {
-    this.barrier = barrier;
-    this.main = main;
+    this.barrier  = barrier;
+    this.main     = main;
+    this.tribe_id = tribe_id;
+    
     bigfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    
+    
     for(int i = 0; i < numGenomes ; i++)
     {
       genome = new Genome(this.main);
