@@ -28,7 +28,7 @@ public class FitnessCalculator
   private Colors[][] triangleCanvas = new Colors[width][height];
   private Colors[][] sourcePixels = new Colors[width][height];
 
-  public PixelWriter pixWriter;
+  
   static BufferedImage imageRight = null;
   static BufferedImage img = null;
   static Image image = null;
@@ -37,6 +37,7 @@ public class FitnessCalculator
 
   public FitnessCalculator()
   {
+    
   }
 
   public FitnessCalculator(Main gui)
@@ -61,7 +62,7 @@ public class FitnessCalculator
   // TODO Get the pixels of original image
   public void getPixelsFromOriginalImage() throws IOException
   {
-    img = ImageIO.read(new File("GeneticAlgorithm/Resources/Images/monalisa.png"));
+    img = ImageIO.read(new File("Resources/Images/monalisa.png"));
 
     main.drawCurImage(main.gfxL, SwingFXUtils.toFXImage(img, null));
     int w = img.getWidth();
@@ -97,7 +98,7 @@ public class FitnessCalculator
   public void getPixelsFromRightCanvas(BufferedImage triangleImage)
   {
 
-    int red,green,blue, pixel;
+    int red,green,blue,pixel;
 
     for (int i = 0; i < width; i++)
     {
@@ -133,7 +134,7 @@ public class FitnessCalculator
     {
       e.printStackTrace();
     }
-    this.pixWriter = this.main.gfxF.getPixelWriter();
+    PixelWriter pixWriter = this.main.gfxF.getPixelWriter();
     
     for (int x = 0; x < width; x++)
     {
@@ -150,11 +151,11 @@ public class FitnessCalculator
 //        int drawError = (int) ((255/195075) * (pixelError));
         if(drawError < 255)
         {
-          pixWriter.setColor(x,y,Color.rgb(drawError,drawError,drawError));
+          //pixWriter.setColor(x,y,Color.rgb(drawError,drawError,drawError));
         }
         else
         {
-          pixWriter.setColor(x,y,Color.rgb(255,0,0));
+          //pixWriter.setColor(x,y,Color.rgb(255,0,0));
           //System.out.printf("%d\n",drawError);
         }
       }

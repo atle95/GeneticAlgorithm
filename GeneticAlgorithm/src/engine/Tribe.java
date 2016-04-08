@@ -10,12 +10,13 @@ import gui.Main;
 
 public class Tribe implements Runnable 
 {
+  private Main main;
+  private int numGenomes = 1;
+  private int tribe_id;
+  public ArrayList<Genome> genomeList = new ArrayList<Genome>();
   BufferedImage triangleImage = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
   Graphics2D bigfx = triangleImage.createGraphics();
-  private Main main;
   Genome genome;
-  private int numGenomes = 1;
-  public ArrayList<Genome> genomeList = new ArrayList<Genome>();
   CyclicBarrier barrier;
   
   /*
@@ -24,7 +25,6 @@ public class Tribe implements Runnable
    a specific job with a tribe
    =====================
    */
-  private int tribe_id;
   
   public Tribe(CyclicBarrier barrier, Main main, int tribe_id)
   {
