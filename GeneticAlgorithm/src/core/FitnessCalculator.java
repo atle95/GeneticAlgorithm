@@ -148,15 +148,15 @@ public class FitnessCalculator
         error += pixelError;
         int drawError = (int) Math.sqrt(pixelError);
 //        int drawError = (int) ((255/195075) * (pixelError));
-        if(drawError < 255)
-        {
-          pixWriter.setColor(x,y,Color.rgb(drawError,drawError,drawError));
-        }
-        else
-        {
-          pixWriter.setColor(x,y,Color.rgb(255,0,0));
-          //System.out.printf("%d\n",drawError);
-        }
+//        if(drawError < 255)
+//        {
+//          pixWriter.setColor(x,y,Color.rgb(drawError,drawError,drawError));
+//        }
+//        else
+//        {
+//          pixWriter.setColor(x,y,Color.rgb(255,0,0));
+//          //System.out.printf("%d\n",drawError);
+//        }
       }
      // fitness = 1 - error / (width * height);
     }
