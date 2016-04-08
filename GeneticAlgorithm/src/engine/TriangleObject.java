@@ -42,69 +42,69 @@ public class TriangleObject
     rand.nextBytes(c);
   }
   
-  public void mutate(int mutation)
+  public void mutate(int mutation, double iteration)
   {
     switch(mutation)
     {
-      case 0: if(this.x[0]+magnitude<=Attributes.imageWidth) this.x[0]+=magnitude;
-            else this.x[0]-=magnitude;
+      case 0: if(this.x[0]+magnitude*iteration<=Attributes.imageWidth) this.x[0]+=magnitude*iteration;
+            else this.x[0]-=magnitude*iteration;
       break;
-      case 1: if(this.x[1]+magnitude<=Attributes.imageWidth) this.x[1]+=magnitude;
-            else this.x[1]-=magnitude;
+      case 1: if(this.x[1]+magnitude*iteration<=Attributes.imageWidth) this.x[1]+=magnitude*iteration;
+            else this.x[1]-=magnitude*iteration;
       break;
-      case 2: if(this.x[2]+magnitude<=Attributes.imageWidth) this.x[2]+=magnitude;
-            else this.x[2]-=magnitude;
+      case 2: if(this.x[2]+magnitude*iteration<=Attributes.imageWidth) this.x[2]+=magnitude*iteration;
+            else this.x[2]-=magnitude*iteration;
       break;
-      case 3: if(this.x[0]-magnitude>=0) this.x[0]-=magnitude;
-            else this.x[0]+=magnitude;
+      case 3: if(this.x[0]-magnitude*iteration>=0) this.x[0]-=magnitude*iteration;
+            else this.x[0]+=magnitude*iteration;
       break;
-      case 4: if(this.x[1]-magnitude>=0) this.x[1]-=magnitude;
-            else this.x[1]+=magnitude;
+      case 4: if(this.x[1]-magnitude*iteration>=0) this.x[1]-=magnitude*iteration;
+            else this.x[1]+=magnitude*iteration;
       break;
-      case 5: if(this.x[2]-magnitude>=0) this.x[2]-=magnitude;
-            else this.x[2]+=magnitude;
+      case 5: if(this.x[2]-magnitude*iteration>=0) this.x[2]-=magnitude*iteration;
+            else this.x[2]+=magnitude*iteration;
       break;
-      case 6: if(this.y[0]+magnitude<=Attributes.imageHeight) this.y[0]+=magnitude;
-            else this.y[0]-=magnitude;
+      case 6: if(this.y[0]+magnitude*iteration<=Attributes.imageHeight) this.y[0]+=magnitude*iteration;
+            else this.y[0]-=magnitude*iteration;
       break;
-      case 7: if(this.y[1]+magnitude<=Attributes.imageHeight) this.y[1]+=magnitude;
-            else this.y[1]-=magnitude;
+      case 7: if(this.y[1]+magnitude*iteration<=Attributes.imageHeight) this.y[1]+=magnitude*iteration;
+            else this.y[1]-=magnitude*iteration;
       break;
-      case 8: if(this.y[2]+magnitude<=Attributes.imageHeight) this.y[2]+=magnitude;
+      case 8: if(this.y[2]+magnitude*iteration<=Attributes.imageHeight) this.y[2]+=magnitude*iteration;
             else this.y[2]-=magnitude;
       break;
-      case 9: if(this.y[0]-magnitude>=0) this.y[0]-=magnitude;
-            else this.y[0]+=magnitude;
+      case 9: if(this.y[0]-magnitude*iteration>=0) this.y[0]-=magnitude*iteration;
+            else this.y[0]+=magnitude*iteration;
       break;
-      case 10: if(this.y[1]-magnitude>=0) this.y[1]-=magnitude;
+      case 10: if(this.y[1]-magnitude*iteration>=0) this.y[1]-=magnitude*iteration;
              else this.y[1]+=magnitude;
       break;
-      case 11: if(this.y[2]-magnitude>=0) this.y[2]-=magnitude;
-             else this.y[2]+=magnitude;
+      case 11: if(this.y[2]-magnitude*iteration>=0) this.y[2]-=magnitude*iteration;
+             else this.y[2]+=magnitude*iteration;
       break;
-      case 12: if(this.c[0]+magnitude<=255) this.c[0]+=magnitude;
-             else this.c[0]-=magnitude;
+      case 12: if(this.c[0]+magnitude*iteration<=255) this.c[0]+=magnitude*iteration;
+             else this.c[0]-=magnitude*iteration;
       break;
-      case 13: if(this.c[1]+magnitude<=255) this.c[1]+=magnitude;
+      case 13: if(this.c[1]+magnitude*iteration<=255) this.c[1]+=magnitude*iteration;
              else this.c[1]+=magnitude;
       break;
-      case 14: if(this.c[2]+magnitude<=255) this.c[2]+=magnitude;
-             else this.c[2]-=magnitude;
+      case 14: if(this.c[2]+magnitude*iteration<=255) this.c[2]+=magnitude*iteration;
+             else this.c[2]-=magnitude*iteration;
       break;
-      case 15: if(this.c[0]-magnitude>=0) this.c[0]-=magnitude;
-             else this.c[0]+=magnitude;
+      case 15: if(this.c[0]-magnitude*iteration>=0) this.c[0]-=magnitude*iteration;
+             else this.c[0]+=magnitude*iteration;
       break;
-      case 16: if(this.c[1]-magnitude>=0) this.c[1]-=magnitude;
-             else this.c[1]+=magnitude;
+      case 16: if(this.c[1]-magnitude*iteration>=0) this.c[1]-=magnitude*iteration;
+             else this.c[1]+=magnitude*iteration;
       break;
-      case 17: if(this.c[2]-magnitude>=0) this.c[2]-=magnitude;
-             else this.c[2]+=magnitude;
+      case 17: if(this.c[2]-magnitude>=0) this.c[2]-=magnitude*iteration;
+             else this.c[2]+=magnitude*iteration;
       break;
-      case 18: if(this.c[3]-opacityMagnitude>=0.0) this.c[3]-=opacityMagnitude;
-             else this.c[3]+=opacityMagnitude;
+      case 18: if(this.c[3]-opacityMagnitude*iteration>=0.0) this.c[3]-=opacityMagnitude*iteration;
+             else this.c[3]+=opacityMagnitude*iteration;
       break;
-      case 19: if(this.c[3]+opacityMagnitude<=1.0) this.c[3]+=opacityMagnitude;
-             else this.c[3]-=opacityMagnitude;
+      case 19: if(this.c[3]+opacityMagnitude*iteration<=1.0) this.c[3]+=opacityMagnitude*iteration;
+             else this.c[3]-=opacityMagnitude*iteration;
       break;
     }
 //    if(this.c[0]>255 || this.c[0]<0 ||this.c[1]>255 || this.c[1]<0 ||this.c[2]>255 || this.c[2]<0)

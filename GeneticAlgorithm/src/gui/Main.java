@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.CyclicBarrier;
 
-import core.FitnessCalculator;
 import engine.Attributes;
 import engine.Tribe;
 import javafx.animation.AnimationTimer;
@@ -14,6 +13,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
+import javafx.scene.paint.Color;
 //import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -33,7 +33,7 @@ public class Main extends Application
   public GraphicsContext gfxF;
   
   public GuiControls controller;
-  public FitnessCalculator fitCalc;
+//  public FitnessCalculator fitCalc;
   ArrayList<Thread> threadList = new ArrayList<Thread>();
   
   public Boolean settingImage = false;
@@ -49,7 +49,7 @@ public class Main extends Application
   private Image curGenome;
   Scene scene;
   PixelReader reader;
-  public Random random = new Random();
+  public Random random = new Random(Attributes.seed);
   
   
   public boolean paused = true;
@@ -63,7 +63,7 @@ public class Main extends Application
   public void start(Stage primaryStage) throws Exception 
   {
     controller = new GuiControls(this);
-    fitCalc = new FitnessCalculator(this);
+//    fitCalc = new FitnessCalculator(this);
     scene = new Scene(controller);
     primaryStage.setScene(scene);
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
@@ -87,7 +87,8 @@ public class Main extends Application
   
   public void drawCurImage(GraphicsContext fx, Image img)
   {
-    fx.clearRect(0, 0, img.getWidth(), img.getHeight());
+    fx.setFill(Color.WHITE);
+    fx.fillRect(0, 0, img.getWidth(), img.getHeight());
     fx.drawImage(img, 0, 0);
   }
   
