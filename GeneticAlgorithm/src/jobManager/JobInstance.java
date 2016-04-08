@@ -1,5 +1,10 @@
 package jobManager;
 
+/**
+ * 
+ * @author Chris Sanchez
+ * This class is the actual job
+ */
 public class JobInstance implements Job
 {
 
