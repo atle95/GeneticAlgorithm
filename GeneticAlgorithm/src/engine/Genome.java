@@ -28,6 +28,7 @@ public class Genome
   Graphics2D bigfx = bimg.createGraphics();
   public double fitness;
   public FitnessCalculator fitCalc;
+  public int generationCount = 0;
   
   
   public Genome(Main main)
@@ -43,13 +44,14 @@ public class Genome
   {
     for(int i = 0; i < Attributes.maxTriangles; i++)
     {
-      TriangleObject member = new TriangleObject(main.random);
+      TriangleObject member = new TriangleObject(main.random, i);
       triangleList.add(member);
     }
   }
   
   public synchronized void mutateTriangle()
   {
+    generationCount++;
     int i = main.random.nextInt(triangleList.size());
     int mutation = main.random.nextInt(20);
     double oldFitness = fitCalc.calculateFitnessOfMutation(this);
@@ -62,18 +64,17 @@ public class Genome
       {
         System.out.printf("Mutating Triangle %3d, current fitness: %11.0f \n", i, newFitness);
       }
-      counter+=0.5;
+      counter+=0.01;
       triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
       //if (Attributes.debug) System.out.printf("delta Fitness %f \n", oldFitness-newFitness);
       oldFitness = newFitness;
       newFitness = fitCalc.calculateFitnessOfMutation(this);
     }
-//    if(counter > 1)
-//    {
-//      if (Attributes.debug) System.out.printf("Number of iterations: %f \n", counter);
-//    }
     counter = 1;
-    setMainImage();
+    if(generationCount%10==0)
+    {
+      setMainImage();
+    }
   }
   public synchronized void setMainImage()
   {

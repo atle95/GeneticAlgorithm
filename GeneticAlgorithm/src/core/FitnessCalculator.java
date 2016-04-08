@@ -11,8 +11,6 @@ import engine.Genome;
 import gui.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.paint.Color;
 
 /**
  * 
