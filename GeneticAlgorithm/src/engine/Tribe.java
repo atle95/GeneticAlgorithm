@@ -6,10 +6,14 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.concurrent.CyclicBarrier;
 
+import java.util.concurrent.locks.ReentrantLock;
+
+
 import gui.Main;
 
 public class Tribe implements Runnable 
 {
+  final ReentrantLock rl = new ReentrantLock();
   private Main main;
   private int numGenomes = 1;
   private int tribe_id;
