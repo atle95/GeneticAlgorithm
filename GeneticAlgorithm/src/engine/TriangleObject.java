@@ -15,7 +15,8 @@ public class TriangleObject
   public byte[] c = new byte[4];
   public int lastMutation;
   public int magnitude = 1;
-  private double opacityMagnitude = 0.001;
+  private double opacityMagnitude = 1;
+  private int opacityBound = 100;
   
   TriangleObject(int x1, int x2, int x3, int y1, int y2, int y3, byte r, byte g, byte b, byte a)
   {
@@ -31,7 +32,7 @@ public class TriangleObject
     this.c[3] = a;
   }
 
-  TriangleObject(Random rand)
+  TriangleObject(Random rand, int i)
   {
     this.x[0] = rand.nextInt(Attributes.imageWidth);
     this.x[1] = rand.nextInt(Attributes.imageWidth);
@@ -40,77 +41,81 @@ public class TriangleObject
     this.y[1] = rand.nextInt(Attributes.imageHeight);
     this.y[2] = rand.nextInt(Attributes.imageHeight);
     rand.nextBytes(c);
+//    if(c[3]-i > -127) 
+//    {
+//      c[3] -=i;
+//    }
+//    else
+//    {
+//      c[3] = 0;
+//    }
   }
   
   public void mutate(int mutation, double iteration)
   {
     switch(mutation)
     {
-      case 0: if(this.x[0]+magnitude*iteration<=Attributes.imageWidth) this.x[0]+=magnitude*iteration;
-            else this.x[0]-=magnitude*iteration;
+      case 0: if(this.x[0]+magnitude+iteration<=Attributes.imageWidth) this.x[0]+=magnitude+iteration;
+            else this.x[0]-=magnitude+iteration;
       break;
-      case 1: if(this.x[1]+magnitude*iteration<=Attributes.imageWidth) this.x[1]+=magnitude*iteration;
-            else this.x[1]-=magnitude*iteration;
+      case 1: if(this.x[1]+magnitude+iteration<=Attributes.imageWidth) this.x[1]+=magnitude+iteration;
+            else this.x[1]-=magnitude+iteration;
       break;
-      case 2: if(this.x[2]+magnitude*iteration<=Attributes.imageWidth) this.x[2]+=magnitude*iteration;
-            else this.x[2]-=magnitude*iteration;
+      case 2: if(this.x[2]+magnitude+iteration<=Attributes.imageWidth) this.x[2]+=magnitude+iteration;
+            else this.x[2]-=magnitude+iteration;
       break;
-      case 3: if(this.x[0]-magnitude*iteration>=0) this.x[0]-=magnitude*iteration;
-            else this.x[0]+=magnitude*iteration;
+      case 3: if(this.x[0]-magnitude+iteration>=0) this.x[0]-=magnitude+iteration;
+            else this.x[0]+=magnitude+iteration;
       break;
-      case 4: if(this.x[1]-magnitude*iteration>=0) this.x[1]-=magnitude*iteration;
-            else this.x[1]+=magnitude*iteration;
+      case 4: if(this.x[1]-magnitude+iteration>=0) this.x[1]-=magnitude+iteration;
+            else this.x[1]+=magnitude+iteration;
       break;
-      case 5: if(this.x[2]-magnitude*iteration>=0) this.x[2]-=magnitude*iteration;
-            else this.x[2]+=magnitude*iteration;
+      case 5: if(this.x[2]-magnitude+iteration>=0) this.x[2]-=magnitude+iteration;
+            else this.x[2]+=magnitude+iteration;
       break;
-      case 6: if(this.y[0]+magnitude*iteration<=Attributes.imageHeight) this.y[0]+=magnitude*iteration;
-            else this.y[0]-=magnitude*iteration;
+      case 6: if(this.y[0]+magnitude+iteration<=Attributes.imageHeight) this.y[0]+=magnitude+iteration;
+            else this.y[0]-=magnitude+iteration;
       break;
-      case 7: if(this.y[1]+magnitude*iteration<=Attributes.imageHeight) this.y[1]+=magnitude*iteration;
-            else this.y[1]-=magnitude*iteration;
+      case 7: if(this.y[1]+magnitude+iteration<=Attributes.imageHeight) this.y[1]+=magnitude+iteration;
+            else this.y[1]-=magnitude+iteration;
       break;
-      case 8: if(this.y[2]+magnitude*iteration<=Attributes.imageHeight) this.y[2]+=magnitude*iteration;
+      case 8: if(this.y[2]+magnitude+iteration<=Attributes.imageHeight) this.y[2]+=magnitude+iteration;
             else this.y[2]-=magnitude;
       break;
-      case 9: if(this.y[0]-magnitude*iteration>=0) this.y[0]-=magnitude*iteration;
-            else this.y[0]+=magnitude*iteration;
+      case 9: if(this.y[0]-magnitude+iteration>=0) this.y[0]-=magnitude+iteration;
+            else this.y[0]+=magnitude+iteration;
       break;
-      case 10: if(this.y[1]-magnitude*iteration>=0) this.y[1]-=magnitude*iteration;
+      case 10: if(this.y[1]-magnitude+iteration>=0) this.y[1]-=magnitude+iteration;
              else this.y[1]+=magnitude;
       break;
-      case 11: if(this.y[2]-magnitude*iteration>=0) this.y[2]-=magnitude*iteration;
-             else this.y[2]+=magnitude*iteration;
+      case 11: if(this.y[2]-magnitude+iteration>=0) this.y[2]-=magnitude+iteration;
+             else this.y[2]+=magnitude+iteration;
       break;
-      case 12: if(this.c[0]+magnitude*iteration<=255) this.c[0]+=magnitude*iteration;
-             else this.c[0]-=magnitude*iteration;
+      case 12: if(this.c[0]+magnitude+iteration<=255) this.c[0]+=magnitude+iteration;
+             else this.c[0]-=magnitude+iteration;
       break;
-      case 13: if(this.c[1]+magnitude*iteration<=255) this.c[1]+=magnitude*iteration;
+      case 13: if(this.c[1]+magnitude+iteration<=255) this.c[1]+=magnitude+iteration;
              else this.c[1]+=magnitude;
       break;
-      case 14: if(this.c[2]+magnitude*iteration<=255) this.c[2]+=magnitude*iteration;
-             else this.c[2]-=magnitude*iteration;
+      case 14: if(this.c[2]+magnitude+iteration<=255) this.c[2]+=magnitude+iteration;
+             else this.c[2]-=magnitude+iteration;
       break;
-      case 15: if(this.c[0]-magnitude*iteration>=0) this.c[0]-=magnitude*iteration;
-             else this.c[0]+=magnitude*iteration;
+      case 15: if(this.c[0]-magnitude+iteration>=0) this.c[0]-=magnitude+iteration;
+             else this.c[0]+=magnitude+iteration;
       break;
-      case 16: if(this.c[1]-magnitude*iteration>=0) this.c[1]-=magnitude*iteration;
-             else this.c[1]+=magnitude*iteration;
+      case 16: if(this.c[1]-magnitude+iteration>=0) this.c[1]-=magnitude+iteration;
+             else this.c[1]+=magnitude+iteration;
       break;
-      case 17: if(this.c[2]-magnitude>=0) this.c[2]-=magnitude*iteration;
-             else this.c[2]+=magnitude*iteration;
+      case 17: if(this.c[2]-magnitude+iteration>=0) this.c[2]-=magnitude+iteration;
+             else this.c[2]+=magnitude+iteration;
       break;
-      case 18: if(this.c[3]-opacityMagnitude*iteration>=0.0) this.c[3]-=opacityMagnitude*iteration;
-             else this.c[3]+=opacityMagnitude*iteration;
+      case 18: if(this.c[3]-opacityMagnitude+iteration>=0.0) this.c[3]-=opacityMagnitude+iteration;
+             else this.c[3]+=opacityMagnitude+iteration;
       break;
-      case 19: if(this.c[3]+opacityMagnitude*iteration<=1.0) this.c[3]+=opacityMagnitude*iteration;
-             else this.c[3]-=opacityMagnitude*iteration;
+      case 19: if(this.c[3]+opacityMagnitude+iteration<=1.0) this.c[3]+=opacityMagnitude+iteration;
+             else this.c[3]-=opacityMagnitude+iteration;
       break;
     }
-//    if(this.c[0]>255 || this.c[0]<0 ||this.c[1]>255 || this.c[1]<0 ||this.c[2]>255 || this.c[2]<0)
-//    {
-//      System.out.printf("x[0]%03.0f x[1]%03.0f x[2]%03.0f y[0]%03.0f y[1]%03.0f y[2]%03.0f r%03d g%03d b%03d a%f\n", this.x[0], this.x[1], this.x[2], this.y[0], this.y[1], this.y[2], this.c[0], this.c[1], this.c[2], this.c[3]);
-//    }
     lastMutation = mutation;
   }
   
@@ -120,7 +125,7 @@ public class TriangleObject
     double[] tempY = this.y;
     Arrays.sort(tempX);
     Arrays.sort(tempY);
-    int[] output = {(int) tempX[0], (int) tempY[0], (int) tempX[2], (int) tempY[2]};
+    int[] output = {(int) tempX[0], (int) tempY[0], (int) (tempX[2] - tempX[0]), (int) (tempY[2]-tempY[0])};
     return output;
   }
 }

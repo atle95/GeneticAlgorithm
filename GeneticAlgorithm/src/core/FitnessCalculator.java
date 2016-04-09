@@ -1,17 +1,16 @@
 package core;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import javax.imageio.ImageIO;
+
 import engine.Attributes;
 import engine.Genome;
+import gui.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.paint.Color;
-
-import java.io.IOException;
-import java.io.File;
-import gui.Main;
 
 /**
  * 
@@ -134,7 +133,7 @@ public class FitnessCalculator
     {
       e.printStackTrace();
     }
-    PixelWriter pixWriter = this.main.gfxF.getPixelWriter();
+//    PixelWriter pixWriter = this.main.gfxF.getPixelWriter();
     
     for (int x = 0; x < width; x++)
     {
@@ -147,17 +146,17 @@ public class FitnessCalculator
         double pixelError = GetColorFitness(c1, c2);
 
         error += pixelError;
-        int drawError = (int) Math.sqrt(pixelError);
+//        int drawError = (int) Math.sqrt(pixelError);
 //        int drawError = (int) ((255/195075) * (pixelError));
-        if(drawError < 255)
-        {
-          //pixWriter.setColor(x,y,Color.rgb(drawError,drawError,drawError));
-        }
-        else
-        {
-          //pixWriter.setColor(x,y,Color.rgb(255,0,0));
-          //System.out.printf("%d\n",drawError);
-        }
+//        if(drawError < 255)
+//        {
+//          pixWriter.setColor(x,y,Color.rgb(drawError,drawError,drawError));
+//        }
+//        else
+//        {
+//          pixWriter.setColor(x,y,Color.rgb(255,0,0));
+//          //System.out.printf("%d\n",drawError);
+//        }
       }
      // fitness = 1 - error / (width * height);
     }

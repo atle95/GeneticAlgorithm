@@ -28,6 +28,7 @@ public class Genome
   Graphics2D bigfx = bimg.createGraphics();
   public double fitness;
   public FitnessCalculator fitCalc;
+  public int generationCount = 0;
   
   
   public Genome(Main main)
@@ -43,46 +44,37 @@ public class Genome
   {
     for(int i = 0; i < Attributes.maxTriangles; i++)
     {
-      TriangleObject member = new TriangleObject(main.random);
+      TriangleObject member = new TriangleObject(main.random, i);
       triangleList.add(member);
     }
   }
   
   public synchronized void mutateTriangle()
   {
+    generationCount++;
     int i = main.random.nextInt(triangleList.size());
     int mutation = main.random.nextInt(20);
     double oldFitness = fitCalc.calculateFitnessOfMutation(this);
-    //main.setCurrFit("current Fitness: "+ oldFitness);
-    //if (Attributes.debug) System.out.printf("mutation: %3d: ", mutation);
     double counter = 1;
     triangleList.get(i).mutate(mutation, counter);
     double newFitness = fitCalc.calculateFitnessOfMutation(this);
-    //if (Attributes.debug) System.out.printf("old fitness: %f new fitness: %f\n", oldFitness, newFitness);
     while (newFitness < oldFitness)
     {
-      if (counter == 0 && Attributes.debug)
+      if (counter == 1 && Attributes.debug)
       {
-        System.out.printf("Mutating Triangle %d, current fitness: %f \n", i, newFitness);
+        System.out.printf("Mutating Triangle %3d, current fitness: %11.0f \n", i, newFitness);
       }
-      //if (Attributes.debug) System.out.printf("iteration: %d \r",counter);
-      counter+=0.5;
+      counter+=0.01;
       triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
       //if (Attributes.debug) System.out.printf("delta Fitness %f \n", oldFitness-newFitness);
       oldFitness = newFitness;
       newFitness = fitCalc.calculateFitnessOfMutation(this);
     }
-    if(counter > 0)
-    {
-      if (Attributes.debug) System.out.printf("Number of iterations: %f \n", counter);
-    }
     counter = 1;
-//    if(this.fitness > main.greatestFitness)
-//    {
-//      main.greatestFitness = this.fitness;
-//      
-//    }
-    setMainImage();
+    if(generationCount%10==0)
+    {
+      setMainImage();
+    }
   }
   public synchronized void setMainImage()
   {
