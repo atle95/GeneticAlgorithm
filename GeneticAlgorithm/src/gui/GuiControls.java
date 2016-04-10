@@ -51,46 +51,46 @@ public class GuiControls extends BorderPane
     {
       throw new RuntimeException(exception);
     }
-    numTrianglesSlider.valueProperty().addListener(new ChangeListener<Number>()
-    {
-      public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) 
-      {
-        System.out.printf("Num Triangles: %d\n", new_val.intValue());
-        Attributes.numTriangles = new_val.intValue();
-        //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.tribe.genome.bimg, null));
-      }
-    });
-    numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
-    {
-      public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) 
-      {
-        if (!new_val) 
-        {
-          System.out.println("done");
-          //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.genome.bimg, null));
-        }
-      }
-    });
-    currentTriangleSlider.valueProperty().addListener(new ChangeListener<Number>()
-    {
-      public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) 
-      {
-        System.out.printf("Num Triangles: %d\n", new_val.intValue());
-        Attributes.currentTriangle = new_val.intValue();
-//        gui.drawTriangles();
-      }
-    });
-    currentTriangleSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
-    {
-      public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) 
-      {
-        if (!new_val) 
-        {
-          System.out.println("done");
-          //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.genome.bimg, null));
-        }
-      }
-    });
+//    numTrianglesSlider.valueProperty().addListener(new ChangeListener<Number>()
+//    {
+//      public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) 
+//      {
+//        System.out.printf("Num Triangles: %d\n", new_val.intValue());
+//        Attributes.numTriangles = new_val.intValue();
+//        //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.tribe.genome.bimg, null));
+//      }
+//    });
+//    numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
+//    {
+//      public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) 
+//      {
+//        if (!new_val) 
+//        {
+//          System.out.println("done");
+//          //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.genome.bimg, null));
+//        }
+//      }
+//    });
+//    currentTriangleSlider.valueProperty().addListener(new ChangeListener<Number>()
+//    {
+//      public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) 
+//      {
+//        System.out.printf("Num Triangles: %d\n", new_val.intValue());
+//        Attributes.currentTriangle = new_val.intValue();
+////        gui.drawTriangles();
+//      }
+//    });
+//    currentTriangleSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
+//    {
+//      public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) 
+//      {
+//        if (!new_val) 
+//        {
+//          System.out.println("done");
+//          //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.genome.bimg, null));
+//        }
+//      }
+//    });
   
   }
   

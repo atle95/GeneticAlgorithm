@@ -80,7 +80,7 @@ public class TriangleObject
             else this.y[1]-=magnitude+iteration;
       break;
       case 8: if(this.y[2]+magnitude+iteration<=Attributes.imageHeight) this.y[2]+=magnitude+iteration;
-            else this.y[2]-=magnitude;
+            else this.y[2]-=magnitude+iteration;
       break;
       case 9: if(this.y[0]-magnitude+iteration>=0) this.y[0]-=magnitude+iteration;
             else this.y[0]+=magnitude+iteration;
@@ -95,7 +95,7 @@ public class TriangleObject
              else this.c[0]-=magnitude+iteration;
       break;
       case 13: if(this.c[1]+magnitude+iteration<=255) this.c[1]+=magnitude+iteration;
-             else this.c[1]+=magnitude;
+             else this.c[1]+=magnitude+iteration;
       break;
       case 14: if(this.c[2]+magnitude+iteration<=255) this.c[2]+=magnitude+iteration;
              else this.c[2]-=magnitude+iteration;
@@ -112,7 +112,7 @@ public class TriangleObject
       case 18: if(this.c[3]-opacityMagnitude+iteration>=0.0) this.c[3]-=opacityMagnitude+iteration;
              else this.c[3]+=opacityMagnitude+iteration;
       break;
-      case 19: if(this.c[3]+opacityMagnitude+iteration<=1.0) this.c[3]+=opacityMagnitude+iteration;
+      case 19: if(this.c[3]+opacityMagnitude+iteration<=255) this.c[3]+=opacityMagnitude+iteration;
              else this.c[3]-=opacityMagnitude+iteration;
       break;
     }

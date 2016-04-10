@@ -49,7 +49,8 @@ public class Main extends Application
   private Image curGenome;
   Scene scene;
   PixelReader reader;
-  public Random random = new Random(Attributes.seed);
+//  public Random random = new Random(Attributes.seed);
+  public Random random = new Random();
   
   
   public boolean paused = true;
