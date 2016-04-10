@@ -61,32 +61,40 @@ public class FitnessCalculator
   // TODO Get the pixels of original image
   public void getPixelsFromOriginalImage() throws IOException
   {
-    img = ImageIO.read(new File("Resources/Images/monalisa.png"));
-
-    main.drawCurImage(main.gfxL, SwingFXUtils.toFXImage(img, null));
-    int w = img.getWidth();
-    int h = img.getHeight();
-
-    //System.out.println("width, height: " + w + ", " + h);
-
-    for (int i = 0; i < w; i++)
+    
+    try 
     {
-      for (int j = 0; j < h; j++)
+      img = ImageIO.read(new File("Resources/Images/monalisa.png"));
+
+      main.drawCurImage(main.gfxL, SwingFXUtils.toFXImage(img, null));
+      int w = img.getWidth();
+      int h = img.getHeight();
+
+      //System.out.println("width, height: " + w + ", " + h);
+
+      for (int i = 0; i < w; i++)
       {
-        int pixel = img.getRGB(i, j);
+        for (int j = 0; j < h; j++)
+        {
+          int pixel = img.getRGB(i, j);
 
-      //  sourcePixels[i][j] = pixel;
+        //  sourcePixels[i][j] = pixel;
 
-        int red   = (pixel & 0x00ff0000) >> 16;
-        int green = (pixel & 0x0000ff00) >> 8;
-        int blue  = pixel & 0x000000ff;
+          int red   = (pixel & 0x00ff0000) >> 16;
+          int green = (pixel & 0x0000ff00) >> 8;
+          int blue  = pixel & 0x000000ff;
 
-        Colors color1 = new Colors(red, green, blue);
-        
-        sourcePixels[i][j] = color1;
+          Colors color1 = new Colors(red, green, blue);
+          
+          sourcePixels[i][j] = color1;
 
-        // System.out.println(red + " " + green + " " + blue);
+          // System.out.println(red + " " + green + " " + blue);
+        }
       }
+    } 
+    catch (IOException e) 
+    {
+      e.printStackTrace();
     }
   }
 
@@ -129,10 +137,6 @@ public class FitnessCalculator
     {
       getPixelsFromOriginalImage();
       getPixelsFromRightCanvas(genome.getBufferedTriangle(genome));
-    } catch (IOException e) 
-    {
-      e.printStackTrace();
-    }
 //    PixelWriter pixWriter = this.main.gfxF.getPixelWriter();
     
     for (int x = 0; x < width; x++)
@@ -161,6 +165,10 @@ public class FitnessCalculator
      // fitness = 1 - error / (width * height);
     }
     //System.out.println(error);
+    } catch (IOException e) 
+    {
+      e.printStackTrace();
+    }
     return error;  
   }
   

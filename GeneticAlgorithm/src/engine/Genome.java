@@ -58,6 +58,10 @@ public class Genome
     double counter = 1;
     triangleList.get(i).mutate(mutation, counter);
     double newFitness = fitCalc.calculateFitnessOfMutation(this);
+    if( newFitness < oldFitness)
+    {
+      triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
+    }
     while (newFitness < oldFitness)
     {
       if (counter == 1 && Attributes.debug)
