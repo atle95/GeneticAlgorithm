@@ -262,8 +262,10 @@ public class GuiControls extends BorderPane
   public void saveButton()
   {
 //    Formatter formatter = new Formatter();
-    String name = String.format("%02.0f_%2.2f.png", (double) Attributes.seed, main.greatestFitness);
-    File file = new File(name);
+    String dirName = String.format("%02.0f", (double) Attributes.seed);
+    String name = String.format("%02.0f_%2.2f.png",(double) Attributes.seed, main.currFitness);
+    File dir = new File (dirName);
+    File file = new File (dir, name);
     
     try 
     {

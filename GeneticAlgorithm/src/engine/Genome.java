@@ -25,6 +25,7 @@ public class Genome
   public double fitness;
   public FitnessCalculator fitCalc;
   public int generationCount = 0;
+private int lastPercentageFitness = 0;
   
   
   public Genome(Main main)
@@ -92,6 +93,7 @@ public class Genome
     counter = 1;
     if(generationCount%10==0)
     {
+      //UNTESTED
       main.currFitness = percentageFitness;
       setMainImage();
       if(main.greatestFitness < percentageFitness)
