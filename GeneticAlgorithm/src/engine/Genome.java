@@ -47,20 +47,25 @@ public class Genome
   
   public synchronized void mutateTriangle()
   {
-    double temp = 0;
-    generationCount++;
+    main.numGenerations++;
+    
     int i = main.random.nextInt(triangleList.size());
     int mutation = main.random.nextInt(20);
-    double oldFitness = fitCalc.calculateFitnessOfMutation(this);
+    
+    double percentageFitness = 0;
     double counter = 1;
+    
+    //Checks Given genome before and after mutation
+    double oldFitness = fitCalc.calculateFitnessOfMutation(this);
     triangleList.get(i).mutate(mutation, counter);
     double newFitness = fitCalc.calculateFitnessOfMutation(this);
+
+    percentageFitness = 100-newFitness/93394396;
     if (Attributes.debug)
     {
-      temp = 100-newFitness/93394396;
-      System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, temp);
+      System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, percentageFitness);
     }
-    if(  oldFitness < newFitness)
+    if(oldFitness < newFitness)
     {
       if (triangleList.get(i).lastMutation %2 == 0)
       {
@@ -84,18 +89,15 @@ public class Genome
       oldFitness = newFitness;
       newFitness = fitCalc.calculateFitnessOfMutation(this);
     }
-    if(main.greatestFitness < temp)
-    {
-      main.greatestFitness = temp;
-//      if( main.greatestFitness %10 == 0 )
-//      {
-//        main.controller.saveButton();
-//      }
-    }
     counter = 1;
     if(generationCount%10==0)
     {
+      main.currFitness = percentageFitness;
       setMainImage();
+      if(main.greatestFitness < percentageFitness)
+      {
+        main.greatestFitness = percentageFitness;
+      }
     }
     
   }

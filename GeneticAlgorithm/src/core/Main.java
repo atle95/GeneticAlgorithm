@@ -41,10 +41,13 @@ public class Main extends Application
 //  public FitnessCalculator fitCalc;
   public ArrayList<Thread> threadList = new ArrayList<Thread>();
   
-  public Boolean settingImage = false;
+  public Random random = new Random(Attributes.seed);
   
   public double greatestFitness = 0;
+  public double currFitness = 0;
+  public int numGenerations = 0;
   
+  public Boolean settingImage = false;
   Image monalisa    = new Image("File:Resources/Images/monalisa.png");
   Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
   Image greatwave   = new Image("File:Resources/Images/greatwave.png");
@@ -54,7 +57,6 @@ public class Main extends Application
   private Image curGenome;
   Scene scene;
   PixelReader reader;
-  public Random random = new Random(Attributes.seed);
 //  public Random random = new Random();
   
   
@@ -190,6 +192,7 @@ public class Main extends Application
       if(!settingImage)
       {
         drawCurImage(gfxR, curGenome);
+        controller.updateLabels();
       }
     }
   }

@@ -94,7 +94,48 @@ public class GuiControls extends BorderPane
 //        }
 //      }
 //    });
+    
+          
+  }
   
+  public void updateLabels() 
+  {
+    double input = 0;
+    setCurrFit(main.currFitness);
+    setFitPerSec(input);
+    setTotalPop(input);
+    setTotalHill(input);
+    setGenPerSec(input);
+    setAvgGenSec(input);
+    setTotalRun(input);
+  }
+  public void setCurrFit(double input)
+  {
+    currFit.setText(String.format("Current Fitness %2.2f%%", input));
+  }
+  public void setFitPerSec(double input)
+  {
+    fitPerSec.setText(String.format("Current Fitness Per Second %2.2f%%", input));
+  } 
+  public void setTotalPop(double input)
+  {
+    totalPop.setText(String.format("Total population: %2.2f%%", input));
+  }
+  public void setTotalHill(double input)
+  {
+    totalHill.setText(String.format("Total hill climb: %2.2f%%", input));
+  }
+  public void setGenPerSec(double input)
+  {
+    genPerSec.setText(String.format("Total Generations Per Second: %2.2f%%", input));
+  }
+  public void setAvgGenSec(double input)
+  {
+    avgGenSec.setText(String.format("Average Generations Per Second: %2.2f%%", input));
+  }
+  public void setTotalRun(double input)
+  {
+    totalRun.setText(String.format("Total Runtime: %2.2f%%", input));
   }
   
   @FXML
@@ -221,7 +262,7 @@ public class GuiControls extends BorderPane
   public void saveButton()
   {
 //    Formatter formatter = new Formatter();
-    String name = String.format("%2.0f_%2.2f.png", (double) Attributes.seed, main.greatestFitness);
+    String name = String.format("%02.0f_%2.2f.png", (double) Attributes.seed, main.greatestFitness);
     File file = new File(name);
     
     try 
@@ -258,5 +299,7 @@ public class GuiControls extends BorderPane
   {
     return this.fitnessCanvas;
   }
+
+  
 
 }
