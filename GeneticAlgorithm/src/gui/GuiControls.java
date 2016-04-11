@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 
+import core.Main;
 import engine.Attributes;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

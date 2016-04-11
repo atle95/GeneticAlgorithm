@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 
 import engine.Attributes;
 import engine.Genome;
-import gui.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 

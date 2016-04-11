@@ -1,4 +1,4 @@
-package gui;
+package core;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -6,6 +6,7 @@ import java.util.concurrent.CyclicBarrier;
 
 import engine.Attributes;
 import engine.Tribe;
+import gui.GuiControls;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -93,7 +94,7 @@ public class Main extends Application
     fx.drawImage(img, 0, 0);
   }
   
-  void initializeTribes() 
+  public void initializeTribes() 
   {
     final CyclicBarrier barrier = new CyclicBarrier(numThreads, new Runnable()
     {

@@ -1,6 +1,5 @@
 package engine;
 
-import gui.Main;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -8,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import core.FitnessCalculator;
+import core.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
@@ -58,17 +58,29 @@ public class Genome
     double counter = 1;
     triangleList.get(i).mutate(mutation, counter);
     double newFitness = fitCalc.calculateFitnessOfMutation(this);
-    if( newFitness < oldFitness)
+    if (Attributes.debug)
     {
-      triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
+      double temp = 100-newFitness/93394396;
+      System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, temp);
     }
+    if(  oldFitness < newFitness)
+    {
+      if (triangleList.get(i).lastMutation %2 == 0)
+      {
+        triangleList.get(i).mutate(triangleList.get(i).lastMutation+1, counter);
+      }
+      else
+      {
+        triangleList.get(i).mutate(triangleList.get(i).lastMutation-1, counter);
+      }
+    }
+//    if(oldFitness == newFitness)
+//    {
+//      triangleList.remove(triangleList.get(i));
+//      triangleList.add(new TriangleObject(main.random, i));
+//    }
     while (newFitness < oldFitness)
     {
-      if (counter == 1 && Attributes.debug)
-      {
-        double temp = 100-newFitness/93394396;
-        System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, temp);
-      }
       counter+=0.01;
       triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
       //if (Attributes.debug) System.out.printf("delta Fitness %f \n", oldFitness-newFitness);
@@ -81,6 +93,7 @@ public class Genome
       setMainImage();
     }
   }
+
   public synchronized void setMainImage()
   {
     main.settingImage = true;
