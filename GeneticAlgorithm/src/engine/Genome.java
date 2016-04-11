@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import core.FitnessCalculator;
 import core.Main;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.image.WritableImage;
 
 
 /**
@@ -132,21 +128,5 @@ public class Genome
     main.gfxR.clearRect(0, 0, main.controller.getCanvasRight().getWidth(), main.controller.getCanvasRight().getHeight());
   }
   
-  public WritableImage getSnapShot(Canvas canvas, int x, int y, int w, int h)
-  {
-    SnapshotParameters parameters = new SnapshotParameters();
-    parameters.setViewport(new Rectangle2D(x, y, w+x, h+y));
-    WritableImage wi = new WritableImage(w, h);
-    WritableImage snapshot = canvas.snapshot(parameters, wi);
-    return snapshot;
-  }
   
-  WritableImage getSnapShot(Canvas canvas, int[] input)
-  {
-    SnapshotParameters parameters = new SnapshotParameters();
-    parameters.setViewport(new Rectangle2D(input[0], input[1], input[2], input[3]));
-    WritableImage wi = new WritableImage(input[2], input[3]);
-    WritableImage snapshot = canvas.snapshot(parameters, wi);
-    return snapshot;
-  }
 }

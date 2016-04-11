@@ -9,11 +9,15 @@ import engine.Tribe;
 import gui.GuiControls;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 //import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -35,7 +39,7 @@ public class Main extends Application
   
   public GuiControls controller;
 //  public FitnessCalculator fitCalc;
-  ArrayList<Thread> threadList = new ArrayList<Thread>();
+  public ArrayList<Thread> threadList = new ArrayList<Thread>();
   
   public Boolean settingImage = false;
   
@@ -50,8 +54,8 @@ public class Main extends Application
   private Image curGenome;
   Scene scene;
   PixelReader reader;
-//  public Random random = new Random(Attributes.seed);
-  public Random random = new Random();
+  public Random random = new Random(Attributes.seed);
+//  public Random random = new Random();
   
   
   public boolean paused = true;
@@ -107,7 +111,9 @@ public class Main extends Application
     //  each tribe is initialized by a different job on the threads
     for(int i = 0; i < numThreads; i++)
     {
-      new Thread(new Tribe(barrier, this, i)).start();
+      Thread e = new Thread(new Tribe(barrier, this, i));
+      threadList.add(e);
+      e.start();
     }
   }
   
@@ -148,6 +154,33 @@ public class Main extends Application
   public void setCurGenome(Image curGenome)
   {
     this.curGenome = curGenome;
+  }
+  
+  public WritableImage getSnapShot(Canvas canvas)
+  {
+    SnapshotParameters parameters = new SnapshotParameters();
+    parameters.setViewport(new Rectangle2D(0, 0, Attributes.imageWidth, Attributes.imageHeight));
+    WritableImage wi = new WritableImage(Attributes.imageWidth, Attributes.imageHeight);
+    WritableImage snapshot = canvas.snapshot(parameters, wi);
+    return snapshot;
+  }
+  
+  public WritableImage getSnapShot(Canvas canvas, int x, int y, int w, int h)
+  {
+    SnapshotParameters parameters = new SnapshotParameters();
+    parameters.setViewport(new Rectangle2D(x, y, w+x, h+y));
+    WritableImage wi = new WritableImage(w, h);
+    WritableImage snapshot = canvas.snapshot(parameters, wi);
+    return snapshot;
+  }
+  
+  WritableImage getSnapShot(Canvas canvas, int[] input)
+  {
+    SnapshotParameters parameters = new SnapshotParameters();
+    parameters.setViewport(new Rectangle2D(input[0], input[1], input[2], input[3]));
+    WritableImage wi = new WritableImage(input[2], input[3]);
+    WritableImage snapshot = canvas.snapshot(parameters, wi);
+    return snapshot;
   }
 
   class MainGameLoop extends AnimationTimer

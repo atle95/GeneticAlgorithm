@@ -1,11 +1,12 @@
 package gui;
 
+import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
 import core.Main;
-import engine.Attributes;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -218,14 +219,14 @@ public class GuiControls extends BorderPane
   @FXML
   protected void saveButton()
   {
-//    File file = new File("oldtriangles.png");
-//    
-//    try {
-//      ImageIO.write(SwingFXUtils.fromFXImage(main.threadList.get(0).triangleList.get(0).getSnapShot(getCanvasRight(), 0,0,Attributes.imageWidth,Attributes.imageHeight), null), "png", file);
-//    } catch (IOException e) 
-//    {
-//      e.printStackTrace();
-//    }
+    File file = new File("oldtriangles.png");
+    
+    try {
+      ImageIO.write(SwingFXUtils.fromFXImage(main.getSnapShot(getCanvasRight()), null), "png", file);
+    } catch (IOException e) 
+    {
+      e.printStackTrace();
+    }
     
   }
   
