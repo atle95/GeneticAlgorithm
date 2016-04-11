@@ -1,10 +1,8 @@
 package engine;
 
-import gui.DrawGraph;
 import gui.Main;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.List;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -25,19 +23,13 @@ import javafx.scene.image.WritableImage;
 public class Genome
 {
   public ArrayList<TriangleObject> triangleList = new ArrayList<TriangleObject>();
-  ArrayList<Double> scores = new ArrayList<Double>();
-  
   Main main;
   public BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
   Graphics2D bigfx = bimg.createGraphics();
+  public double fitness;
   public FitnessCalculator fitCalc;
   public int generationCount = 0;
-  private double temp_fitness;
-  private double best_fitness = 0;
   
-  int index = 0;
-  
-  public Genome(){}
   
   public Genome(Main main)
   {
@@ -74,24 +66,8 @@ public class Genome
     {
       if (counter == 1 && Attributes.debug)
       {
-        temp_fitness = 100 - newFitness / 93394396;
-        System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, temp_fitness);
-        
-        if( temp_fitness > best_fitness){
-          best_fitness = temp_fitness;
-        }
-        if (index % 25 == 0)
-        {
-          System.err.println("index " + index);
-          
-          setIndex(index);
-          setFitness(best_fitness);
-          
-          scores.add(best_fitness);
-   //       DrawGraph.showGraph(scores);
-          index++;
-          
-        } else index++;
+        double temp = 100-newFitness/93394396;
+        System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, temp);
       }
       counter+=0.01;
       triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
@@ -159,28 +135,5 @@ public class Genome
     WritableImage wi = new WritableImage(input[2], input[3]);
     WritableImage snapshot = canvas.snapshot(parameters, wi);
     return snapshot;
-  }
-  
-  /*
-   ============================
-   Added getters and setters for 
-   the current fitness
-   ============================
-   */
-  public double getFitness(){
-    return best_fitness;
-  }
-  
-  public double getIndex(){
-    return index;
-  }
-  public void setFitness(double temp_fitness){
-   // scores.add(temp_fitness);
- //   new DrawGraph(scores);
-    this.temp_fitness = temp_fitness;
-  }
-  
-  public void setIndex(int index){
-    this.index = index;
   }
 }

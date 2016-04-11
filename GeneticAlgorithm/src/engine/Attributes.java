@@ -7,7 +7,7 @@ public class Attributes
   public static double totalFitness;
   public static int imageWidth = 512;
   public static int imageHeight = 413;
-  public static long seed = 8301995;
+  public static long seed = 1;
   public static int currentTriangle=200;
   public static boolean debug = true;
 }

@@ -5,11 +5,9 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.concurrent.CyclicBarrier;
-
 import java.util.concurrent.locks.ReentrantLock;
 
-
-import gui.Main;
+import core.Main;
 
 public class Tribe implements Runnable 
 {
