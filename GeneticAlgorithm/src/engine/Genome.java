@@ -83,9 +83,12 @@ public class Genome
         if (index % 25 == 0)
         {
           System.err.println("index " + index);
-
+          
+          setIndex(index);
+          setFitness(best_fitness);
+          
           scores.add(best_fitness);
-          DrawGraph.createAndShowGui(scores);
+   //       DrawGraph.showGraph(scores);
           index++;
           
         } else index++;
@@ -164,15 +167,20 @@ public class Genome
    the current fitness
    ============================
    */
-  public ArrayList getFitness(){
-    return scores;
+  public double getFitness(){
+    return best_fitness;
+  }
+  
+  public double getIndex(){
+    return index;
   }
   public void setFitness(double temp_fitness){
-   // this.temp_fitness = temp_fitness;
-   // ArrayList<Double> scores = new ArrayList<Double>();
-    scores.add(temp_fitness);
-    new DrawGraph(scores);
-   // DrawGraph.createAndShowGui();
-   // System.err.println("scores " + scores);
+   // scores.add(temp_fitness);
+ //   new DrawGraph(scores);
+    this.temp_fitness = temp_fitness;
+  }
+  
+  public void setIndex(int index){
+    this.index = index;
   }
 }
