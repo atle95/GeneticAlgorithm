@@ -77,13 +77,13 @@ public class Main extends Application
 //    drawCurImage(gfxR, SwingFXUtils.toFXImage(genome.bimg, null));
 //    fitCalc.getOriginalImageFitness();
 //    fitCalc.calculateFitnessOfMutation();
+
+    
     initializeTribes();
     AnimationTimer gameLoop = new MainGameLoop();
     gameLoop.start();
     
     primaryStage.show();
-    
-    
   }
   
   public void drawCurImage(GraphicsContext fx, Image img)

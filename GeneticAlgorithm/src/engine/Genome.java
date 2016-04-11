@@ -1,8 +1,10 @@
 package engine;
 
+import gui.DrawGraph;
 import gui.Main;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.List;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -23,13 +25,18 @@ import javafx.scene.image.WritableImage;
 public class Genome
 {
   public ArrayList<TriangleObject> triangleList = new ArrayList<TriangleObject>();
+  ArrayList<Double> scores = new ArrayList<Double>();
+  
   Main main;
   public BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
   Graphics2D bigfx = bimg.createGraphics();
-  public double fitness;
+  private double temp_fitness;
   public FitnessCalculator fitCalc;
   public int generationCount = 0;
   
+  int index = 0;
+  
+  public Genome(){}
   
   public Genome(Main main)
   {
@@ -66,8 +73,18 @@ public class Genome
     {
       if (counter == 1 && Attributes.debug)
       {
-        double temp = 100-newFitness/93394396;
-        System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, temp);
+        temp_fitness = 100 - newFitness / 93394396;
+        System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, temp_fitness);
+        if (index % 25 == 0)
+        {
+          System.err.println("index " + index);
+         // setFitness(temp_fitness);
+
+          scores.add(temp_fitness);
+          DrawGraph.createAndShowGui(scores);
+          index++;
+          
+        } else index++;
       }
       counter+=0.01;
       triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
@@ -135,5 +152,23 @@ public class Genome
     WritableImage wi = new WritableImage(input[2], input[3]);
     WritableImage snapshot = canvas.snapshot(parameters, wi);
     return snapshot;
+  }
+  
+  /*
+   ============================
+   Added getters and setters for 
+   the current fitness
+   ============================
+   */
+  public ArrayList getFitness(){
+    return scores;
+  }
+  public void setFitness(double temp_fitness){
+   // this.temp_fitness = temp_fitness;
+   // ArrayList<Double> scores = new ArrayList<Double>();
+    scores.add(temp_fitness);
+    new DrawGraph(scores);
+   // DrawGraph.createAndShowGui();
+   // System.err.println("scores " + scores);
   }
 }
