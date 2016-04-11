@@ -44,7 +44,6 @@ public class FitnessCalculator
     this.main = gui;
   }
 
-
   // TODO get the fitness of the image
   public void getOriginalImageFitness(Genome genome)
   {
@@ -64,13 +63,11 @@ public class FitnessCalculator
     
     try 
     {
-      img = ImageIO.read(new File("GeneticAlgorithm/Resources/Images/monalisa.png"));
+      img = ImageIO.read(new File("Resources/Images/monalisa.png"));
 
       main.drawCurImage(main.gfxL, SwingFXUtils.toFXImage(img, null));
       int w = img.getWidth();
       int h = img.getHeight();
-
-      //System.out.println("width, height: " + w + ", " + h);
 
       for (int i = 0; i < w; i++)
       {
@@ -80,8 +77,6 @@ public class FitnessCalculator
           {
             int pixel = img.getRGB(i, j);
 
-            // sourcePixels[i][j] = pixel;
-
             int red = (pixel & 0x00ff0000) >> 16;
             int green = (pixel & 0x0000ff00) >> 8;
             int blue = pixel & 0x000000ff;
@@ -90,7 +85,6 @@ public class FitnessCalculator
 
             sourcePixels[i][j] = color1;
           }
-          // System.out.println(red + " " + green + " " + blue);
         }
       }
     } 
@@ -125,7 +119,6 @@ public class FitnessCalculator
 
           triangleCanvas[i][j] = color2;
         }
-       // System.out.println(red + " " + green + " " + blue);
       }
     }
   }
@@ -141,7 +134,6 @@ public class FitnessCalculator
     {
       getPixelsFromOriginalImage();
       getPixelsFromRightCanvas(genome.getBufferedTriangle(genome));
-//    PixelWriter pixWriter = this.main.gfxF.getPixelWriter();
     
     for (int x = 0; x < width; x++)
     {
@@ -156,22 +148,9 @@ public class FitnessCalculator
         double pixelError = GetColorFitness(c1, c2);
 
         error += pixelError;
-//        int drawError = (int) Math.sqrt(pixelError);
-//        int drawError = (int) ((255/195075) * (pixelError));
-//        if(drawError < 255)
-//        {
-//          pixWriter.setColor(x,y,Color.rgb(drawError,drawError,drawError));
-//        }
-//        else
-//        {
-//          pixWriter.setColor(x,y,Color.rgb(255,0,0));
-//          //System.out.printf("%d\n",drawError);
-//        }
         }
       }
-     // fitness = 1 - error / (width * height);
     }
-    //System.out.println(error);
     } catch (IOException e) 
     {
       e.printStackTrace();
@@ -199,5 +178,4 @@ public class FitnessCalculator
   public void setFitness(double fitness) {
     this.fitness = fitness;
   }
-
 }
