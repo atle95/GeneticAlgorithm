@@ -58,11 +58,16 @@ public class Genome
     double counter = 1;
     triangleList.get(i).mutate(mutation, counter);
     double newFitness = fitCalc.calculateFitnessOfMutation(this);
+    if( newFitness < oldFitness)
+    {
+      triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
+    }
     while (newFitness < oldFitness)
     {
       if (counter == 1 && Attributes.debug)
       {
-        System.out.printf("Mutating Triangle %3d, current fitness: %11.0f \n", i, newFitness);
+        double temp = 100-newFitness/93394396;
+        System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, temp);
       }
       counter+=0.01;
       triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
