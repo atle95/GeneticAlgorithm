@@ -73,8 +73,6 @@ public class FitnessCalculator
       {
         for (int j = 0; j < h; j++)
         {
-          if (i % 5 == 0 && (j % 5 == 0))
-          {
             int pixel = img.getRGB(i, j);
 
             int red = (pixel & 0x00ff0000) >> 16;
@@ -84,7 +82,6 @@ public class FitnessCalculator
             Colors color1 = new Colors(red, green, blue);
 
             sourcePixels[i][j] = color1;
-          }
         }
       }
     } 
@@ -107,8 +104,6 @@ public class FitnessCalculator
     {
       for (int j = 0; j < height; j++)
       {
-        if (i % 5 == 0 && (j % 5 == 0))
-        {
           pixel = triangleImage.getRGB(i, j);
 
           red = (pixel & 0x00ff0000) >> 16;
@@ -118,7 +113,6 @@ public class FitnessCalculator
           Colors color2 = new Colors(red, green, blue);
 
           triangleCanvas[i][j] = color2;
-        }
       }
     }
   }
@@ -139,16 +133,12 @@ public class FitnessCalculator
     {
       for (int y = 0; y < height; y++)
       {
-
-        if(x % 5 == 0 && ( y % 5 == 0))
-        {
         Colors c1 = triangleCanvas[x][y];
         Colors c2 = sourcePixels[x][y];
 
         double pixelError = GetColorFitness(c1, c2);
 
         error += pixelError;
-        }
       }
     }
     } catch (IOException e) 

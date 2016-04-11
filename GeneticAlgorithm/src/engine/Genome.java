@@ -30,9 +30,10 @@ public class Genome
   Main main;
   public BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
   Graphics2D bigfx = bimg.createGraphics();
-  private double temp_fitness;
   public FitnessCalculator fitCalc;
   public int generationCount = 0;
+  private double temp_fitness;
+  private double best_fitness = 0;
   
   int index = 0;
   
@@ -75,12 +76,15 @@ public class Genome
       {
         temp_fitness = 100 - newFitness / 93394396;
         System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, temp_fitness);
+        
+        if( temp_fitness > best_fitness){
+          best_fitness = temp_fitness;
+        }
         if (index % 25 == 0)
         {
           System.err.println("index " + index);
-         // setFitness(temp_fitness);
 
-          scores.add(temp_fitness);
+          scores.add(best_fitness);
           DrawGraph.createAndShowGui(scores);
           index++;
           

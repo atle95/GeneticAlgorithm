@@ -21,7 +21,12 @@ import javax.swing.*;
 
 import engine.Genome;
 
-@SuppressWarnings("serial")
+/**
+ * 
+ * @author Chris Sanchez
+ *
+ */
+
 public class DrawGraph extends JPanel {
    private static final int MAX_SCORE = 20;
    private static final int PREF_W = 512;
@@ -31,7 +36,7 @@ public class DrawGraph extends JPanel {
    private static final Color GRAPH_POINT_COLOR = new Color(150, 50, 50, 180);
    private static final Stroke GRAPH_STROKE = new BasicStroke(3f);
    private static final int GRAPH_POINT_WIDTH = 5;
-   private static final int Y_HATCH_CNT = 20;
+   private static final int Y_HATCH_CNT = 5;
    private static ArrayList<Double> scores;
 
  //  public DrawGraph(){}
@@ -128,7 +133,7 @@ public class DrawGraph extends JPanel {
 //      scores = g.getFitness();
       for(@SuppressWarnings("unused") Double s: scores )
       {
-        System.out.println(" scores =" + scores);
+        System.out.println(" scoresss =" + scores);
       }
 
       DrawGraph mainPanel = new DrawGraph(scores);
@@ -144,7 +149,16 @@ public class DrawGraph extends JPanel {
    }
 
 //   public static void main(String[] args) {
+//     Random random = new Random();
+//     int maxDataPoints = 16;
+//     int maxScore = 20;
+//     for (int i = 0; i < maxDataPoints ; i++) {
+//       scores.add((double) random.nextInt(maxScore));
+//    }
+//     
 //     SwingUtilities.invokeLater(new Runnable() {
+//       
+//       
 //         public void run() {
 //            createAndShowGui();
 //         }
