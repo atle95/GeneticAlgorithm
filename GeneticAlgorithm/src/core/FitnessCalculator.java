@@ -64,7 +64,7 @@ public class FitnessCalculator
     
     try 
     {
-      img = ImageIO.read(new File("Resources/Images/monalisa.png"));
+      img = ImageIO.read(new File("GeneticAlgorithm/Resources/Images/monalisa.png"));
 
       main.drawCurImage(main.gfxL, SwingFXUtils.toFXImage(img, null));
       int w = img.getWidth();
@@ -76,18 +76,20 @@ public class FitnessCalculator
       {
         for (int j = 0; j < h; j++)
         {
-          int pixel = img.getRGB(i, j);
+          if (i % 5 == 0 && (j % 5 == 0))
+          {
+            int pixel = img.getRGB(i, j);
 
-        //  sourcePixels[i][j] = pixel;
+            // sourcePixels[i][j] = pixel;
 
-          int red   = (pixel & 0x00ff0000) >> 16;
-          int green = (pixel & 0x0000ff00) >> 8;
-          int blue  = pixel & 0x000000ff;
+            int red = (pixel & 0x00ff0000) >> 16;
+            int green = (pixel & 0x0000ff00) >> 8;
+            int blue = pixel & 0x000000ff;
 
-          Colors color1 = new Colors(red, green, blue);
-          
-          sourcePixels[i][j] = color1;
+            Colors color1 = new Colors(red, green, blue);
 
+            sourcePixels[i][j] = color1;
+          }
           // System.out.println(red + " " + green + " " + blue);
         }
       }
@@ -111,16 +113,18 @@ public class FitnessCalculator
     {
       for (int j = 0; j < height; j++)
       {
-       pixel = triangleImage.getRGB(i, j);
-       
-       red   = (pixel & 0x00ff0000) >> 16;
-       green = (pixel & 0x0000ff00) >> 8;
-       blue  = pixel & 0x000000ff;
-       
-       Colors color2 = new Colors(red, green, blue);
-       
-       triangleCanvas[i][j] = color2;
+        if (i % 5 == 0 && (j % 5 == 0))
+        {
+          pixel = triangleImage.getRGB(i, j);
 
+          red = (pixel & 0x00ff0000) >> 16;
+          green = (pixel & 0x0000ff00) >> 8;
+          blue = pixel & 0x000000ff;
+
+          Colors color2 = new Colors(red, green, blue);
+
+          triangleCanvas[i][j] = color2;
+        }
        // System.out.println(red + " " + green + " " + blue);
       }
     }
@@ -144,6 +148,8 @@ public class FitnessCalculator
       for (int y = 0; y < height; y++)
       {
 
+        if(x % 5 == 0 && ( y % 5 == 0))
+        {
         Colors c1 = triangleCanvas[x][y];
         Colors c2 = sourcePixels[x][y];
 
@@ -161,6 +167,7 @@ public class FitnessCalculator
 //          pixWriter.setColor(x,y,Color.rgb(255,0,0));
 //          //System.out.printf("%d\n",drawError);
 //        }
+        }
       }
      // fitness = 1 - error / (width * height);
     }
