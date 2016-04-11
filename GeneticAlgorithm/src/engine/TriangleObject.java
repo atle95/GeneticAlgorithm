@@ -16,7 +16,7 @@ public class TriangleObject
   public int lastMutation;
   public int magnitude = 1;
   private double opacityMagnitude = 1;
-  private int opacityBound = 100;
+//  private int opacityBound = 100;
   
   TriangleObject(int x1, int x2, int x3, int y1, int y2, int y3, byte r, byte g, byte b, byte a)
   {

@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import core.Main;
+import engine.Attributes;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -217,13 +218,17 @@ public class GuiControls extends BorderPane
   }
 
   @FXML
-  protected void saveButton()
+  public void saveButton()
   {
-    File file = new File("oldtriangles.png");
+//    Formatter formatter = new Formatter();
+    String name = String.format("%2.0f_%2.2f.png", (double) Attributes.seed, main.greatestFitness);
+    File file = new File(name);
     
-    try {
+    try 
+    {
       ImageIO.write(SwingFXUtils.fromFXImage(main.getSnapShot(getCanvasRight()), null), "png", file);
-    } catch (IOException e) 
+    } 
+    catch (IOException e) 
     {
       e.printStackTrace();
     }
