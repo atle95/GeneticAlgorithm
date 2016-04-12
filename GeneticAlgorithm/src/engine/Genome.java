@@ -20,16 +20,21 @@ public class Genome
 {
   public ArrayList<TriangleObject> triangleList = new ArrayList<TriangleObject>();
   Main main;
-  public BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight, BufferedImage.TYPE_INT_ARGB);
+  public BufferedImage bimg = new BufferedImage(Attributes.imageWidth, Attributes.imageHeight,
+      BufferedImage.TYPE_INT_ARGB);
   Graphics2D bigfx = bimg.createGraphics();
   public double fitness;
   public FitnessCalculator fitCalc;
   public int generationCount = 0;
-private int lastPercentageFitness = 0;
+  private int lastPercentageFitness = 0;
 
-private double temp_fitness;
-private static double best_fitness = 0;
-private static int index = 0;
+  private double temp_fitness;
+  private static double best_fitness = 0;
+  private static int index = 0;
+  
+  public static ArrayList<Double> fitnessPlot = new ArrayList<Double>();
+  public static ArrayList<Integer> indexPlot = new ArrayList<Integer>();
+
 
   
   
@@ -112,12 +117,14 @@ private static int index = 0;
       if (percentageFitness > best_fitness)
       {
         best_fitness = percentageFitness;
+        fitnessPlot.add(best_fitness);
       }
       if (index % 25 == 0)
       {
         System.err.println("index " + index);
 //        setIndex(index);
 //        setFitness(percentageFitness);
+        indexPlot.add(index);
         index++;
         
       } else index++;
@@ -191,8 +198,16 @@ private static int index = 0;
    return best_fitness;
  }
  
+ public static ArrayList<Double> getFitnessArray(){
+   return fitnessPlot;
+ }
+ 
  public static double getIndex(){
    return index;
+ }
+ 
+ public static ArrayList<Integer> getIndexArray(){
+   return indexPlot;
  }
 // public void setFitness(double temp_fitness){
 //  // scores.add(temp_fitness);

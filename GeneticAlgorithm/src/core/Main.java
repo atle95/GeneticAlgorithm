@@ -86,9 +86,9 @@ public class Main extends Application
     Group root = new Group();
     scene2 = new Scene(root, 700, 700, Color.LIGHTGREEN);
     
-   // primaryStage.setScene(scene2);
+    primaryStage.setScene(scene2);
     
-    primaryStage.setScene(scene);
+    //primaryStage.setScene(scene);
     
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
     gfxR = controller.getCanvasRight().getGraphicsContext2D();
@@ -239,7 +239,7 @@ public class Main extends Application
 class CreateStage {
 
   Scene scene2;
-  @SuppressWarnings({ "unchecked", "rawtypes" })
+  @SuppressWarnings({ "unchecked", "rawtypes", "unused" })
   
   public CreateStage() {
     Genome g = new Genome();
@@ -260,8 +260,15 @@ class CreateStage {
     XYChart.Series series = new XYChart.Series();
     series.setName("Fitness Progression");
     // populating the series with data
-    System.err.println("index " +Genome.getIndex()+ " fitness " +Genome.getFitness());
-    series.getData().add(new XYChart.Data(Genome.getIndex(), Genome.getFitness()));
+    
+//    for(Double d: Genome.getFitnessArray()){
+//    //  System.err.println("index " +Genome.getIndex()+ " fitness " +Genome.getFitness());
+//    series.getData().add(new XYChart.Data(Genome.getIndex(), Genome.getFitnessArray().get(index)));
+//    }
+    for(int i = 0; i < Genome.getFitnessArray().size(); i++){
+    //  System.err.println("index " +Genome.getIndex()+ " fitness " +Genome.getFitness());
+    series.getData().add(new XYChart.Data(Genome.getIndexArray().get(i), Genome.getFitnessArray().get(i)));
+    }
 
 
     // scene2 = new Scene(lineChart,800,600);
