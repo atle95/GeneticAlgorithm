@@ -76,7 +76,7 @@ public class Genome
   }
   
   /**
-   * HillClimbing Logic
+   * Hill Climbing Logic
    * 
    */
   public synchronized void mutateTriangle()
