@@ -13,6 +13,16 @@ import javafx.scene.image.Image;
 /**
  * 
  * @author Chris Sanchez
+ * This class reads in the rgb values of
+ * The source image (ex. Mona Lisa) and compares
+ * it to the generated triangle image. When the
+ * corresponding pixels are similar in color 
+ * value, a high fitness percentage is 
+ * calculated, otherwise a low fitness value
+ * is calculated. This process helps during
+ * hill climbing because the genetic algorithm 
+ * needs to know if a mutation is improving the 
+ * results, or not.
  *
  */
 public class FitnessCalculator
@@ -41,7 +51,10 @@ public class FitnessCalculator
     this.main = gui;
   }
 
-  // TODO get the fitness of the image
+  /**
+   * Calls the helper methods that read in the pixel data
+   * from the images
+   */
   public void getOriginalImageFitness(Genome genome)
   {
     try
@@ -54,7 +67,14 @@ public class FitnessCalculator
     }
   }
 
-  // TODO Get the pixels of original image
+  /**
+   * 
+   * @throws IOException
+   * This method reads in the pixels from the source image.
+   * The red, green, blue values are then passed to the 
+   * Colors constructor to make a Colors object that will 
+   * then be used to compare the fitness
+   */
   public void getPixelsFromOriginalImage() throws IOException
   {
     
@@ -90,6 +110,8 @@ public class FitnessCalculator
   /**
    * 
    * @param triangleImage
+   * This method reads the pixels from the generated triangle 
+   * image
    */
   public void getPixelsFromRightCanvas(BufferedImage triangleImage)
   {
@@ -116,6 +138,10 @@ public class FitnessCalculator
 /**
  * 
  * @return - fitness
+ * This method maps the rgb values from the images to
+ * a two-dimensional array. These values are used to 
+ * construct color objects which are then used as 
+ * components for comparing the fitness
  */
   public double calculateFitnessOfMutation(Genome genome)
   {
@@ -148,6 +174,7 @@ public class FitnessCalculator
   /**
    * 
    * Sum up the difference between the pixel values of the source image and new image
+   * 
    */
   public double GetColorFitness(Colors c1, Colors c2)
   {
@@ -158,10 +185,18 @@ public class FitnessCalculator
       return r*r + g*g + b*b;
   }
 
+  /**
+   * 
+   * @return fitness
+   */
   public double getFitness() {
     return fitness;
   }
 
+  /**
+   * 
+   * @param fitness
+   */
   public void setFitness(double fitness) {
     this.fitness = fitness;
   }

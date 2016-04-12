@@ -3,7 +3,13 @@ package core;
 /**
  * 
  * @author Chris Sanchez
- *
+ * 
+ * Colors constructs objects of rgb
+ * values that are taken from the pixels 
+ * of the source and destination images
+ * (i.e. the Mona Lisa Image and the 
+ * triangle images)
+ * 
  */
 public class Colors
 {
