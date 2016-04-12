@@ -98,13 +98,13 @@ public class Genome
     double percentageDeltaFitness = Math.abs(oldFitness-newFitness)/main.searchSize;
 
     percentageFitness = 100-newFitness/main.searchSize;
-  if (Attributes.debug && (generationCount%10==0))
-  { for(int i = 0; i<weightDistribution.length;i++)
-    { System.out.printf("[%2.2f]", weightDistribution[i]);
-    }
-  System.out.printf("%n");
-//    System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", currentTriangle, percentageFitness);
-  }
+//  if (Attributes.debug && (generationCount%10==0))
+//  { for(int i = 0; i<weightDistribution.length;i++)
+//    { System.out.printf("[%2.2f]", weightDistribution[i]);
+//    }
+//  System.out.printf("%n");
+////    System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", currentTriangle, percentageFitness);
+//  }
     if(oldFitness < newFitness)
     {
       //decrease probability of selecting again, and revert changes
