@@ -10,6 +10,7 @@ import engine.Tribe;
 import gui.GuiControls;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
@@ -97,7 +98,6 @@ public class Main extends Application
 
     drawCurImage(gfxL, monalisa);
 //    genome.initializeTriangles();
-//    drawCurImage(gfxR, SwingFXUtils.toFXImage(genome.bimg, null));
 //    fitCalc.getOriginalImageFitness();
 //    fitCalc.calculateFitnessOfMutation();
     initializeTribes();

@@ -73,31 +73,33 @@ public class Genome
     int currentTriangle = main.random.nextInt(triangleList.size());
     double sum = 0;
     for (double j : weightDistribution)
-    {
-        sum += j;
+    { sum += j;
     }
     
     double temp = main.random.nextDouble()*sum;
     for (int k = 0; k < weightDistribution.length; ++k)
-    {
-        temp -= weightDistribution[k];
-        if(temp <= 0.0d)
-        {  mutation = k;
-            break;
-        }
+    { temp -= weightDistribution[k];
+      if(temp <= 0.0d)
+      { mutation = k;
+        break;
+      }
     }
 //    int mutation = main.random.nextInt(20);
     
-    double percentageFitness = 0;
     double counter = 1;
     
     //Checks Given genome before and after mutation
     double oldFitness = fitCalc.calculateFitnessOfMutation(this);
     triangleList.get(currentTriangle).mutate(mutation, counter);
     double newFitness = fitCalc.calculateFitnessOfMutation(this);
+    
     double percentageDeltaFitness = Math.abs(oldFitness-newFitness)/main.searchSize;
-
-    percentageFitness = 100-newFitness/main.searchSize;
+    double percentageFitness = 100-newFitness/main.searchSize;
+    
+    if(main.numGenerations == 1)
+    {
+      System.out.printf("%2.2f",percentageFitness);
+    }
 //  if (Attributes.debug && (generationCount%10==0))
 //  { for(int i = 0; i<weightDistribution.length;i++)
 //    { System.out.printf("[%2.2f]", weightDistribution[i]);
