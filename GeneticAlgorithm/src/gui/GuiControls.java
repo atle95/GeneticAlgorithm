@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import core.CreateStage;
 import core.Main;
 import engine.Attributes;
 import javafx.embed.swing.SwingFXUtils;
@@ -285,6 +286,7 @@ public class GuiControls extends BorderPane
   @FXML
   public void showGraph()
   {
+    new CreateStage();
   }
   
   @FXML
