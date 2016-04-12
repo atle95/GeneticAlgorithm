@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 import core.CreateStage;
 import core.Main;
 import engine.Attributes;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,26 +57,14 @@ public class GuiControls extends BorderPane
     {
       throw new RuntimeException(exception);
     }
-//    numTrianglesSlider.valueProperty().addListener(new ChangeListener<Number>()
-//    {
-//      public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) 
-//      {
-//        System.out.printf("Num Triangles: %d\n", new_val.intValue());
-//        Attributes.numTriangles = new_val.intValue();
-//        //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.tribe.genome.bimg, null));
-//      }
-//    });
-//    numTrianglesSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>()
-//    {
-//      public void changed(ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val) 
-//      {
-//        if (!new_val) 
-//        {
-//          System.out.println("done");
-//          //main.drawCurImage(main.gfxR, SwingFXUtils.toFXImage(main.genome.bimg, null));
-//        }
-//      }
-//    });
+    numTrianglesSlider.valueProperty().addListener(new ChangeListener<Number>()
+    {
+      public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) 
+      {
+        System.out.printf("Num Triangles: %d\n", new_val.intValue());
+        Attributes.numTriangles = new_val.intValue();
+      }
+    });
 //    currentTriangleSlider.valueProperty().addListener(new ChangeListener<Number>()
 //    {
 //      public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) 
@@ -99,6 +89,11 @@ public class GuiControls extends BorderPane
           
   }
   
+  /**
+   * Update Labels
+   *    Updates labels in the Values Tab 
+   *
+   */
   public void updateLabels() 
   {
     double input = 0;
@@ -139,6 +134,12 @@ public class GuiControls extends BorderPane
     totalRun.setText(String.format("Total Runtime: %2.2f%%", input));
   }
   
+  /**
+   * button
+   *          unimplementted Tribe switcher
+   * @param event
+   *          How you know which button is being pressed
+   */  
   @FXML
   protected void button(ActionEvent event) 
   {
@@ -180,6 +181,13 @@ public class GuiControls extends BorderPane
     }
   }
     
+  /**
+   * imageButton
+   *          Switches out current image 
+   *          
+   * @param event 
+   *          How to know which button is being pressed
+   */
   @FXML
   protected void imageButton(ActionEvent event)
   {
@@ -205,6 +213,12 @@ public class GuiControls extends BorderPane
     }
   }
 
+  /**
+   * blendModeButton
+   *          Experimental/Debug Utility
+   * @param event
+   *          How you know which button is being pressed
+   */ 
   @FXML
   protected void blendModeButton(ActionEvent event)
   {
@@ -250,12 +264,23 @@ public class GuiControls extends BorderPane
     }
   }
   
+  /**
+   * @deprecated clearButton
+   *          unimplementted Tribe switcher
+   * @param event
+   *          How you know which button is being pressed
+   */ 
   @FXML
   protected void clearButton()
   {
-//    gui.clearTriangles();
   }
   
+  /**
+   * @depricated button
+   *          unimplementted Tribe switcher
+   * @param event
+   *          How you know which button is being pressed
+   */ 
   @FXML
   protected void mutateButton()
   {
@@ -263,15 +288,18 @@ public class GuiControls extends BorderPane
     main.initializeTribes();
   }
 
+
+  /**
+   * saveButton
+   *          saves image to disk in folder with name = to Attributes.seed
+   */ 
   @FXML
   public void saveButton()
   {
-//    Formatter formatter = new Formatter();
     String dirName = String.format("%02.0f", (double) Attributes.seed);
     String name = String.format("%02.0f_%2.2f.png",(double) Attributes.seed, main.currFitness);
     File dir = new File (dirName);
     File file = new File (dir, name);
-    
     try 
     {
       ImageIO.write(SwingFXUtils.fromFXImage(main.getSnapShot(getCanvasRight()), null), "png", file);
@@ -283,6 +311,10 @@ public class GuiControls extends BorderPane
     
   }
   
+  /**
+   * showGraph
+   *          shows The graph
+   */ 
   @FXML
   public void showGraph()
   {
