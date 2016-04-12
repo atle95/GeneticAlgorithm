@@ -137,7 +137,6 @@ public class Genome
         }
         if (index % 25 == 0)
         { 
-          System.err.println("index " + index);
           indexPlot.add(index);
           index++;
         } 
