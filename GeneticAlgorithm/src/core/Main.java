@@ -86,9 +86,9 @@ public class Main extends Application
     Group root = new Group();
     scene2 = new Scene(root, 700, 700, Color.LIGHTGREEN);
     
-    primaryStage.setScene(scene2);
+    //primaryStage.setScene(scene2);
     
-    //primaryStage.setScene(scene);
+    primaryStage.setScene(scene);
     
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
     gfxR = controller.getCanvasRight().getGraphicsContext2D();
