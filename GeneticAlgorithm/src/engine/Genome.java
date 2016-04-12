@@ -28,7 +28,7 @@ public class Genome
   public int generationCount = 0;
 //  private int lastPercentageFitness = 0;
   private int mutation = -1;
-  private double adaptiveRate = 1.014;
+  private double adaptiveRate = 1.5;
 
 //  private double temp_fitness;
   private static double best_fitness = 0;
@@ -84,7 +84,6 @@ public class Genome
     main.numGenerations++;
     int currentTriangle = main.random.nextInt(triangleList.size());
     double sum = 0;
-    double temp = main.random.nextDouble()*sum;
     double counter = 1;
     
     //Heuristic weighting logic
@@ -92,6 +91,7 @@ public class Genome
     { 
       sum += j;
     }
+    double temp = main.random.nextDouble()*sum;
     for (int k = 0; k < weightDistribution.length; ++k)
     { 
       temp -= weightDistribution[k];
@@ -101,7 +101,15 @@ public class Genome
         break;
       }
     }
-    
+//    if (Attributes.debug && (generationCount%100==0))
+//    { 
+//      System.out.printf("%n");
+//      for(int i = 0; i<weightDistribution.length;i++)
+//      {
+//        System.out.printf("[%d]%2.2f ", i, weightDistribution[i]);
+//      }
+//      System.out.printf("%n");
+//    }
     //Checks Given genome before and after mutation
     double oldFitness = fitCalc.calculateFitnessOfMutation(this);
     triangleList.get(currentTriangle).mutate(mutation, counter);
@@ -127,8 +135,9 @@ public class Genome
         triangleList.get(currentTriangle).mutate(triangleList.get(currentTriangle).lastMutation-1, counter);
       }
     }
-    else
+    else if (newFitness < oldFitness)
     { //increase probability of selecting again, and repeat changes
+      weightDistribution[mutation]*=(1+percentageDeltaFitness);
       while (newFitness < oldFitness)
       { 
         if (percentageFitness > best_fitness)
@@ -142,7 +151,6 @@ public class Genome
         } 
         else index++;
         
-        weightDistribution[mutation]*=(1+percentageDeltaFitness);
         counter*=adaptiveRate;
         
         oldFitness = newFitness;

@@ -288,7 +288,6 @@ public class GuiControls extends BorderPane
     main.initializeTribes();
   }
 
-
   /**
    * saveButton
    *          saves image to disk in folder with name = to Attributes.seed
