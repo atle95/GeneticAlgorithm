@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 import engine.Attributes;
 import engine.Genome;
-import gui.Main;
+import core.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -63,7 +63,7 @@ public class FitnessCalculator
     
     try 
     {
-      img = ImageIO.read(new File("Resources/Images/monalisa.png"));
+      img = ImageIO.read(new File("GeneticAlgorithm/Resources/Images/monalisa.png"));
 
       main.drawCurImage(main.gfxL, SwingFXUtils.toFXImage(img, null));
       int w = img.getWidth();

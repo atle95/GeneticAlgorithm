@@ -1,6 +1,5 @@
 package engine;
 
-import gui.Main;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -8,11 +7,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import core.FitnessCalculator;
+import core.Main;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.image.WritableImage;
 
 
 /**
@@ -29,6 +25,7 @@ public class Genome
   public double fitness;
   public FitnessCalculator fitCalc;
   public int generationCount = 0;
+private int lastPercentageFitness = 0;
   
   
   public Genome(Main main)
@@ -51,24 +48,42 @@ public class Genome
   
   public synchronized void mutateTriangle()
   {
-    generationCount++;
+    main.numGenerations++;
+    
     int i = main.random.nextInt(triangleList.size());
     int mutation = main.random.nextInt(20);
-    double oldFitness = fitCalc.calculateFitnessOfMutation(this);
+    
+    double percentageFitness = 0;
     double counter = 1;
+    
+    //Checks Given genome before and after mutation
+    double oldFitness = fitCalc.calculateFitnessOfMutation(this);
     triangleList.get(i).mutate(mutation, counter);
     double newFitness = fitCalc.calculateFitnessOfMutation(this);
-    if( newFitness < oldFitness)
+
+    percentageFitness = 100-newFitness/93394396;
+    if (Attributes.debug)
     {
-      triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
+      System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, percentageFitness);
     }
+    if(oldFitness < newFitness)
+    {
+      if (triangleList.get(i).lastMutation %2 == 0)
+      {
+        triangleList.get(i).mutate(triangleList.get(i).lastMutation+1, counter);
+      }
+      else
+      {
+        triangleList.get(i).mutate(triangleList.get(i).lastMutation-1, counter);
+      }
+    }
+//    if(oldFitness == newFitness)
+//    {
+//      triangleList.remove(triangleList.get(i));
+//      triangleList.add(new TriangleObject(main.random, i));
+//    }
     while (newFitness < oldFitness)
     {
-      if (counter == 1 && Attributes.debug)
-      {
-        double temp = 100-newFitness/93394396;
-        System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, temp);
-      }
       counter+=0.01;
       triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
       //if (Attributes.debug) System.out.printf("delta Fitness %f \n", oldFitness-newFitness);
@@ -78,9 +93,17 @@ public class Genome
     counter = 1;
     if(generationCount%10==0)
     {
+      //UNTESTED
+      main.currFitness = percentageFitness;
       setMainImage();
+      if(main.greatestFitness < percentageFitness)
+      {
+        main.greatestFitness = percentageFitness;
+      }
     }
+    
   }
+
   public synchronized void setMainImage()
   {
     main.settingImage = true;
@@ -119,21 +142,5 @@ public class Genome
     main.gfxR.clearRect(0, 0, main.controller.getCanvasRight().getWidth(), main.controller.getCanvasRight().getHeight());
   }
   
-  public WritableImage getSnapShot(Canvas canvas, int x, int y, int w, int h)
-  {
-    SnapshotParameters parameters = new SnapshotParameters();
-    parameters.setViewport(new Rectangle2D(x, y, w+x, h+y));
-    WritableImage wi = new WritableImage(w, h);
-    WritableImage snapshot = canvas.snapshot(parameters, wi);
-    return snapshot;
-  }
   
-  WritableImage getSnapShot(Canvas canvas, int[] input)
-  {
-    SnapshotParameters parameters = new SnapshotParameters();
-    parameters.setViewport(new Rectangle2D(input[0], input[1], input[2], input[3]));
-    WritableImage wi = new WritableImage(input[2], input[3]);
-    WritableImage snapshot = canvas.snapshot(parameters, wi);
-    return snapshot;
-  }
 }
