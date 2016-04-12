@@ -5,15 +5,23 @@ import java.util.Random;
 import java.util.concurrent.CyclicBarrier;
 
 import engine.Attributes;
+import engine.Genome;
 import engine.Tribe;
 import gui.GuiControls;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
@@ -48,7 +56,7 @@ public class Main extends Application
   public int numGenerations = 0;
   
   public Boolean settingImage = false;
-  Image monalisa    = new Image("File:Resources/Images/monalisa.png");
+  Image monalisa    = new Image("File:GeneticAlgorithm/Resources/Images/monalisa.png");
   Image poppyfields = new Image("File:Resources/Images/poppyfields.png");
   Image greatwave   = new Image("File:Resources/Images/greatwave.png");
   Image vangogh     = new Image("File:Resources/Images/vangogh.png");
@@ -73,6 +81,7 @@ public class Main extends Application
     controller = new GuiControls(this);
 //    fitCalc = new FitnessCalculator(this);
     scene = new Scene(controller);
+    Group root = new Group();
     primaryStage.setScene(scene);
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
     gfxR = controller.getCanvasRight().getGraphicsContext2D();
@@ -87,6 +96,26 @@ public class Main extends Application
     initializeTribes();
     AnimationTimer gameLoop = new MainGameLoop();
     gameLoop.start();
+    
+    /*
+     ================================
+     Added this to make a button that 
+     shows another stage
+     ================================
+     */
+    Button btn = new Button();
+    btn.setLayoutX(412);
+    btn.setLayoutY(511);
+    btn.setText("Show Graph");
+    btn.setOnAction(new EventHandler<ActionEvent>() {
+
+        public void handle(ActionEvent event) {
+            new CreateStage();
+            primaryStage.toFront();
+
+        }
+    });
+    root.getChildren().add(btn);
     
     primaryStage.show();
     
@@ -195,5 +224,45 @@ public class Main extends Application
         controller.updateLabels();
       }
     }
+  }
+}
+
+
+
+class CreateStage {
+
+  Scene scene2;
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  
+  public CreateStage() {
+    Genome g = new Genome();
+    Stage stage = new Stage();
+
+    stage.setTitle("Fitness Map");
+    // defining the axes
+    final NumberAxis xAxis = new NumberAxis();
+    final NumberAxis yAxis = new NumberAxis();
+    xAxis.setLabel("Time");
+    // creating the chart
+    final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
+
+    lineChart.setTitle("Fitness Progression");
+    // defining a series
+
+    @SuppressWarnings("rawtypes")
+    XYChart.Series series = new XYChart.Series();
+    series.setName("Fitness Progression");
+    // populating the series with data
+    series.getData().add(new XYChart.Data(g.getIndex(), g.getFitness()));
+    series.getData().add(new XYChart.Data(2, 14));
+    series.getData().add(new XYChart.Data(3, 15));
+    series.getData().add(new XYChart.Data(4, 24));
+    series.getData().add(new XYChart.Data(5, 34));
+    series.getData().add(new XYChart.Data(6, 36));
+
+    // scene2 = new Scene(lineChart,800,600);
+    lineChart.getData().add(series);
+    stage.setScene(new Scene(lineChart, 800, 600));
+    stage.show();
   }
 }
