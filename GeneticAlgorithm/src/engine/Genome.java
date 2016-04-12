@@ -28,7 +28,7 @@ public class Genome
   public int generationCount = 0;
 //  private int lastPercentageFitness = 0;
   private int mutation = -1;
-  private double adaptiveRate = 2;
+  private double adaptiveRate = 1.014;
 
 //  private double temp_fitness;
   private static double best_fitness = 0;
