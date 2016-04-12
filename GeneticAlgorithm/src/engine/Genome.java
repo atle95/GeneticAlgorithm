@@ -26,11 +26,11 @@ public class Genome
   public double fitness;
   public FitnessCalculator fitCalc;
   public int generationCount = 0;
-  private int lastPercentageFitness = 0;
+//  private int lastPercentageFitness = 0;
   private int mutation = -1;
   private double adaptiveRate = 2;
 
-  private double temp_fitness;
+//  private double temp_fitness;
   private static double best_fitness = 0;
   private static int index = 0;
   
@@ -42,6 +42,12 @@ public class Genome
   
   public Genome(){}
   
+  /**
+   * Genome Constructor
+   * 
+   * @param main
+   *          The main object reference to access gui controls
+   */
   public Genome(Main main)
   {
     this.main = main;
@@ -56,6 +62,10 @@ public class Genome
 
   }
   
+  /**
+   * Initializes a number of triangles equal to Attributes.maxTriangles
+   * 
+   */
   public void initializeTriangles()
   {
     for(int i = 0; i < Attributes.maxTriangles; i++)
@@ -65,6 +75,10 @@ public class Genome
     }
   }
   
+  /**
+   * HillClimbing Logic
+   * 
+   */
   public synchronized void mutateTriangle()
   {
 
@@ -96,39 +110,14 @@ public class Genome
     double percentageDeltaFitness = Math.abs(oldFitness-newFitness)/main.searchSize;
     double percentageFitness = 100-newFitness/main.searchSize;
     
-    if(main.numGenerations == 1)
+    if(Attributes.debug&&main.numGenerations == 1)
     {
       System.out.printf("%2.2f",percentageFitness);
     }
-//  if (Attributes.debug && (generationCount%10==0))
-//  { for(int i = 0; i<weightDistribution.length;i++)
-//    { System.out.printf("[%2.2f]", weightDistribution[i]);
-//    }
-//  System.out.printf("%n");
-////    System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", currentTriangle, percentageFitness);
-//  }
     if(oldFitness < newFitness)
-    {
-      //decrease probability of selecting again, and revert changes
+    { //decrease probability of selecting again, and revert changes
       weightDistribution[mutation]*=(1-percentageDeltaFitness);
-      
-      
-      
-//      //This will be for the linegraph
-//      if (percentageFitness > best_fitness)
-//      {
-//        best_fitness = percentageFitness;
-//      }
-//      if (index % 25 == 0)
-//      {
-//        System.err.println("index " + index);
-//        setIndex(index);
-//        setFitness(percentageFitness);
-//        index++;
-//        
-//      } else index++;
-      
-      
+      counter/=adaptiveRate;
       if (triangleList.get(currentTriangle).lastMutation %2 == 0)
       {
         triangleList.get(currentTriangle).mutate(triangleList.get(currentTriangle).lastMutation+1, counter);
@@ -137,51 +126,47 @@ public class Genome
       {
         triangleList.get(currentTriangle).mutate(triangleList.get(currentTriangle).lastMutation-1, counter);
       }
-      counter/=adaptiveRate;
-    }//End top level if statement
-    
-//    if(oldFitness == newFitness)
-//    {
-//      triangleList.remove(triangleList.get(i));
-//      triangleList.add(new TriangleObject(main.random, i));
-//    }
-    while (newFitness < oldFitness)
-    {
-      
-      //This will be for the linegraph
-      if (percentageFitness > best_fitness)
-      {
-        best_fitness = percentageFitness;
-        fitnessPlot.add(best_fitness);
-      }
-      if (index % 25 == 0)
-      {
-        indexPlot.add(index);
-        index++;
+    }
+    else
+    { //increase probability of selecting again, and repeat changes
+      while (newFitness < oldFitness)
+      { 
+        if (percentageFitness > best_fitness)
+        { best_fitness = percentageFitness;
+          fitnessPlot.add(best_fitness);
+        }
+        if (index % 25 == 0)
+        { 
+          System.err.println("index " + index);
+          indexPlot.add(index);
+          index++;
+        } 
+        else index++;
         
-      } else index++;
-      
-      weightDistribution[mutation]*=(1+percentageDeltaFitness);
-      counter*=adaptiveRate;
-      triangleList.get(currentTriangle).mutate(triangleList.get(currentTriangle).lastMutation, counter);
-      
-      oldFitness = newFitness;
-      newFitness = fitCalc.calculateFitnessOfMutation(this);
-    }
-    counter = 1;
-    if(generationCount%10==0)
-    {
-      //UNTESTED
-      main.currFitness = percentageFitness;
-      setMainImage();
-      if(main.greatestFitness < percentageFitness)
+        weightDistribution[mutation]*=(1+percentageDeltaFitness);
+        counter*=adaptiveRate;
+        
+        oldFitness = newFitness;
+        triangleList.get(currentTriangle).mutate(triangleList.get(currentTriangle).lastMutation, counter);
+        newFitness = fitCalc.calculateFitnessOfMutation(this);
+      }
+      counter = 1;
+      if(generationCount%10==0)
       {
-        main.greatestFitness = percentageFitness;
+        main.currFitness = percentageFitness;
+        setMainImage();
+        if(main.greatestFitness < percentageFitness)
+        {
+          main.greatestFitness = percentageFitness;
+        }
       }
     }
-    
   }
 
+  /**
+   * Updates Gui with The current genome population
+   * 
+   */
   public synchronized void setMainImage()
   {
     main.settingImage = true;
@@ -189,6 +174,14 @@ public class Genome
     main.settingImage = false;
   }
   
+  /**
+   * Genome Constructor
+   * 
+   * @param genome
+   *          The genome object to get an image representation of
+   * @return BufferedImage
+   *          The image represantation of the genome object
+   */
   public BufferedImage getBufferedTriangle(Genome genome)
   { 
     bigfx.setPaint(Color.WHITE);
@@ -214,41 +207,40 @@ public class Genome
     return bimg;
   }
   
-  public void clearTriangles()
+  /**
+   * Get Fitness
+   * 
+   * @return best_fitness
+   *            The best fitness so far
+   */
+  public static double getFitness()
   {
-    //gfxR.setGlobalBlendMode(BlendMode.SRC_OVER);
-    main.gfxR.clearRect(0, 0, main.controller.getCanvasRight().getWidth(), main.controller.getCanvasRight().getHeight());
+    return best_fitness;
   }
-  
-  /*
-  ============================
-  Added getters and setters for 
-  the current fitness
-  ============================
-  */
- public static double getFitness(){
-   return best_fitness;
- }
  
- public static ArrayList<Double> getFitnessArray(){
-   return fitnessPlot;
- }
+  /**
+   * Get Fitness Array
+   * 
+   * @return fitnessPlot
+   */
+  public static ArrayList<Double> getFitnessArray()
+  {
+    return fitnessPlot;
+  }
  
- public static double getIndex(){
-   return index;
- }
+  /**
+   * Get Index
+   * 
+   * @return index
+   */
+  public static double getIndex()
+  {
+    return index;
+  }
  
- public static ArrayList<Integer> getIndexArray(){
-   return indexPlot;
- }
-// public void setFitness(double temp_fitness){
-//  // scores.add(temp_fitness);
-////   new DrawGraph(scores);
-//   this.temp_fitness = temp_fitness;
-// }
-// 
-// public void setIndex(int index){
-//   this.index = index;
-// }
+  public static ArrayList<Integer> getIndexArray()
+  {
+    return indexPlot;
+  }
   
 }
