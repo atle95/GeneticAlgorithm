@@ -120,6 +120,9 @@
                         <Label fx:id="avgGenSec" text="Average Generations per second:  ####" />
                         <Separator prefWidth="200.0" />
                         <Label fx:id="totalRun" text="Total Runtime: hh:mm:ss" />
+                        <Separator prefWidth="200.0" />
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButton" text="Save image" />
+                        <Button fx:id="showGraph" mnemonicParsing="false" onAction="#showGraph" text="Show Graph" />
                      </children>
                      <padding>
                         <Insets left="4.0" top="4.0" />
@@ -193,7 +196,6 @@
                         </ScrollPane>
                        <Button fx:id="clear" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearButton" text="CLEAR" />
                        <Button fx:id="mutate" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mutateButton" text="MUTATE" />
-                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButton" text="Save image" />
                      </children>
                      <opaqueInsets>
                         <Insets left="4.0" top="4.0" />

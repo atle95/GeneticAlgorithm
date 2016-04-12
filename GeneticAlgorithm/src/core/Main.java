@@ -48,7 +48,7 @@ public class Main extends Application
   public GuiControls controller;
 //  public FitnessCalculator fitCalc;
   public ArrayList<Thread> threadList = new ArrayList<Thread>();
-  
+  public double searchSize = Math.sqrt(3)*255*Attributes.imageWidth*Attributes.imageHeight;
   public Random random = new Random(Attributes.seed);
   
   public double greatestFitness = 0;
@@ -86,9 +86,9 @@ public class Main extends Application
     Group root = new Group();
     scene2 = new Scene(root, 700, 700, Color.LIGHTGREEN);
     
-    //primaryStage.setScene(scene2);
-    
     primaryStage.setScene(scene);
+    
+    //primaryStage.setScene(scene);
     
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
     gfxR = controller.getCanvasRight().getGraphicsContext2D();

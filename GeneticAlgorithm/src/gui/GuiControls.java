@@ -283,6 +283,11 @@ public class GuiControls extends BorderPane
   }
   
   @FXML
+  public void showGraph()
+  {
+  }
+  
+  @FXML
   protected void slider(DragEvent event)
   {
     if(event.equals(DragEvent.DRAG_OVER))

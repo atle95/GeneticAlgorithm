@@ -27,6 +27,8 @@ public class Genome
   public FitnessCalculator fitCalc;
   public int generationCount = 0;
   private int lastPercentageFitness = 0;
+  private int mutation = -1;
+  private double adaptiveRate = 2;
 
   private double temp_fitness;
   private static double best_fitness = 0;
@@ -34,7 +36,7 @@ public class Genome
   
   public static ArrayList<Double> fitnessPlot = new ArrayList<Double>();
   public static ArrayList<Integer> indexPlot = new ArrayList<Integer>();
-
+  private double[] weightDistribution = new double[20];
 
   
   
@@ -47,6 +49,11 @@ public class Genome
     initializeTriangles();
     main.setCurGenome(SwingFXUtils.toFXImage(this.bimg, null));
     fitCalc = new FitnessCalculator(this.main);
+    for (int i =0; i<weightDistribution.length; i++)
+    {
+        weightDistribution[i] = 1.0;
+    }
+
   }
   
   public void initializeTriangles()
@@ -60,26 +67,51 @@ public class Genome
   
   public synchronized void mutateTriangle()
   {
+
     main.numGenerations++;
     
-    int i = main.random.nextInt(triangleList.size());
-    int mutation = main.random.nextInt(20);
+    int currentTriangle = main.random.nextInt(triangleList.size());
+    double sum = 0;
+    for (double j : weightDistribution)
+    {
+        sum += j;
+    }
+    
+    double temp = main.random.nextDouble()*sum;
+    for (int k = 0; k < weightDistribution.length; ++k)
+    {
+        temp -= weightDistribution[k];
+        if(temp <= 0.0d)
+        {  mutation = k;
+            break;
+        }
+    }
+//    int mutation = main.random.nextInt(20);
     
     double percentageFitness = 0;
     double counter = 1;
     
     //Checks Given genome before and after mutation
     double oldFitness = fitCalc.calculateFitnessOfMutation(this);
-    triangleList.get(i).mutate(mutation, counter);
+    triangleList.get(currentTriangle).mutate(mutation, counter);
     double newFitness = fitCalc.calculateFitnessOfMutation(this);
+    double percentageDeltaFitness = Math.abs(oldFitness-newFitness)/main.searchSize;
 
-    percentageFitness = 100-newFitness/93394396;
-    if (Attributes.debug)
-    {
-      System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", i, percentageFitness);
-    }
+    percentageFitness = 100-newFitness/main.searchSize;
+//  if (Attributes.debug && (generationCount%10==0))
+//  { for(int i = 0; i<weightDistribution.length;i++)
+//    { System.out.printf("[%2.2f]", weightDistribution[i]);
+//    }
+//  System.out.printf("%n");
+////    System.out.printf("Mutating Triangle %3d, current fitness: %2.2f%% %n", currentTriangle, percentageFitness);
+//  }
     if(oldFitness < newFitness)
     {
+      //decrease probability of selecting again, and revert changes
+      weightDistribution[mutation]*=(1-percentageDeltaFitness);
+      
+      
+      
 //      //This will be for the linegraph
 //      if (percentageFitness > best_fitness)
 //      {
@@ -95,14 +127,15 @@ public class Genome
 //      } else index++;
       
       
-      if (triangleList.get(i).lastMutation %2 == 0)
+      if (triangleList.get(currentTriangle).lastMutation %2 == 0)
       {
-        triangleList.get(i).mutate(triangleList.get(i).lastMutation+1, counter);
+        triangleList.get(currentTriangle).mutate(triangleList.get(currentTriangle).lastMutation+1, counter);
       }
       else
       {
-        triangleList.get(i).mutate(triangleList.get(i).lastMutation-1, counter);
+        triangleList.get(currentTriangle).mutate(triangleList.get(currentTriangle).lastMutation-1, counter);
       }
+      counter/=adaptiveRate;
     }//End top level if statement
     
 //    if(oldFitness == newFitness)
@@ -126,10 +159,10 @@ public class Genome
         
       } else index++;
       
+      weightDistribution[mutation]*=(1+percentageDeltaFitness);
+      counter*=adaptiveRate;
+      triangleList.get(currentTriangle).mutate(triangleList.get(currentTriangle).lastMutation, counter);
       
-      counter+=0.01;
-      triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
-      //if (Attributes.debug) System.out.printf("delta Fitness %f \n", oldFitness-newFitness);
       oldFitness = newFitness;
       newFitness = fitCalc.calculateFitnessOfMutation(this);
     }
