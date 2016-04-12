@@ -64,6 +64,7 @@ public class Main extends Application
   Image curImage = monalisa;
   private Image curGenome;
   Scene scene;
+  Scene scene2;
   PixelReader reader;
 //  public Random random = new Random();
   
@@ -81,8 +82,14 @@ public class Main extends Application
     controller = new GuiControls(this);
 //    fitCalc = new FitnessCalculator(this);
     scene = new Scene(controller);
+    
     Group root = new Group();
+    scene2 = new Scene(root, 700, 700, Color.LIGHTGREEN);
+    
+   // primaryStage.setScene(scene2);
+    
     primaryStage.setScene(scene);
+    
     primaryStage.setTitle("Genetic Algorithm by Atle and Chris");
     gfxR = controller.getCanvasRight().getGraphicsContext2D();
     gfxL = controller.getCanvasLeft().getGraphicsContext2D();
@@ -104,8 +111,8 @@ public class Main extends Application
      ================================
      */
     Button btn = new Button();
-    btn.setLayoutX(412);
-    btn.setLayoutY(511);
+    btn.setLayoutX(20);
+    btn.setLayoutY(20);
     btn.setText("Show Graph");
     btn.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -253,12 +260,9 @@ class CreateStage {
     XYChart.Series series = new XYChart.Series();
     series.setName("Fitness Progression");
     // populating the series with data
-    series.getData().add(new XYChart.Data(g.getIndex(), g.getFitness()));
-    series.getData().add(new XYChart.Data(2, 14));
-    series.getData().add(new XYChart.Data(3, 15));
-    series.getData().add(new XYChart.Data(4, 24));
-    series.getData().add(new XYChart.Data(5, 34));
-    series.getData().add(new XYChart.Data(6, 36));
+    System.err.println("index " +Genome.getIndex()+ " fitness " +Genome.getFitness());
+    series.getData().add(new XYChart.Data(Genome.getIndex(), Genome.getFitness()));
+
 
     // scene2 = new Scene(lineChart,800,600);
     lineChart.getData().add(series);

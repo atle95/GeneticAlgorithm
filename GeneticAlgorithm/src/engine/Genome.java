@@ -28,10 +28,12 @@ public class Genome
 private int lastPercentageFitness = 0;
 
 private double temp_fitness;
-private double best_fitness = 0;
-private int index = 0;
+private static double best_fitness = 0;
+private static int index = 0;
 
   
+  
+  public Genome(){}
   
   public Genome(Main main)
   {
@@ -73,19 +75,19 @@ private int index = 0;
     }
     if(oldFitness < newFitness)
     {
-      //This will be for the linegraph
-      if (percentageFitness > best_fitness)
-      {
-        best_fitness = percentageFitness;
-      }
-      if (index % 25 == 0)
-      {
-        System.err.println("index " + index);
-        setIndex(index);
-        setFitness(percentageFitness);
-        index++;
-        
-      } else index++;
+//      //This will be for the linegraph
+//      if (percentageFitness > best_fitness)
+//      {
+//        best_fitness = percentageFitness;
+//      }
+//      if (index % 25 == 0)
+//      {
+//        System.err.println("index " + index);
+//        setIndex(index);
+//        setFitness(percentageFitness);
+//        index++;
+//        
+//      } else index++;
       
       
       if (triangleList.get(i).lastMutation %2 == 0)
@@ -105,6 +107,22 @@ private int index = 0;
 //    }
     while (newFitness < oldFitness)
     {
+      
+      //This will be for the linegraph
+      if (percentageFitness > best_fitness)
+      {
+        best_fitness = percentageFitness;
+      }
+      if (index % 25 == 0)
+      {
+        System.err.println("index " + index);
+//        setIndex(index);
+//        setFitness(percentageFitness);
+        index++;
+        
+      } else index++;
+      
+      
       counter+=0.01;
       triangleList.get(i).mutate(triangleList.get(i).lastMutation, counter);
       //if (Attributes.debug) System.out.printf("delta Fitness %f \n", oldFitness-newFitness);
@@ -169,21 +187,21 @@ private int index = 0;
   the current fitness
   ============================
   */
- public double getFitness(){
+ public static double getFitness(){
    return best_fitness;
  }
  
- public double getIndex(){
+ public static double getIndex(){
    return index;
  }
- public void setFitness(double temp_fitness){
-  // scores.add(temp_fitness);
-//   new DrawGraph(scores);
-   this.temp_fitness = temp_fitness;
- }
- 
- public void setIndex(int index){
-   this.index = index;
- }
+// public void setFitness(double temp_fitness){
+//  // scores.add(temp_fitness);
+////   new DrawGraph(scores);
+//   this.temp_fitness = temp_fitness;
+// }
+// 
+// public void setIndex(int index){
+//   this.index = index;
+// }
   
 }
