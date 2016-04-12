@@ -60,7 +60,7 @@ public class FitnessCalculator
     
     try 
     {
-      img = ImageIO.read(new File("Resources/Images/monalisa.png"));
+      img = ImageIO.read(new File("GeneticAlgorithm/Resources/Images/monalisa.png"));
 
       int w = img.getWidth();
       int h = img.getHeight();
