@@ -121,9 +121,6 @@ public class Genome
       }
       if (index % 25 == 0)
       {
-        System.err.println("index " + index);
-//        setIndex(index);
-//        setFitness(percentageFitness);
         indexPlot.add(index);
         index++;
         

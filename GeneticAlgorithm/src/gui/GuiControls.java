@@ -28,7 +28,7 @@ import javafx.scene.layout.BorderPane;
 public class GuiControls extends BorderPane
 {
   @FXML private Button button1, button2, button3, button4, button5, button6, button7, button8;
-  @FXML private Button monaLisaButton, poppyFieldsButton, greatWaveButton, vanGoghButton, mcEscherButton;
+  @FXML private Button monaLisaButton, poppyFieldsButton, greatWaveButton, vanGoghButton, mcEscherButton, Graph;
   @FXML private Canvas canvasLeft, canvasRight, fitnessCanvas;
   @FXML public Label currFit, fitPerSec, totalPop, totalHill, genPerSec, avgGenSec, totalRun;
   @FXML Button srcOver, srcAtop, add, multiply, screen, overlay, darken, lighten, colorDodge, colorBurn, hardLight, softLight, difference, exclusion, redBlend, blueBlend, greenBlend, clear, mutate;
@@ -172,6 +172,10 @@ public class GuiControls extends BorderPane
     else if(event.getSource() == button8)
     {
       System.out.println("Button 8");
+    }
+    else if(event.getSource() == Graph)
+    {
+      System.out.println("Graph");
     }
   }
     
