@@ -26,6 +26,11 @@ public class Genome
   public FitnessCalculator fitCalc;
   public int generationCount = 0;
 private int lastPercentageFitness = 0;
+
+private double temp_fitness;
+private double best_fitness = 0;
+private int index = 0;
+
   
   
   public Genome(Main main)
@@ -68,6 +73,21 @@ private int lastPercentageFitness = 0;
     }
     if(oldFitness < newFitness)
     {
+      //This will be for the linegraph
+      if (percentageFitness > best_fitness)
+      {
+        best_fitness = percentageFitness;
+      }
+      if (index % 25 == 0)
+      {
+        System.err.println("index " + index);
+        setIndex(index);
+        setFitness(percentageFitness);
+        index++;
+        
+      } else index++;
+      
+      
       if (triangleList.get(i).lastMutation %2 == 0)
       {
         triangleList.get(i).mutate(triangleList.get(i).lastMutation+1, counter);
@@ -76,7 +96,8 @@ private int lastPercentageFitness = 0;
       {
         triangleList.get(i).mutate(triangleList.get(i).lastMutation-1, counter);
       }
-    }
+    }//End top level if statement
+    
 //    if(oldFitness == newFitness)
 //    {
 //      triangleList.remove(triangleList.get(i));
@@ -142,5 +163,27 @@ private int lastPercentageFitness = 0;
     main.gfxR.clearRect(0, 0, main.controller.getCanvasRight().getWidth(), main.controller.getCanvasRight().getHeight());
   }
   
+  /*
+  ============================
+  Added getters and setters for 
+  the current fitness
+  ============================
+  */
+ public double getFitness(){
+   return best_fitness;
+ }
+ 
+ public double getIndex(){
+   return index;
+ }
+ public void setFitness(double temp_fitness){
+  // scores.add(temp_fitness);
+//   new DrawGraph(scores);
+   this.temp_fitness = temp_fitness;
+ }
+ 
+ public void setIndex(int index){
+   this.index = index;
+ }
   
 }
