@@ -16,8 +16,16 @@ public class TriangleObject
   public int lastMutation;
   public int magnitude = 1;
   private double opacityMagnitude = 1;
-//  private int opacityBound = 100;
-  
+
+  /**
+   * Triangle Object Constructor
+   * 
+   * @param ints
+   *          Each of the values of the triangle's coordinates
+   *          
+   * @param bytes
+   *          RGBA values of the triangle
+   */
   TriangleObject(int x1, int x2, int x3, int y1, int y2, int y3, byte r, byte g, byte b, byte a)
   {
     this.x[0] = x1;
@@ -32,7 +40,13 @@ public class TriangleObject
     this.c[3] = a;
   }
 
-  TriangleObject(Random rand, int i)
+  /**
+   * Triangle Object Constructor
+   * 
+   * @param rand
+   *          A random from all the way from main, thank you main.
+   */
+  TriangleObject(Random rand)
   {
     this.x[0] = rand.nextInt(Attributes.imageWidth);
     this.x[1] = rand.nextInt(Attributes.imageWidth);
@@ -41,16 +55,19 @@ public class TriangleObject
     this.y[1] = rand.nextInt(Attributes.imageHeight);
     this.y[2] = rand.nextInt(Attributes.imageHeight);
     rand.nextBytes(c);
-//    if(c[3]-i > -127) 
-//    {
-//      c[3] -=i;
-//    }
-//    else
-//    {
-//      c[3] = 0;
-//    }
   }
   
+  /**
+   * Mutate
+   * 
+   * @param mutation
+   *          The mutation to be applied to the triangle, 
+   *          even numbers add to the value, odd numbers subtract from it
+   *          (so that you can undo a change with (mutation %2 == 0)
+   *          
+   * @param iteration
+   *          The current step size determined by Heuristics
+   */
   public void mutate(int mutation, double iteration)
   {
     switch(mutation)
@@ -65,7 +82,7 @@ public class TriangleObject
             else this.x[1]-=magnitude+iteration;
       break;
       case 3: if(this.x[1]-magnitude+iteration>=0) this.x[1]-=magnitude+iteration;
-      else this.x[1]+=magnitude+iteration;
+           else this.x[1]+=magnitude+iteration;
       break;
       case 4: if(this.x[2]+magnitude+iteration<=Attributes.imageWidth) this.x[2]+=magnitude+iteration;
             else this.x[2]-=magnitude+iteration;
@@ -119,6 +136,12 @@ public class TriangleObject
     lastMutation = mutation;
   }
   
+  /**
+   * @deprecated getTriangleBoundingBox()
+   * 
+   * @return int[]
+   *          A sorted array of ints for use with a snapshot method
+   */
   int[] getTriangleBoundingBox()
   {
     double[] tempX = this.x;

@@ -70,7 +70,7 @@ public class Genome
   {
     for(int i = 0; i < Attributes.maxTriangles; i++)
     {
-      TriangleObject member = new TriangleObject(main.random, i);
+      TriangleObject member = new TriangleObject(main.random);
       triangleList.add(member);
     }
   }
@@ -81,26 +81,26 @@ public class Genome
    */
   public synchronized void mutateTriangle()
   {
-
     main.numGenerations++;
-    
     int currentTriangle = main.random.nextInt(triangleList.size());
     double sum = 0;
-    for (double j : weightDistribution)
-    { sum += j;
-    }
-    
     double temp = main.random.nextDouble()*sum;
+    double counter = 1;
+    
+    //Heuristic weighting logic
+    for (double j : weightDistribution)
+    { 
+      sum += j;
+    }
     for (int k = 0; k < weightDistribution.length; ++k)
-    { temp -= weightDistribution[k];
+    { 
+      temp -= weightDistribution[k];
       if(temp <= 0.0d)
-      { mutation = k;
+      { 
+        mutation = k;
         break;
       }
     }
-//    int mutation = main.random.nextInt(20);
-    
-    double counter = 1;
     
     //Checks Given genome before and after mutation
     double oldFitness = fitCalc.calculateFitnessOfMutation(this);
@@ -175,12 +175,12 @@ public class Genome
   }
   
   /**
-   * Genome Constructor
+   * Get BufferedImage
    * 
    * @param genome
-   *          The genome object to get an image representation of
+   *          The genome object to get a buffered image representation of
    * @return BufferedImage
-   *          The image represantation of the genome object
+   *          The buffered image represantation of the genome object
    */
   public BufferedImage getBufferedTriangle(Genome genome)
   { 
