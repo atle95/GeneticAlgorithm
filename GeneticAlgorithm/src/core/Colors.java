@@ -9,6 +9,7 @@ package core;
  * of the source and destination images
  * (i.e. the Mona Lisa Image and the 
  * triangle images)
+ * 
  */
 public class Colors
 {
