@@ -1,13 +1,10 @@
 package gui;
 
-import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
-import core.Main;
 import engine.Attributes;
-import javafx.embed.swing.SwingFXUtils;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -94,48 +91,7 @@ public class GuiControls extends BorderPane
 //        }
 //      }
 //    });
-    
-          
-  }
   
-  public void updateLabels() 
-  {
-    double input = 0;
-    setCurrFit(main.currFitness);
-    setFitPerSec(input);
-    setTotalPop(input);
-    setTotalHill(input);
-    setGenPerSec(input);
-    setAvgGenSec(input);
-    setTotalRun(input);
-  }
-  public void setCurrFit(double input)
-  {
-    currFit.setText(String.format("Current Fitness %2.2f%%", input));
-  }
-  public void setFitPerSec(double input)
-  {
-    fitPerSec.setText(String.format("Current Fitness Per Second %2.2f%%", input));
-  } 
-  public void setTotalPop(double input)
-  {
-    totalPop.setText(String.format("Total population: %2.2f%%", input));
-  }
-  public void setTotalHill(double input)
-  {
-    totalHill.setText(String.format("Total hill climb: %2.2f%%", input));
-  }
-  public void setGenPerSec(double input)
-  {
-    genPerSec.setText(String.format("Total Generations Per Second: %2.2f%%", input));
-  }
-  public void setAvgGenSec(double input)
-  {
-    avgGenSec.setText(String.format("Average Generations Per Second: %2.2f%%", input));
-  }
-  public void setTotalRun(double input)
-  {
-    totalRun.setText(String.format("Total Runtime: %2.2f%%", input));
   }
   
   @FXML
@@ -259,20 +215,16 @@ public class GuiControls extends BorderPane
   }
 
   @FXML
-  public void saveButton()
+  protected void saveButton()
   {
-//    Formatter formatter = new Formatter();
-    String name = String.format("%02.0f_%2.2f.png", (double) Attributes.seed, main.greatestFitness);
-    File file = new File(name);
-    
-    try 
-    {
-      ImageIO.write(SwingFXUtils.fromFXImage(main.getSnapShot(getCanvasRight()), null), "png", file);
-    } 
-    catch (IOException e) 
-    {
-      e.printStackTrace();
-    }
+//    File file = new File("oldtriangles.png");
+//    
+//    try {
+//      ImageIO.write(SwingFXUtils.fromFXImage(main.threadList.get(0).triangleList.get(0).getSnapShot(getCanvasRight(), 0,0,Attributes.imageWidth,Attributes.imageHeight), null), "png", file);
+//    } catch (IOException e) 
+//    {
+//      e.printStackTrace();
+//    }
     
   }
   
@@ -299,7 +251,5 @@ public class GuiControls extends BorderPane
   {
     return this.fitnessCanvas;
   }
-
-  
 
 }

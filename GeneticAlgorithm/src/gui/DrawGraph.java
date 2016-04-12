@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  
 public class DrawGraph extends Application {
   
-  Genome g = new Genome();
+//  Genome g = new Genome();
   
   private Scene scene;
  
@@ -37,7 +37,7 @@ public class DrawGraph extends Application {
         XYChart.Series series = new XYChart.Series();
         series.setName("Fitness Progression");
         //populating the series with data
-        series.getData().add(new XYChart.Data(g.getIndex(), g.getFitness()));
+     //   series.getData().add(new XYChart.Data(g.getIndex(), g.getFitness()));
         series.getData().add(new XYChart.Data(2, 14));
         series.getData().add(new XYChart.Data(3, 15));
         series.getData().add(new XYChart.Data(4, 24));
